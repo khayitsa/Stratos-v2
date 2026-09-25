@@ -1,201 +1,87 @@
 {% extends 'base.html' %}
+{% from '_components.html' import page_banner, cta_band with context %}
 {% block title %}UAE Company Formation & Corporate Services | Stratos{% endblock %}
+{% block meta_description %}UAE establishment and corporate services: company formation, banking support, residence and visas, accounting, tax coordination and corporate administration.{% endblock %}
 {% block content %}
 
-<style>
-    /* Align Hero to the left and match 10% padding */
-    .hero-services {
-        padding: 80px 10% 40px !important;
-        text-align: left !important;
-    }
-    
-    .hero-services h1,
-    .hero-services .eyebrow {
-        text-align: left !important;
-        margin-left: 0;
-    }
+{# Big heading = "Our Services" (page name). The long line is now the subtitle. #}
+{{ page_banner('gabriel-santos-DgLksCjEfB0-unsplash.jpg', 'Our Services', pos='center 6%',
+               subtitle='UAE Establishment and Corporate Services.',
+               secondary_label='Explore Complete Establishment', secondary_href='#complete-establishment') }}
 
-    /* Expand Services Section to full 100% width */
-    .services-page {
-        padding: 80px 10% 120px !important;
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+<!-- One Business. Connected Decisions.  (centred; body text justified) -->
+<section class="statement-strip">
+    <p class="strip-lead">The work involved in establishing a UAE business does not end when the licence is issued. Stratos connects the structure, formation, banking, residence, bookkeeping and administrative workstreams required to move from an initial plan to a functioning company.</p>
+    <h2>One Business. Connected Decisions.</h2>
+    <p>The proposed activities affect the licence. The ownership affects the documents required. The operating model affects the choice of jurisdiction. All three influence banking, visas, bookkeeping and ongoing administration. Treating each requirement as a separate transaction creates avoidable gaps.</p>
+    <p>We begin with the whole business, establish the appropriate sequence and coordinate the agreed work through one accountable Relationship Manager.</p>
+</section>
 
-    .service-list {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    /* Force justify alignment for all body text on the Services page */
-    .hero-services p.lead,
-    .statement-band p,
-    .service-row p,
-    .service-row li {
-        text-align: justify !important;
-    }
-    /* =========================================
-   MOBILE BAND BACKGROUND DARKNESS FIX
-========================================= */
-
-@media (max-width: 768px) {
-    /* 1. Ensure dark navy backdrop and position context */
-    .dark-band,
-    .dark-band.vision-band {
-        position: relative !important;
-        background-color: var(--navy-dark) !important;
-        padding: 60px 6% !important;
-    }
-
-    /* 2. Darken the photo significantly for mobile readability */
-    .dark-band .section-photo,
-    .dark-band.vision-band .section-photo {
-        opacity: 0.18 !important; /* Lowers image brightness so white text pops */
-        filter: brightness(0.4) contrast(1.2) !important; /* Darkens image tones */
-        object-fit: cover !important;
-    }
-
-    /* 3. Keep content explicitly high-contrast white */
-    .dark-band h2,
-    .dark-band .band-copy,
-    .dark-band p,
-    .dark-band .eyebrow,
-    .dark-band p.eyebrow {
-        color: #ffffff !important;
-        position: relative !important;
-        z-index: 3 !important;
-        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important; /* Adds subtle drop-shadow for legibility */
-    }
-
-    .dark-band .band-copy,
-    .dark-band p {
-        opacity: 0.9 !important;
-        font-size: 14px !important;
-        line-height: 1.6 !important;
-    }
-
-    /* 4. Solid contrast button styling on mobile */
-    .dark-band .btn-banner {
-        background-color: #ffffff !important;
-        color: var(--navy-dark) !important;
-        border: 1px solid #ffffff !important;
-        font-weight: 600 !important;
-        position: relative !important;
-        z-index: 3 !important;
-    }
-}
-</style>
-
-<!-- SERVICES HERO BANNER (STATIC BACKGROUND) -->
-<section class="hero-banner static-hero" style="background-image: url('{{ url_for('image_asset', filename='kate-trysh-70vza4NysS8-unsplash.jpg') }}');">
-    <div class="hero-banner-overlay"></div>
-    
-    <!-- Unified Content Container -->
-    <div class="hero-banner-content">
-        <p class="eyebrow-light">OUR SERVICES</p>
-        <h1>UAE Establishment and Corporate Services.</h1>
-        
-        <p class="lead-light">The work involved in establishing a UAE business does not end when the licence is issued. Stratos connects the structure, formation, banking, residence, bookkeeping and administrative workstreams required to move from an initial plan to a functioning company.</p>
-
-        <div class="button-row">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="#complete-establishment" class="btn-banner btn-banner-transparent">Explore Complete Establishment</a>
+<!-- FLAGSHIP: photo LEFT (black-and-white, framed), text RIGHT -->
+<section class="band band--white" id="complete-establishment">
+    <div class="split">
+        <div class="split__photo split__photo--bw split__photo--frame" style="background-image: url('{{ url_for('image_asset', filename='claudio-poggio-0xC7iBAgtr8-unsplash.jpg') }}');" role="img" aria-label="Dubai towers"></div>
+        <div class="split__text">
+            <p class="eyebrow">FLAGSHIP ENGAGEMENT</p>
+            <h2>Complete UAE Establishment</h2>
+            <div class="prose">
+                <p>For international groups that require more than a standard formation package. We assess the business, compare appropriate mainland and free-zone routes, provide a written commercial recommendation and coordinate the agreed work through formation and operational set-up.</p>
+                <p>Depending on the scope, this can include banking preparation, residence applications, bookkeeping set-up, corporate administration and tax-specialist coordination.</p>
+            </div>
+            <div class="actions actions--left" style="margin-top: 26px;">
+                <a href="{{ url_for('complete_uae_establishment') }}" class="btn-outline">Explore Complete UAE Establishment</a>
+            </div>
         </div>
-        <p class="microcopy">New enquiries begin with a short suitability review.</p>
     </div>
 </section>
 
-<!-- SERVICE BENEFITS SUMMARY BAND -->
-<section class="statement-band" style="background: var(--navy-dark); color: #ffffff; text-align: left; padding: 60px 10%;">
-    <div style="width: 100%; max-width: 100%;">
-        <h2 style="color: #ffffff; font-size: 28px; margin: 0 0 32px; font-weight: 400;">One Business. Connected Decisions.</h2>
-        <p style="color: rgba(255, 255, 255, 0.9); margin: 0 0 16px; font-size: 14px;">The proposed activities affect the licence. The ownership affects the documents required. The operating model affects the choice of jurisdiction. All three influence banking, visas, bookkeeping and ongoing administration. Treating each requirement as a separate transaction creates avoidable gaps.</p>
-        <p style="color: rgba(255, 255, 255, 0.9); margin: 0; font-size: 14px;">We begin with the whole business, establish the appropriate sequence and coordinate the agreed work through one accountable Relationship Manager.</p>
-    </div>
-</section>
-
-<!-- CORE SERVICES LIST -->
-<section class="services-section services-page">
-    <div class="section-header" style="text-align: left; margin-bottom: 36px;">
-        <p class="eyebrow">FLAGSHIP ENGAGEMENT</p>
-        <h2>Complete UAE Establishment</h2>
-        <p style="font-size: 14px; color: var(--navy-light); margin-top: 16px;">For international groups that require more than a standard formation package. We assess the business, compare appropriate mainland and free-zone routes, provide a written commercial recommendation and coordinate the agreed work through formation and operational set-up. Depending on the scope, this can include banking preparation, residence applications, bookkeeping set-up, corporate administration and tax-specialist coordination.</p>
-    </div>
-
-    <div class="service-list">
-        <!-- 01: UAE Company Formation -->
-        <article class="service-row">
-            <span class="card-number">01</span>
-            <div>
-                <h2>UAE Company Formation</h2>
+<!-- CORE SERVICES  (cards, centred, buttons pinned to the bottom of each card) -->
+<section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">CORE SERVICES</p>
+            <h2>Each Workstream, Coordinated Together.</h2>
+        </div>
+        <div class="svc-grid">
+            <article class="svc-card">
+                <span class="svc-card__num">01</span>
+                <h3>UAE Company Formation</h3>
                 <p>Implementation of an agreed mainland or free-zone route, including activity and legal-form confirmation, document preparation, application coordination and licensing.</p>
-            </div>
-            <a href="{{ url_for('uae_company_formation') }}" class="btn-outline">Explore UAE Company Formation</a>
-        </article>
-
-        <!-- 02: Business Bank Account Application Support -->
-        <article class="service-row">
-            <span class="card-number">02</span>
-            <div>
-                <h2>Business Bank Account Application Support</h2>
+                <a href="{{ url_for('uae_company_formation') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">02</span>
+                <h3>Business Bank Account Application Support</h3>
                 <p>Assessment of potential bank fit, preparation of the business profile and KYC pack, submission or introduction support where appropriate, and assistance during the bank's review.</p>
-            </div>
-            <a href="{{ url_for('business_bank_account_support') }}" class="btn-outline">Explore Banking Support</a>
-        </article>
-
-        <!-- 03: Residence & Visa Application Support -->
-        <article class="service-row">
-            <span class="card-number">03</span>
-            <div>
-                <h2>Residence &amp; Visa Application Support</h2>
+                <a href="{{ url_for('business_bank_account_support') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">03</span>
+                <h3>Residence &amp; Visa Application Support</h3>
                 <p>Preliminary eligibility review and application or renewal coordination for eligible investors, employees and dependants, planned around the company's establishment and operating requirements.</p>
-            </div>
-            <a href="{{ url_for('residence_visa_support') }}" class="btn-outline">Explore Residence & Visa Support</a>
-        </article>
-
-        <!-- 04: Accounting, Bookkeeping & Management Reporting -->
-        <article class="service-row">
-            <span class="card-number">04</span>
-            <div>
-                <h2>Accounting, Bookkeeping &amp; Management Reporting</h2>
+                <a href="{{ url_for('residence_visa_support') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">04</span>
+                <h3>Accounting, Bookkeeping &amp; Management Reporting</h3>
                 <p>Accounting set-up, bookkeeping, reconciliations, management reporting and year-end preparation aligned with the way the company operates.</p>
-            </div>
-            <a href="{{ url_for('accounting_management_reporting') }}" class="btn-outline">Explore Accounting & Reporting</a>
-        </article>
-
-        <!-- 05: Corporate Tax & VAT Coordination -->
-        <article class="service-row">
-            <span class="card-number">05</span>
-            <div>
-                <h2>Corporate Tax &amp; VAT Coordination</h2>
+                <a href="{{ url_for('accounting_management_reporting') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">05</span>
+                <h3>Corporate Tax &amp; VAT Coordination</h3>
                 <p>Accounting readiness, information preparation and coordination with appropriately registered or licensed tax professionals for assessment, registration, returns and formal advice.</p>
-            </div>
-            <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-outline">Explore Tax & VAT Coordination</a>
-        </article>
-
-        <!-- 06: Corporate Administration & Governance -->
-        <article class="service-row">
-            <span class="card-number">06</span>
-            <div>
-                <h2>Corporate Administration &amp; Governance</h2>
+                <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">06</span>
+                <h3>Corporate Administration &amp; Governance</h3>
                 <p>Licence renewals, company amendments, corporate records, governance actions and continuing corporate-requirement coordination after incorporation.</p>
-            </div>
-            <a href="{{ url_for('corporate_administration_governance') }}" class="btn-outline">Explore Corporate Administration</a>
-        </article>
+                <a href="{{ url_for('corporate_administration_governance') }}" class="btn-outline">Learn More</a>
+            </article>
+        </div>
     </div>
 </section>
 
-<!-- CALL TO ACTION BANNER -->
-<section class="dark-band vision-band">
-    <img class="section-photo" src="{{ url_for('image_asset', filename='b3.jfif') }}" alt="Dubai skyline at dusk">
-    
-    <div class="vision-band-content">
-        <p class="eyebrow-light">START WITH THE BUSINESS</p>
-        <h2>Not Sure Which Service You Need?</h2>
-        <p class="band-copy">Describe the proposed activities, ownership, timing, banking requirements, visas and ongoing support required. We will identify the appropriate starting point before suggesting a consultation.</p>
-        <a href="{{ url_for('contact') }}" class="btn-banner">Tell Us About Your Plans</a>
-    </div>
-</section>
-
+{{ cta_band('b3.jfif', 'START WITH THE BUSINESS', 'Not Sure Which Service You Need?', 'Describe the proposed activities, ownership, timing, banking requirements, visas and ongoing support required. We will identify the appropriate starting point before suggesting a consultation.') }}
 {% endblock %}

@@ -1,10 +1,33 @@
-from pathlib import Path 
-from flask import Flask, redirect, render_template, request, send_from_directory, session, url_for
+import os
+from datetime import datetime
+from pathlib import Path
+from flask import Flask, abort, redirect, render_template, request, send_from_directory, session, url_for
 
 
 BASE_DIR = Path(__file__).resolve().parent
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.config["SECRET_KEY"] = "stratos-local-development-key"
+
+# ---------------------------------------------------------------------------
+# COMPANY / LEGAL DETAILS SHOWN IN THE FOOTER
+# These were "[EXACT LEGAL NAME]" and "[LICENCE NUMBER]" placeholders. They must
+# come from Palesa / Miguel (marketing + legal group) - do NOT invent them.
+# Set them here, or as environment variables on PythonAnywhere:
+#   STRATOS_LEGAL_NAME, STRATOS_LICENCE_NO, STRATOS_DISCLAIMER
+# While they are empty the footer simply omits those sentences (no brackets).
+# ---------------------------------------------------------------------------
+COMPANY = {
+    "legal_name": os.environ.get("STRATOS_LEGAL_NAME", ""),
+    "licence_no": os.environ.get("STRATOS_LICENCE_NO", ""),
+    "licence_authority": "Meydan Free Zone",
+    "disclaimer": os.environ.get("STRATOS_DISCLAIMER", ""),
+}
+
+
+@app.context_processor
+def inject_globals():
+    return {"company": COMPANY, "current_year": datetime.now().year}
+
 
 USERS = {
     "client": {"password": "stratos2026", "role": "client", "display_name": "Client"},
@@ -128,6 +151,44 @@ SERVICE_PAGES = {
 }
 
 
+# Short page names: the big banner heading. The long line becomes the subtitle.
+SERVICE_NAMES = {
+    "complete_uae_establishment": "Complete UAE Establishment",
+    "uae_company_formation": "UAE Company Formation",
+    "accounting_management_reporting": "Accounting & Reporting",
+    "business_bank_account_support": "Business Banking Support",
+    "residence_visa_support": "Residence & Visa Support",
+    "corporate_tax_vat_coordination": "Corporate Tax & VAT",
+    "corporate_administration_governance": "Corporate Administration",
+}
+# Image plan per service page (chosen from the images already in /images - see "Image audit" in the README).
+#   banner : hero photo          pos : CSS background-position that keeps the calm sky behind the heading
+#   bw     : True = black-and-white hero   cta : closing-banner photo
+#   splits : photos for the image-left / text-right sections (close-up building shots are fine here
+#            because no text ever sits ON these photos)
+SERVICE_IMAGES = {
+    "complete_uae_establishment": {"banner": "b3.jfif", "pos": "center 0%", "bw": False, "cta": "p4.jfif",
+                                   "splits": ["claudio-poggio-0xC7iBAgtr8-unsplash.jpg", "p3.jfif"]},
+    "uae_company_formation": {"banner": "p2.jfif", "pos": "center 75%", "bw": True, "cta": "b3.jfif",
+                              "splits": ["dubai-7237750_1920.jpg", "p3.jfif"]},
+    "accounting_management_reporting": {"banner": "rahul-sharma-auVibNu6bO8-unsplash.jpg", "pos": "center 18%", "bw": True, "cta": "dubai-7237750_1920.jpg",
+                                        "splits": ["claudio-poggio-0xC7iBAgtr8-unsplash.jpg", "p3.jfif"]},
+    "business_bank_account_support": {"banner": "kate-trysh-70vza4NysS8-unsplash.jpg", "pos": "center 8%", "bw": False, "cta": "p4.jfif",
+                                      "splits": ["dubai-7237750_1920.jpg", "p3.jfif"]},
+    "residence_visa_support": {"banner": "gabriel-santos-DgLksCjEfB0-unsplash.jpg", "pos": "center 6%", "bw": False, "cta": "b3.jfif",
+                               "splits": ["claudio-poggio-0xC7iBAgtr8-unsplash.jpg", "p3.jfif"]},
+    "corporate_tax_vat_coordination": {"banner": "amir-hanna-KjWMGF0PYuE-unsplash (1).jpg", "pos": "center 30%", "bw": False, "cta": "dubai-1351569_1920.jpg",
+                                       "splits": ["dubai-7237750_1920.jpg", "p3.jfif"]},
+    "corporate_administration_governance": {"banner": "b1.jfif", "pos": "center 40%", "bw": False, "cta": "p4.jfif",
+                                            "splits": ["claudio-poggio-0xC7iBAgtr8-unsplash.jpg", "p3.jfif"]},
+}
+for _key, _page in SERVICE_PAGES.items():
+    _page["name"] = SERVICE_NAMES[_key]
+    _cfg = SERVICE_IMAGES[_key]
+    _page["banner_image"], _page["banner_pos"], _page["banner_bw"] = _cfg["banner"], _cfg["pos"], _cfg["bw"]
+    _page["cta_image"], _page["split_images"] = _cfg["cta"], _cfg["splits"]
+
+
 def service_page(key):
     return render_template("service_detail.html", page=SERVICE_PAGES[key])
 
@@ -172,9 +233,100 @@ def faqs():
     return render_template("faqs.html")
 
 
+# ---------------------------------------------------------------------------
+# ARTICLES
+# The three cards on /articles used to link to "#". Each one now opens its own
+# page. NOTE: article copy is a first draft built from the wording already on
+# the service pages - Leah / legal (Palesa, Miguel) should review before launch.
+# ---------------------------------------------------------------------------
+ARTICLES = {
+    "mainland-or-free-zone": {
+        "title": "Mainland or Free Zone: Start with How the Business Will Operate",
+        "category": "Business Formation",
+        "summary": "The practical questions to examine before comparing jurisdictions, authorities or formation packages.",
+        "image": "gabriel-santos-DgLksCjEfB0-unsplash.jpg",
+        "banner": "p1.jfif",
+        "read_time": "4 min read",
+        "sections": [
+            {"heading": "There is no universally better route", "paragraphs": [
+                "Mainland and free-zone companies are often presented as a simple either/or choice, with one described as more flexible and the other as cheaper or faster. In practice, neither statement holds for every business.",
+                "The better question is how the company will actually operate: what it will sell, who its customers and suppliers are, where its people and premises will be, and who will own it."]},
+            {"heading": "Questions to answer before comparing options", "items": [
+                "What activities will the company carry out, and does the licence need to describe each of them?",
+                "Where are the customers, suppliers and counterparties based?",
+                "Will the business need physical premises, staff or visas in the UAE?",
+                "Who will own the company, and is any shareholder another company?",
+                "What will the bank need to understand about the business and its expected transactions?",
+                "How might the business grow or change over the next few years?"]},
+            {"heading": "Why the order matters", "paragraphs": [
+                "Comparing authorities or packages before answering those questions tends to produce a structure chosen on price or speed alone. That can leave the business with a licence that does not reflect its activities, ownership documents that are difficult to explain to a bank, or visa capacity that does not match its staffing plans.",
+                "At Stratos we establish the commercial facts first, compare the routes that genuinely fit, and record the reasons for the recommendation, including the assumptions and trade-offs involved."]},
+        ],
+        "service": "complete_uae_establishment",
+    },
+    "preparing-for-a-uae-bank-account": {
+        "title": "How to Prepare for a UAE Business Bank Account Application",
+        "category": "Banking",
+        "summary": "How ownership, commercial activity, expected transactions and supporting documents shape a corporate account application.",
+        "image": "kate-trysh-70vza4NysS8-unsplash.jpg",
+        "banner": "rahul-sharma-auVibNu6bO8-unsplash.jpg",
+        "read_time": "4 min read",
+        "sections": [
+            {"heading": "A licence is not an entitlement to a bank account", "paragraphs": [
+                "Incorporating a UAE company and opening a corporate bank account are separate processes. A bank decides independently whether to open or maintain an account, and no adviser can guarantee the outcome.",
+                "Banks need to understand the company, its owners, its activities, its expected transactions and its reason for using a UAE account."]},
+            {"heading": "What a bank will typically want to understand", "items": [
+                "The business model: what the company sells, who it serves and where suppliers and customers are based.",
+                "Ownership and control: shareholders, ultimate beneficial owners, directors and authorised signatories.",
+                "Source of funds and source of wealth.",
+                "Expected account activity: currencies, countries, transaction values and major counterparties.",
+                "The UAE connection: operations, decision-making, premises and staff."]},
+            {"heading": "Make sure the facts agree", "paragraphs": [
+                "A strong application is not the one with the most documents. It is one in which the facts agree. The activity on the licence should match the business description, and the website, contracts and invoices should describe the same commercial model.",
+                "Finding and resolving avoidable inconsistencies before submission is usually more valuable than adding more paperwork."]},
+        ],
+        "service": "business_bank_account_support",
+    },
+    "after-uae-company-incorporation": {
+        "title": "What Happens After UAE Company Incorporation?",
+        "category": "Compliance",
+        "summary": "The bookkeeping, tax, immigration, renewal and governance work that begins once the licence is issued.",
+        "image": "dubai-1351569_1920.jpg",
+        "banner": "p2.jfif",
+        "read_time": "3 min read",
+        "sections": [
+            {"heading": "The licence is the start, not the finish", "paragraphs": [
+                "Once the licence is issued, a number of requirements begin to run at the same time. They are easy to overlook when the focus has been on incorporation."]},
+            {"heading": "What typically needs attention", "items": [
+                "Immigration and residence requirements.",
+                "Banking applications.",
+                "Proper financial records and bookkeeping.",
+                "Corporate Tax and VAT assessment.",
+                "Beneficial-ownership and corporate records.",
+                "Contracts, premises or operational permissions.",
+                "Licence conditions and renewal dates."]},
+            {"heading": "Plan the sequence early", "paragraphs": [
+                "These workstreams depend on each other. The company route can affect visa capacity, bookkeeping should begin as soon as the company starts transacting, and renewal dates should be tracked from the outset.",
+                "Where Stratos manages the wider engagement, we provide a post-incorporation action list for the items included in the agreed scope and can continue managing those workstreams."]},
+        ],
+        "service": "corporate_administration_governance",
+    },
+}
+
+
 @app.get("/articles")
 def articles():
-    return render_template("articles.html")
+    return render_template("articles.html", articles=ARTICLES)
+
+
+@app.get("/articles/<slug>/")
+def article_detail(slug):
+    article = ARTICLES.get(slug)
+    if not article:
+        abort(404)
+    return render_template("article_detail.html", article=article, slug=slug,
+                           service=SERVICE_PAGES[article["service"]],
+                           service_endpoint=article["service"])
 
 @app.get("/who-we-work-with")
 def who_we_work_with():

@@ -1,417 +1,78 @@
 {% extends 'base.html' %}
+{% from '_components.html' import page_banner, cta_band with context %}
 {% block title %}FAQs | Stratos Consulting{% endblock %}
 {% block content %}
 
-<!-- PAGE-SPECIFIC EXECUTIVE STYLES -->
-<style>
-    /* Section Container Alignment & Backgrounds */
-    .faq-page-wrapper {
-        background: #ffffff;
-    }
 
-    .faq-hero-section {
-        padding: 80px 10% 40px;
-        /* Removed white background so the global image shows through */
-    }
-
-    .faq-category-section {
-        padding: 48px 10%;
-        border-top: 1px solid rgba(7, 14, 40, 0.1);
-        background: #ffffff;
-    }
-
-    .faq-category-header {
-        margin-bottom: 32px;
-        text-align: left;
-    }
-
-    .faq-category-header h2 {
-        font-family: var(--font-heading);
-        font-size: 28px !important;
-        color: var(--navy-dark);
-        margin: 8px 0 0;
-    }
-
-    .faq-intro-text {
-        font-size: 14px !important;
-        color: var(--navy-light);
-        line-height: 1.75 !important;
-        margin-bottom: 32px;
-        text-align: justify !important;
-        max-width: 900px;
-    }
-
-    /* Premium Custom Accordion Styling */
-    .faq-accordion-group {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .faq-accordion-group details {
-        border: 1px solid rgba(7, 14, 40, 0.12);
-        border-radius: 4px;
-        padding: 0;
-        background: #ffffff;
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-
-    .faq-accordion-group details:hover {
-        border-color: var(--navy-dark);
-        box-shadow: 0 4px 16px rgba(7, 14, 40, 0.05);
-    }
-
-    .faq-accordion-group details[open] {
-        border-color: var(--navy-dark);
-        background: #fdfdfd;
-    }
-
-    .faq-accordion-group summary {
-        font-family: var(--font-heading);
-        font-size: 18px !important;
-        font-weight: 600;
-        color: var(--navy-dark);
-        padding: 24px 32px;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        user-select: none;
-        transition: color 0.3s ease, background-color 0.3s ease;
-    }
-
-    .faq-accordion-group summary::-webkit-details-marker {
-        display: none;
-    }
-
-    /* Custom + / - Indicator */
-    .faq-accordion-group summary::after {
-        content: '+';
-        font-family: var(--font-body);
-        font-size: 20px;
-        font-weight: 400;
-        color: var(--navy-dark);
-        transition: transform 0.3s ease, color 0.3s ease;
-        margin-left: 16px;
-        flex-shrink: 0;
-    }
-
-    .faq-accordion-group details[open] summary::after {
-        content: '−';
-        transform: rotate(180deg);
-    }
-
-    .faq-accordion-group summary:hover {
-        background: #f8f9fb;
-    }
-
-    /* Accordion Body Content */
-    .faq-content-body {
-        padding: 0 32px 28px;
-        border-top: 1px solid rgba(7, 14, 40, 0.06);
-        margin-top: 4px;
-    }
-
-    .faq-content-body p {
-        font-size: 14px !important;
-        line-height: 1.75 !important;
-        color: var(--navy-light);
-        margin: 16px 0 0;
-        text-align: justify !important;
-    }
-
-    .faq-content-body ul, 
-    .faq-content-body ol {
-        margin: 16px 0 0;
-        padding-left: 20px;
-        color: var(--navy-light);
-    }
-
-    .faq-content-body li {
-        font-size: 14px !important;
-        line-height: 1.75 !important;
-        margin-bottom: 8px;
-        text-align: justify !important;
-    }
-
-    .faq-content-body li strong {
-        color: var(--navy-dark);
-    }
-
-    /* Milestone Step Badges */
-    .milestone-badge {
-        display: inline-block;
-        font-family: var(--font-body);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--navy-dark);
-        background: rgba(7, 14, 40, 0.06);
-        padding: 4px 10px;
-        border-radius: 2px;
-        margin-left: 12px;
-    }
-
-    /* Mobile Responsive Adjustments */
-    @media (max-width: 768px) {
-        .faq-hero-section,
-        .faq-category-section {
-            padding-left: 6% !important;
-            padding-right: 6% !important;
-        }
-
-        .faq-accordion-group summary {
-            padding: 18px 20px;
-            font-size: 16px !important;
-        }
-
-        .faq-content-body {
-            padding: 0 20px 20px;
-        }
-
-        .milestone-badge {
-            display: block;
-            margin-left: 0;
-            margin-top: 6px;
-            width: fit-content;
-        }
-    }
-    /* =========================================
-   STATIC HERO BANNER (FAQS, INSIGHTS, SERVICES)
-========================================= */
-
-.hero-banner.static-hero {
-    position: relative;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
-    padding: 100px 8% !important; /* Locks flush to global 8% horizontal site margin */
-    box-sizing: border-box;
-    width: 100% !important;
-    max-width: 1440px !important;
-    margin: 0 auto !important;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-.hero-banner.static-hero .hero-banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        rgba(7, 14, 40, 0.92) 0%, 
-        rgba(7, 14, 40, 0.75) 55%, 
-        rgba(7, 14, 40, 0.45) 100%
-    );
-    z-index: 2;
-}
-
-.hero-banner.static-hero .hero-banner-content {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 850px !important;
-    text-align: left !important;
-}
-
-.hero-banner.static-hero h1 {
-    font-family: var(--font-heading) !important;
-    font-size: clamp(34px, 4.5vw, 48px) !important;
-    line-height: 1.18 !important;
-    font-weight: 500 !important;
-    color: #ffffff !important;
-    margin: 12px 0 20px 0 !important;
-}
-
-.hero-banner.static-hero .lead-light {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin-bottom: 28px !important;
-    max-width: 720px;
-}
-
-.hero-banner.static-hero .microcopy {
-    font-size: 11px !important;
-    margin-top: 16px !important;
-    opacity: 0.8;
-    color: #ffffff !important;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .hero-banner.static-hero {
-        min-height: 440px !important;
-        padding: 90px 6% 40px !important;
-    }
-
-    .hero-banner.static-hero h1 {
-        font-size: 28px !important;
-        line-height: 1.25 !important;
-    }
-
-    .hero-banner.static-hero .lead-light {
-        font-size: 14px !important;
-        line-height: 1.55 !important;
-    }
-}
-/* Milestone Step Badges */
-.milestone-badge {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--navy-light);
-    background: transparent; /* Removed grey background */
-    padding: 0;
-    margin-top: 6px;
-}
-/* =========================================
-   MOBILE CTA BAND READABILITY FIX
-========================================= */
-
-@media (max-width: 768px) {
-    .dark-band.vision-band {
-        position: relative !important;
-        background-color: var(--navy-dark) !important;
-        padding: 60px 6% !important;
-        overflow: hidden !important;
-    }
-
-    /* Darken background photo so white text stands out clearly */
-    .dark-band.vision-band .section-photo {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        opacity: 0.25 !important; /* Lowers photo intensity */
-        filter: brightness(0.35) contrast(1.2) !important; /* Heavily darkens bright buildings */
-        z-index: 1 !important;
-    }
-
-    /* Force text elements above the photo with clear contrast */
-    .dark-band.vision-band div,
-    .dark-band.vision-band h2,
-    .dark-band.vision-band p,
-    .dark-band.vision-band .eyebrow,
-    .dark-band.vision-band .band-copy {
-        position: relative !important;
-        z-index: 2 !important;
-        color: #ffffff !important;
-        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7) !important; /* Shadow for maximum legibility */
-    }
-
-    .dark-band.vision-band .band-copy {
-        opacity: 0.95 !important;
-        font-size: 14px !important;
-        line-height: 1.6 !important;
-    }
-
-    /* Solid CTA Button for Mobile */
-    .dark-band.vision-band .btn-banner {
-        position: relative !important;
-        z-index: 2 !important;
-        background-color: #ffffff !important;
-        color: var(--navy-dark) !important;
-        border: 1px solid #ffffff !important;
-        font-weight: 600 !important;
-        margin-top: 20px !important;
-        display: inline-block !important;
-    }
-}
-</style>
 
 <div class="faq-page-wrapper">
 
-   <!-- FAQS HERO BANNER (STATIC BACKGROUND) -->
-<section class="hero-banner static-hero" style="background-image: url('{{ url_for('image_asset', filename='rahul-sharma-auVibNu6bO8-unsplash.jpg') }}');">
-    <div class="hero-banner-overlay"></div>
-    
-    <!-- Unified Content Container -->
-    <div class="hero-banner-content">
-        <p class="eyebrow-light">FREQUENTLY ASKED QUESTIONS</p>
-        <h1>Questions Worth Asking Before Formation.</h1>
-        
-        <p class="lead-light">Clear answers for decisions that are easy to oversimplify.</p>
-
-        <div class="button-row">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent">Explore Our Services</a>
-        </div>
-        <p class="microcopy">New enquiries begin with a short suitability review.</p>
-    </div>
-</section>
+    {# FAQ banner, as marked up in the review: keep the eyebrow, big heading "FAQs" only.
+       Removed: the long title, the "Clear answers..." line, both buttons and the microcopy. #}
+    {{ page_banner('rahul-sharma-auVibNu6bO8-unsplash.jpg', 'FAQs',
+                   eyebrow='FREQUENTLY ASKED QUESTIONS', show_actions=False, pos='center 20%', bw=True) }}
 
     <!-- SECTION 1: GENERAL QUESTIONS -->
-    <section class="faq-category-section">
-        <div class="faq-category-header">
+    <section class="band band--white">
+    <div class="band__inner">
+        <div class="band__head">
             <p class="eyebrow">OVERVIEW</p>
             <h2>General Questions</h2>
         </div>
 
-        <div class="faq-accordion-group">
+        <div class="faq-list">
             <details open>
                 <summary>Should I establish a UAE mainland or free-zone company?</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>That depends on how the company will operate. Its activities, customers, place of business, ownership, staffing, visa requirements, banking profile and ongoing obligations all matter. We compare the appropriate routes against those requirements before recommending one.</p>
                 </div>
             </details>
 
             <details>
                 <summary>What do I receive before formation begins?</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>Under our Complete UAE Establishment engagement, you receive a written comparison of the appropriate mainland and free-zone options and a reasoned structural recommendation. You also receive an itemised proposal setting out the agreed scope, professional fees, government charges, known third-party costs, assumptions and exclusions.</p>
                 </div>
             </details>
 
             <details>
                 <summary>Does forming a UAE company include opening a bank account?</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>No. Company incorporation and bank-account approval are separate processes. Stratos can assess potential bank fit, prepare the business profile and KYC application pack, support the application process where appropriate and assist with follow-up. The bank makes the final decision independently.</p>
                 </div>
             </details>
 
             <details>
                 <summary>How much does UAE company formation cost?</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>A meaningful figure depends on the activities, ownership, jurisdiction, premises, visas and connected services required. Suitable clients receive an itemised proposal following the initial assessment.</p>
                 </div>
             </details>
 
             <details>
                 <summary>What happens after I submit an enquiry?</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>We review the proposed business, ownership, timing and required services. If the engagement appears suited to our model, we will invite you to a consultation or request additional information.</p>
                 </div>
             </details>
         </div>
+        </div>
     </section>
 
 
-    <section class="faq-category-section">
-        <div class="faq-category-header">
+    <section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
             <p class="eyebrow">STAGE 1 PROTOCOL</p>
             <h2>Client Onboarding &amp; Documentation</h2>
         </div>
 
-        <p class="faq-intro-text">At Stratos Consulting, we begin every engagement with a structured onboarding process to ensure efficiency, compliance, and personalized service. Below is a detailed outline of what’s required and what you can expect in the first stage of your business setup journey.</p>
+        <p class="faq-intro">At Stratos Consulting, we begin every engagement with a structured onboarding process to ensure efficiency, compliance, and personalized service. Below is a detailed outline of what’s required and what you can expect in the first stage of your business setup journey.</p>
 
-        <div class="faq-accordion-group">
+        <div class="faq-list">
             <details>
                 <summary>Step 1: Information &amp; Document Collection (Individual Shareholders)</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>To initiate the setup process, please provide the following documentation:</p>
                     <ul>
                         <li><strong>Three Preferred Company Names:</strong> Listed in clear order of preference for reservation.</li>
@@ -427,7 +88,7 @@
 
             <details>
                 <summary>Step 2: Client Onboarding Workflow</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <ol>
                         <li><strong>Introduction Call:</strong> We schedule a welcome briefing to introduce your dedicated team, verify your objectives, and align operational preferences.</li>
                         <li><strong>Proposal &amp; Engagement Agreement:</strong> You will receive a customized proposal outlining the scope of services, completion timelines, transparent fee breakdown, and terms. Service commences upon agreement execution.</li>
@@ -436,54 +97,58 @@
                 </div>
             </details>
         </div>
+        </div>
     </section>
 
     <!-- SECTION 3: GOVERNMENT FEES & APPROVALS -->
-    <section class="faq-category-section">
-        <div class="faq-category-header">
+    <section class="band band--white">
+    <div class="band__inner">
+        <div class="band__head">
             <p class="eyebrow">TERMS &amp; COMPLIANCE</p>
             <h2>Government Fees, Approvals &amp; Limitations</h2>
         </div>
 
-        <div class="faq-accordion-group">
+        <div class="faq-list">
             <details>
                 <summary>Government Fees Protocol</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>All official government charges are supported by official payment vouchers. Government fees are payable upfront prior to filing and must be settled in full before submission of documentation to relevant authorities.</p>
                 </div>
             </details>
 
             <details>
                 <summary>Activity Approvals &amp; Free Zone Authority Review</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>All selected business activities are subject to final approval by the relevant licensing authority or Free Zone. In the event an activity requires external regulatory approval or amendment, our team provides alternative activity mapping and coordinates filings seamlessly.</p>
                 </div>
             </details>
 
             <details>
                 <summary>Shareholder Limitations &amp; Establishment Cards</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>Standard setup structures accommodate up to three (3) shareholders. Supplementary administrative fees apply for additional corporate or individual shareholders. Establishment cards are issued specifically for entity structures with visa allocations.</p>
                 </div>
             </details>
 
             <details>
                 <summary>Proposal Validity</summary>
-                <div class="faq-content-body">
+                <div class="faq-answer">
                     <p>Engagement proposals are valid for a period of 30 days from issuance, after which government fees, regulatory terms, or activity availability may be subject to authority adjustments.</p>
                 </div>
             </details>
         </div>
+        </div>
     </section>
 
     <!-- SECTION 4: PROCESS & PROJECT TIMELINE -->
-<section class="faq-category-section" style="padding-bottom: 80px;">
-    <div class="faq-category-header">
+<section class="band band--tint">
+    <div class="band__inner">
+    <div class="band__head">
         <p class="eyebrow">ESTIMATED MILESTONES</p>
         <h2>Process &amp; Project Timeline</h2>
     </div>
 
-    <div class="faq-accordion-group">
+    <div class="faq-list">
         <details>
             <summary>
                 <div>
@@ -491,7 +156,7 @@
                     <span class="milestone-badge">Approx. 48 Hours</span>
                 </div>
             </summary>
-            <div class="faq-content-body">
+            <div class="faq-answer">
                 <p>Invoice settlement, engagement agreement execution, document verification, and immediate filing initiation with licensing authorities.</p>
             </div>
         </details>
@@ -503,7 +168,7 @@
                     <span class="milestone-badge">Approx. 5–7 Working Days</span>
                 </div>
             </summary>
-            <div class="faq-content-body">
+            <div class="faq-answer">
                 <p>Official submission to authorities, signing of statutory legal incorporation instruments, and official Trade License and Certificate of Formation issuance.</p>
             </div>
         </details>
@@ -515,7 +180,7 @@
                     <span class="milestone-badge">Approx. 2–3 Working Days</span>
                 </div>
             </summary>
-            <div class="faq-content-body">
+            <div class="faq-answer">
                 <p>Filing for official Entry Permit issuance, pre-arrival immigration clearance, and scheduling of in-country residency procedures.</p>
             </div>
         </details>
@@ -527,23 +192,15 @@
                     <span class="milestone-badge">Approx. 5–7 Working Days</span>
                 </div>
             </summary>
-            <div class="faq-content-body">
+            <div class="faq-answer">
                 <p>In-person arrival in Dubai, VIP escorted Medical Fitness examination, biometrics capture, and official Emirates ID &amp; Residency Visa stamping.</p>
             </div>
         </details>
     </div>
-</section>
-
-    <!-- CALL TO ACTION BANNER -->
-    <section class="dark-band vision-band">
-        <img class="section-photo" src="{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}" alt="Dubai skyline at dusk">
-        <div>
-            <p class="eyebrow">NOT SURE WHERE TO START?</p>
-            <h2>Let's discuss your UAE plans.</h2>
-            <p class="band-copy">Submit a short enquiry and our advisors will respond with next steps and a suitable engagement path.</p>
-        </div>
-        <a href="{{ url_for('contact') }}" class="btn-banner">Tell Us About Your Plans</a>
+    </div>
     </section>
+
+    {{ cta_band('dubai-7237750_1920.jpg', 'NOT SURE WHERE TO START?', "Let's discuss your UAE plans.", 'Submit a short enquiry and our advisors will respond with next steps and a suitable engagement path.') }}
 
 </div>
 

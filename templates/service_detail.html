@@ -1,208 +1,98 @@
 {% extends 'base.html' %}
+{% from '_components.html' import page_banner, cta_band, intro_strip with context %}
 {% block title %}{{ page.title }}{% endblock %}
 {% block meta_description %}{{ page.meta_description }}{% endblock %}
 {% block content %}
-<style>
-    .service-detail { 
-        padding: 0 10% 80px; 
-        box-sizing: border-box;
-        width: 100%;
-    }
-    .detail-section { 
-        max-width: 1040px; 
-        padding: 56px 0; 
-        border-top: 1px solid #d8dce5; 
-    }
-    .detail-section h2 { 
-        margin: 0 0 24px; 
-        color: var(--navy-dark); 
-        font-family: var(--font-heading); 
-        font-size: 32px !important; 
-        font-weight: 500; 
-        line-height: 1.2; 
-    }
-    .detail-section p { 
-        max-width: 850px; 
-        font-size: 14px !important; 
-        line-height: 1.65; 
-        margin: 0 0 16px; 
-    }
-    .detail-section ul { 
-        max-width: 850px; 
-        padding-left: 22px; 
-        line-height: 1.65; 
-    }
-    .detail-section li { 
-        margin-bottom: 9px; 
-        font-size: 14px !important;
-    }
-    .detail-note { 
-        color: var(--navy-light); 
-        font-style: italic; 
-        margin-top: 22px !important; 
-    }
-    .detail-grid { 
-        display: grid; 
-        grid-template-columns: repeat(2, minmax(0, 1fr)); 
-        gap: 20px; 
-    }
-    .detail-card { 
-        border: 1px solid #d8dce5; 
-        padding: 26px; 
-        background: #fff; 
-        border-radius: 4px;
-    }
-    .detail-card h3 { 
-        margin: 0 0 10px; 
-        color: var(--navy-dark); 
-        font-family: var(--font-heading); 
-        font-size: 20px !important; 
-        font-weight: 500; 
-    }
-    .detail-card p { 
-        font-size: 14px !important; 
-        line-height: 1.65; 
-        margin: 0; 
-    }
-    .detail-steps { 
-        counter-reset: detail-step; 
-        display: grid; 
-        gap: 20px; 
-    }
-    .detail-step { 
-        display: grid; 
-        grid-template-columns: 42px 1fr; 
-        gap: 16px; 
-        align-items: start; 
-    }
-    .detail-step::before { 
-        counter-increment: detail-step; 
-        content: counter(detail-step, decimal-leading-zero); 
-        color: var(--navy-dark); 
-        font-size: 13px; 
-        font-weight: 700; 
-        padding-top: 3px; 
-    }
-    .detail-step h3 { 
-        margin: 0 0 6px; 
-        color: var(--navy-dark); 
-        font-size: 18px !important; 
-    }
-    .detail-step p { 
-        font-size: 14px !important; 
-        margin: 0; 
-    }
-    .detail-faq { 
-        max-width: 1040px; 
-        padding: 56px 0; 
-        border-top: 1px solid #d8dce5; 
-    }
-    .detail-faq h2 { 
-        margin: 0 0 24px; 
-        color: var(--navy-dark); 
-        font-family: var(--font-heading); 
-        font-size: 32px !important; 
-        font-weight: 500; 
-    }
-    .detail-faq details { 
-        border-top: 1px solid #d8dce5; 
-        padding: 18px 0; 
-    }
-    .detail-faq details:last-child { 
-        border-bottom: 1px solid #d8dce5; 
-    }
-    .detail-faq summary { 
-        cursor: pointer; 
-        color: var(--navy-dark); 
-        font-weight: 600; 
-        padding-right: 20px; 
-        font-size: 16px !important;
-    }
-    .detail-faq details p { 
-        max-width: 780px; 
-        margin: 14px 0 0; 
-        font-size: 14px !important; 
-    }
-    .service-cta { 
-        margin: 40px -11.1% -80px; 
-        padding: 70px 10%; 
-        background: var(--navy-dark); 
-        color: #fff; 
-    }
-    .service-cta h2 { 
-        max-width: 760px; 
-        color: #fff !important; 
-        font-family: var(--font-heading); 
-        font-size: 36px !important; 
-        font-weight: 500; 
-        line-height: 1.2; 
-        margin: 0 0 18px; 
-    }
-    .service-cta p { 
-        max-width: 700px; 
-        color: rgba(255,255,255,.86) !important; 
-        line-height: 1.65; 
-    }
-    .service-cta .btn-banner { 
-        display: inline-block; 
-        margin-top: 18px; 
-    }
 
-    @media (max-width: 1024px) {
-        .service-detail { padding: 0 6% 60px; }
-        .detail-section, .detail-faq { padding: 42px 0; }
-        .detail-section h2, .detail-faq h2 { font-size: 27px !important; }
-        .detail-grid { grid-template-columns: 1fr; }
-        .service-cta { margin: 32px -6.8% -60px; padding: 52px 6%; }
-        .service-cta h2 { font-size: 28px !important; }
-    }
-</style>
+{# HERO: the SERVICE NAME is the big heading, the long line becomes the subtitle.
+   All the per-page <style> that used to live here has moved to static/stratos-refresh.css. #}
+{{ page_banner(page.banner_image, page.name, subtitle=page.heading, eyebrow=page.label, pos=page.banner_pos, bw=page.banner_bw,
+               secondary_label=page.secondary, secondary_href='#engagement-content') }}
+{{ intro_strip(page.intro) }}
 
-<!-- UNIFIED HERO BANNER SECTION -->
-<section class="page-hero hero-services">
-    <p class="eyebrow-light">{{ page.label }}</p>
-    <h1>{{ page.heading }}</h1>
-    <p class="lead-light">{{ page.intro }}</p>
-    <div class="button-row">
-        <a href="{{ url_for('contact') }}" class="btn-banner">Tell Us About Your Plans</a>
-        <a href="#engagement-content" class="btn-banner btn-banner-transparent">{{ page.secondary }}</a>
+{# Rhythm: sections alternate white / tint, card sections become navy bands, step sections become a timeline.
+   `ns.tone` remembers the previous plain band so two identical bands never sit side by side. #}
+{% set ns = namespace(tone='tint', prev='', splits=0) %}
+<div id="engagement-content">
+{% for section in page.sections %}
+    {% if section.get('cards') and ns.prev != 'navy' %}
+        {% set tone = 'navy' %}
+    {% else %}
+        {% set ns.tone = 'white' if ns.tone == 'tint' else 'tint' %}
+        {% set tone = ns.tone %}
+    {% endif %}
+    {% set ns.prev = tone %}
+{% set is_prose = section.get('paragraphs') and not (section.get('items') or section.get('cards') or section.get('steps')) %}
+{% if is_prose and ns.splits < 2 %}
+{# Image-left / text-right (then flipped) - the first two prose sections of every service page #}
+<section class="band band--{{ tone }}">
+    <div class="split {{ 'split--reverse' if ns.splits == 1 }}">
+        <div class="split__photo split__photo--frame {{ 'split__photo--bw' if ns.splits == 0 }}" style="background-image: url('{{ url_for('image_asset', filename=page.split_images[ns.splits]) }}');" role="img" aria-label="Dubai"></div>
+        <div class="split__text">
+            <h2>{{ section.heading }}</h2>
+            <div class="prose">{% for paragraph in section.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}</div>
+            {% if section.get('note') %}<p class="callout" style="text-align:left !important; text-align-last:left;">{{ section.note }}</p>{% endif %}
+        </div>
+    </div>
+</section>
+{% set ns.splits = ns.splits + 1 %}
+{% else %}
+<section class="band band--{{ tone }}">
+    <div class="band__inner">
+        <div class="band__head" {% if not (section.get('paragraphs') or section.get('note')) %}style="margin-bottom: 40px;"{% endif %}>
+            <h2>{{ section.heading }}</h2>
+        </div>
+
+        {% if section.get('paragraphs') %}
+        <div class="prose">
+            {% for paragraph in section.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}
+        </div>
+        {% endif %}
+
+        {% if section.get('items') %}
+        <ul class="checklist">{% for item in section['items'] %}<li>{{ item }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        {% if section.get('cards') %}
+        <div class="card-grid">
+            {% for card in section.cards %}
+            <article class="info-card"><h3>{{ card[0] }}</h3><p>{{ card[1] }}</p></article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if section.get('steps') %}
+        <ol class="timeline" style="--steps: {{ section.steps|length }};">
+            {% for step in section.steps %}
+            <li class="timeline__step">
+                <span class="timeline__dot">{{ '%02d'|format(loop.index) }}</span>
+                <h3>{{ step[0] }}</h3>
+                <p>{{ step[1] }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+
+        {% if section.get('note') %}<p class="callout">{{ section.note }}</p>{% endif %}
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+</div>
+
+<section class="band band--{{ 'white' if (ns.prev == 'tint' or ns.prev == 'navy') else 'tint' }}">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">FAQ</p>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+            {% for question, answer in page.faq %}
+            <details><summary>{{ question }}</summary><p>{{ answer }}</p></details>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
-<div class="service-detail">
-    <div id="engagement-content" style="padding-top: 32px;">
-        {% for section in page.sections %}
-        <section class="detail-section">
-            <h2>{{ section.heading }}</h2>
-            {% for paragraph in section.get('paragraphs', []) %}<p>{{ paragraph }}</p>{% endfor %}
-            {% if section.get('items') %}
-            <ul>{% for item in section.get('items', []) %}<li>{{ item }}</li>{% endfor %}</ul>
-            {% endif %}
-            {% if section.get('cards') %}
-            <div class="detail-grid">
-                {% for card in section.cards %}<article class="detail-card"><h3>{{ card[0] }}</h3><p>{{ card[1] }}</p></article>{% endfor %}
-            </div>
-            {% endif %}
-            {% if section.get('steps') %}
-            <div class="detail-steps">
-                {% for step in section.steps %}<article class="detail-step"><div><h3>{{ step[0] }}</h3><p>{{ step[1] }}</p></div></article>{% endfor %}
-            </div>
-            {% endif %}
-            {% if section.get('note') %}<p class="detail-note">{{ section.note }}</p>{% endif %}
-        </section>
-        {% endfor %}
-    </div>
-
-    <section class="detail-faq">
-        <h2>Frequently Asked Questions</h2>
-        {% for question, answer in page.faq %}<details><summary>{{ question }}</summary><p>{{ answer }}</p></details>{% endfor %}
-    </section>
-
-    <section class="service-cta">
-        <p class="eyebrow-light">{{ page.cta_label }}</p>
-        <h2>{{ page.cta_heading }}</h2>
-        <p>{{ page.cta_copy }}</p>
-        <a href="{{ url_for('contact') }}" class="btn-banner">Tell Us About Your Plans</a>
-    </section>
-</div>
+{{ cta_band(page.cta_image, page.cta_label, page.cta_heading, page.cta_copy) }}
 {% endblock %}

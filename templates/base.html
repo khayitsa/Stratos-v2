@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260925">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -36,31 +37,34 @@
     </div>
 
     <!-- Navigation Row -->
+    {# Active tab: `ep` is the current Flask endpoint; the matching link gets class="active" + aria-current #}
+    {% set ep = request.endpoint or '' %}
+    {% set service_eps = ['services','complete_uae_establishment','uae_company_formation','accounting_management_reporting','business_bank_account_support','residence_visa_support','corporate_administration_governance','corporate_tax_vat_coordination'] %}
     <nav aria-label="Primary navigation" id="primaryNav">
         <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
+            <li><a href="{{ url_for('about') }}"{% if ep == 'about' %} class="active" aria-current="page"{% endif %}>About</a></li>
             <li class="nav-dropdown">
-                <a href="{{ url_for('services') }}">Services</a>
+                <a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ url_for('complete_uae_establishment') }}">Complete UAE Establishment</a></li>
-                    <li><a href="{{ url_for('uae_company_formation') }}">UAE Company Formation</a></li>
-                    <li><a href="{{ url_for('accounting_management_reporting') }}">Accounting, Bookkeeping & Management Reporting</a></li>
-                    <li><a href="{{ url_for('business_bank_account_support') }}">Business Bank Account Application Support</a></li>
-                    <li><a href="{{ url_for('residence_visa_support') }}">Residence & Visa Application Support</a></li>
-                    <li><a href="{{ url_for('corporate_administration_governance') }}">Corporate Administration & Governance</a></li>
-                    <li><a href="{{ url_for('corporate_tax_vat_coordination') }}">Corporate Tax & VAT Coordination</a></li>
+                    <li><a href="{{ url_for('complete_uae_establishment') }}"{% if ep == 'complete_uae_establishment' %} class="active" aria-current="page"{% endif %}>Complete UAE Establishment</a></li>
+                    <li><a href="{{ url_for('uae_company_formation') }}"{% if ep == 'uae_company_formation' %} class="active" aria-current="page"{% endif %}>UAE Company Formation</a></li>
+                    <li><a href="{{ url_for('accounting_management_reporting') }}"{% if ep == 'accounting_management_reporting' %} class="active" aria-current="page"{% endif %}>Accounting, Bookkeeping & Management Reporting</a></li>
+                    <li><a href="{{ url_for('business_bank_account_support') }}"{% if ep == 'business_bank_account_support' %} class="active" aria-current="page"{% endif %}>Business Bank Account Application Support</a></li>
+                    <li><a href="{{ url_for('residence_visa_support') }}"{% if ep == 'residence_visa_support' %} class="active" aria-current="page"{% endif %}>Residence & Visa Application Support</a></li>
+                    <li><a href="{{ url_for('corporate_administration_governance') }}"{% if ep == 'corporate_administration_governance' %} class="active" aria-current="page"{% endif %}>Corporate Administration & Governance</a></li>
+                    <li><a href="{{ url_for('corporate_tax_vat_coordination') }}"{% if ep == 'corporate_tax_vat_coordination' %} class="active" aria-current="page"{% endif %}>Corporate Tax & VAT Coordination</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('who_we_work_with') }}">Who We Work With</a></li>
-            <li><a href="{{ url_for('articles') }}">Insights</a></li>
-            <li><a href="{{ url_for('faqs') }}">FAQ</a></li>
-            <li><a href="{{ url_for('appointments') }}">Book Appointment</a></li>
+            <li><a href="{{ url_for('who_we_work_with') }}"{% if ep == 'who_we_work_with' %} class="active" aria-current="page"{% endif %}>Who We Work With</a></li>
+            <li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>
+            <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
+            <li><a href="{{ url_for('appointments') }}"{% if ep == 'appointments' %} class="active" aria-current="page"{% endif %}>Book Appointment</a></li>
         </ul>
         
         <!-- CTA Button Aligned to the Nav Row -->
         <div class="nav-right-cta desktop-only">
-            <a href="{{ url_for('contact') }}" class="btn-signin">Tell Us About Your Plans</a>
+            <a href="{{ url_for('contact') }}" class="btn-signin">Book a Consultation</a>
         </div>
     </nav>
 </header>
@@ -68,57 +72,45 @@
     <main>{% block content %}{% endblock %}</main>
 
     <!-- GLOBAL FOOTER -->
-<footer class="site-footer">
-    <div class="footer-container">
-        <!-- 4 Column Main Links Area -->
-        <div class="footer-links footer-grid">
-            <div class="footer-col">
-                <strong>Firm</strong>
-                <a href="{{ url_for('about') }}">About Stratos</a>
-                <a href="{{ url_for('services') }}">Our Services</a>
-                <a href="{{ url_for('who_we_work_with') }}">Who We Work With</a>
-                <a href="{{ url_for('articles') }}">Insights</a>
-                <a href="{{ url_for('faqs') }}">FAQ</a>
-                <a href="{{ url_for('contact') }}">Contact</a>
-                <a href="{{ url_for('contact') }}">Tell Us About Your Plans</a>
-            </div>
-            
-            <div class="footer-col">
-                <strong>Services</strong>
-                <a href="{{ url_for('complete_uae_establishment') }}">Complete UAE Establishment</a>
-                <a href="{{ url_for('uae_company_formation') }}">UAE Company Formation</a>
-                <a href="{{ url_for('accounting_management_reporting') }}">Accounting, Bookkeeping & Management Reporting</a>
-                <a href="{{ url_for('business_bank_account_support') }}">Business Bank Account Application Support</a>
-                <a href="{{ url_for('residence_visa_support') }}">Residence & Visa Application Support</a>
-                <a href="{{ url_for('corporate_administration_governance') }}">Corporate Administration & Governance</a>
-                <a href="{{ url_for('corporate_tax_vat_coordination') }}">Corporate Tax & VAT Coordination</a>
-            </div>
-            
-            <div class="footer-col">
-                <strong>Legal</strong>
-                <a href="{{ url_for('privacy') }}">Privacy Notice</a>
-                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
-                <a href="{{ url_for('terms') }}">Terms of Use</a>
-               
-            </div>
-
-            <!-- Rightmost Brand Column -->
-            <div class="footer-col footer-brand-col">
-                <a href="{{ url_for('home') }}" class="footer-logo-link">
-                    <img class="brand-logo" src="{{ url_for('logo') }}" alt="STRATOS">
-                </a>
-                <p class="footer-brand-text">Advisory-led UAE company formation, bookkeeping, banking preparation and ongoing corporate support for international founders, private investment groups and established businesses.</p>
-            </div>
+<footer class="stratos-footer">
+    <div class="stratos-footer__shell">
+        <!-- Brand sits on the LEFT -->
+        <div class="stratos-footer__brand">
+            <a href="{{ url_for('home') }}" aria-label="Stratos home">
+                <img src="{{ url_for('logo') }}" alt="STRATOS">
+            </a>
+            <p>Advisory-led UAE company formation, bookkeeping, banking preparation and ongoing corporate support for international founders, private investment groups and established businesses.</p>
+            <p class="footer-offices">Offices in the UAE, Panama and South Africa</p>
         </div>
 
-        <!-- Full Width Bottom Disclaimer -->
-        <div class="footer-bottom-row">
-            <p>Licensed in Dubai through Meydan Free Zone. Serving clients across the UAE.</p>
-            <p>&copy; 2026 [EXACT LEGAL NAME]. All rights reserved. Commercial licence no. [LICENCE NUMBER], issued by Meydan Free Zone, Dubai.</p>
+        <div class="stratos-footer__col">
+            <h4>Stratos</h4>
+            <a href="{{ url_for('about') }}">About Stratos</a>
+            <a href="{{ url_for('services') }}">Our Services</a>
+            <a href="{{ url_for('who_we_work_with') }}">Who We Work With</a>
+            <a href="{{ url_for('articles') }}">Articles</a>
+            <a href="{{ url_for('faqs') }}">FAQ</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
         </div>
+
+        {# Services column removed on purpose (marked up in review): every service is in the Services menu at the top. #}
+        <div class="stratos-footer__col">
+            <h4>Legal</h4>
+            <a href="{{ url_for('privacy') }}">Privacy Notice</a>
+            <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            <a href="{{ url_for('terms') }}">Terms of Use</a>
+        </div>
+    </div>
+
+    <!-- Legal line. Values come from COMPANY in app.py (fill in once Palesa / Miguel confirm them) -->
+    <div class="stratos-footer__legal">
+        <p>Licensed in Dubai through {{ company.licence_authority }}. Serving clients across the UAE.</p>
+        <p>&copy; {{ current_year }} {{ company.legal_name or 'Stratos Consulting' }}. All rights reserved.{% if company.licence_no %} Commercial licence no. {{ company.licence_no }}, issued by {{ company.licence_authority }}, Dubai.{% endif %}</p>
+        {% if company.disclaimer %}<p>{{ company.disclaimer }}</p>{% endif %}
     </div>
 </footer>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='stratos-motion.js') }}?v=20260925" defer></script>
 </body>
 </html>

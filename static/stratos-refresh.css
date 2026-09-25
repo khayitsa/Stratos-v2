@@ -1,0 +1,2166 @@
+/* =====================================================================
+   STRATOS - DESIGN REFRESH (25 Sep 2026)
+   Loaded AFTER style.css (see base.html). Everything here either
+   overrides a legacy rule or styles a new component. New components use
+   new class names so they never fight the old patch-on-patch CSS.
+
+   Contents
+     0.  Tokens + global typography (no hyphenation, consistent colours)
+     1.  Desktop header  (logo left / nav centred / CTA right)
+     2.  Buttons         (one system, always centred in their wrapper)
+     3.  Page banner     (ONE hero component, same size on every page)
+     4.  Section bands   (white / tint / navy rhythm, centred headings)
+     5.  Cards, timeline, service grid, checklist
+     6.  Proof strip, About tweaks
+     7.  Fit panel, FAQ accordions
+     8.  CTA band        (text inside navy panel, photo fades in on right)
+     9.  World map + office pins
+    10.  Footer
+    11.  Article pages
+    12.  Responsive
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   0. TOKENS + GLOBAL TYPOGRAPHY
+   ------------------------------------------------------------------- */
+:root {
+    --tint: #eef2f8;            /* cool blue-white, replaces the flat grey */
+    --tint-2: #e3e9f3;
+    --line: rgba(7, 14, 40, 0.14);
+    --ink: var(--navy-dark, #070e28);
+    --ink-soft: #46506d;
+    --shell: 1180px;            /* max content width inside a band */
+    --btn-h: 48px;
+}
+
+/* "Nothing should EVER be hyphenated" - kills hyphens: auto everywhere,
+   including the old .text-slide rule. */
+*,
+*::before,
+*::after {
+    -webkit-hyphens: none !important;
+    -ms-hyphens: none !important;
+    hyphens: none !important;
+    word-break: normal !important;
+    overflow-wrap: normal;
+}
+/* Keep compound words such as "end-to-end" together on one line. */
+.nb { white-space: nowrap; }
+
+html { scroll-behavior: smooth; }
+
+main { display: block; overflow-x: clip; }
+
+/* ---------------------------------------------------------------------
+   1. DESKTOP HEADER  (>=1025px only - the mobile drawer is untouched)
+   ------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+    body header {
+        display: grid !important;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        column-gap: 24px;
+        padding: 10px 4% !important;
+    }
+    body header .header-top {
+        margin: 0 !important;
+        width: auto !important;
+        justify-content: flex-start !important;
+    }
+    body header .logo-container {
+        margin: 0 !important;
+        flex-grow: 0 !important;
+    }
+    /* nav's children (list + CTA) become direct grid items of the header */
+    body header nav#primaryNav {
+        display: contents !important;
+    }
+    body header nav#primaryNav > ul {
+        grid-column: 2;
+        justify-content: center;
+        gap: 6px 22px;
+        margin: 0;
+    }
+    body header nav#primaryNav > ul > li > a {
+        min-width: 0;
+        white-space: nowrap;
+        font-size: 13px;
+        padding: 0 2px;
+    }
+    body header .nav-right-cta {
+        grid-column: 3;
+        justify-self: end;
+    }
+    body header .nav-right-cta .btn-signin {
+        width: auto;
+        padding: 0 22px;
+        white-space: nowrap;
+    }
+}
+@media (min-width: 1025px) and (max-width: 1240px) {
+    body header nav#primaryNav > ul { gap: 4px 14px; }
+    body header nav#primaryNav > ul > li > a { font-size: 12px; }
+    body header .nav-right-cta .btn-signin { padding: 0 14px; font-size: 12px; }
+}
+
+/* ---------------------------------------------------------------------
+   2. BUTTONS - one system. Wrappers centre them.
+   ------------------------------------------------------------------- */
+body .btn-banner,
+body .btn-outline,
+body .btn-signin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--btn-h);
+    height: auto;
+    padding: 0 30px;
+    border-radius: 4px !important;
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.2;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color .25s, color .25s, border-color .25s, transform .25s;
+}
+/* on dark surfaces */
+body .btn-banner:not(.btn-banner-transparent) {
+    background: #ffffff;
+    color: var(--ink);
+    border-color: #ffffff;
+}
+body .btn-banner:not(.btn-banner-transparent):hover {
+    background: transparent;
+    color: #ffffff;
+}
+body .btn-banner.btn-banner-transparent {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, .85);
+}
+body .btn-banner.btn-banner-transparent:hover {
+    background: #ffffff;
+    color: var(--ink);
+}
+/* on light surfaces */
+body .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+}
+body .btn-outline:hover {
+    background: var(--ink);
+    color: #ffffff;
+}
+/* header CTA */
+body .btn-signin {
+    background: #ffffff;
+    color: var(--ink);
+    border-color: #ffffff;
+}
+body .btn-signin:hover {
+    background: transparent;
+    color: #ffffff;
+}
+/* Wrapper that always centres its buttons (fixes "buttons left aligned") */
+.actions,
+.banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+.actions--left { justify-content: flex-start; }
+.actions--mt { margin-top: 40px; }
+
+/* ---------------------------------------------------------------------
+   3. PAGE BANNER - the single hero used on every page.
+      Same height everywhere, content centred vertically + horizontally.
+   ------------------------------------------------------------------- */
+.page-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+    height: 500px;               /* identical on every page */
+    margin: 0;
+    padding: 56px 6%;
+    box-sizing: border-box;
+    background-color: var(--ink);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    text-align: center;
+    color: #ffffff;
+    isolation: isolate;
+}
+.page-banner::before {           /* even, centred darkening - no left-heavy fade */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse at center, rgba(7,14,40,.55) 0%, rgba(7,14,40,.80) 100%);
+}
+.page-banner .hero-bg-slider { z-index: 0; }
+.page-banner__inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 840px;
+    margin: 0 auto;
+    text-align: center;
+}
+body .page-banner .eyebrow-light {
+    display: block;
+    margin: 0 0 14px !important;
+    text-align: center;
+    font-size: 11px !important;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: .85;
+}
+/* The page NAME is the big heading, so visitors always know where they are */
+body main .page-banner h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(34px, 4.4vw, 52px) !important;
+    font-weight: 500 !important;
+    line-height: 1.12 !important;
+    color: #ffffff !important;
+    margin: 0 0 12px !important;
+    text-align: center !important;
+}
+/* The long descriptive line drops to a smaller subtitle */
+body main .page-banner .banner-subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(17px, 1.9vw, 23px);
+    font-weight: 400;
+    line-height: 1.35;
+    color: rgba(255,255,255,.95);
+    margin: 0 auto 18px;
+    max-width: 760px;
+    text-align: center;
+}
+body main .page-banner .banner-lead {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.88);
+    max-width: 720px;
+    margin: 0 auto 26px;
+    text-align: center;
+}
+body main .page-banner .banner-micro {
+    margin: 16px 0 0;
+    font-size: 11px;
+    opacity: .8;
+    color: #ffffff;
+    text-align: center;
+}
+.page-banner--home { height: 560px; }   /* home may be slightly taller, but every INNER page matches */
+
+/* ---------------------------------------------------------------------
+   4. SECTION BANDS - white / tint / navy rhythm, centred headings
+   ------------------------------------------------------------------- */
+.band {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 84px 6%;
+    --fg: var(--ink);
+    --fg-soft: var(--ink-soft);
+    background: #ffffff;
+    color: var(--fg);
+}
+.band--white { background: #ffffff; }
+.band--tint  { background: linear-gradient(180deg, var(--tint) 0%, #f7f9fc 100%); }
+.band--navy  {
+    --fg: #ffffff;
+    --fg-soft: rgba(255,255,255,.82);
+    background: var(--ink);
+}
+.band__inner { max-width: var(--shell); margin: 0 auto; }
+.band__head {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 46px;
+}
+body main .band .eyebrow,
+body main .band .eyebrow-light {
+    display: block;
+    margin: 0 0 12px !important;
+    text-align: center;
+    font-size: 11px !important;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-soft) !important;
+    opacity: 1;
+}
+body main .band h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3vw, 38px) !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    color: var(--fg) !important;
+    margin: 0 0 16px !important;
+    text-align: center !important;
+}
+body main .band h3 { color: var(--fg); }
+body main .band__head p,
+body main .band .lead-centered {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+    color: var(--fg-soft) !important;
+    text-align: center !important;
+    margin: 0 auto 12px !important;
+    max-width: 780px;
+}
+/* long-form body copy is justified, last line left */
+body main .prose {
+    max-width: 800px;
+    margin: 0 auto;
+}
+body main .prose p {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: var(--fg-soft) !important;
+    text-align: justify !important;
+    text-align-last: left;
+    margin: 0 0 16px !important;
+}
+body main .prose .callout,
+body main .callout {
+    max-width: 800px;
+    margin: 28px auto 0 !important;
+    padding: 18px 26px;
+    text-align: center !important;
+    text-align-last: center;
+    font-family: var(--font-heading);
+    font-size: 18px !important;
+    font-style: italic;
+    line-height: 1.5 !important;
+    color: var(--fg) !important;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+.band--navy .callout { border-color: rgba(255,255,255,.28); }
+
+/* Banner statement that sits under a hero (services) */
+.statement-strip {
+    background: var(--ink);
+    color: #fff;
+    padding: 56px 6%;
+    text-align: center;
+}
+.statement-strip h2 {
+    font-family: var(--font-heading);
+    font-size: 28px !important;
+    font-weight: 400;
+    color: #fff !important;
+    margin: 0 0 20px;
+}
+.statement-strip p {
+    max-width: 860px;
+    margin: 0 auto 14px !important;
+    font-size: 15px !important;
+    line-height: 1.75;
+    color: rgba(255,255,255,.88) !important;
+    text-align: justify;
+    text-align-last: center;
+}
+
+/* Two-column split: photo on the LEFT, text on the RIGHT (Leah's brief) */
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    max-width: var(--shell);
+    margin: 0 auto;
+}
+.split__photo {
+    position: relative;
+    min-height: 440px;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+.split__photo--bw { filter: grayscale(1) contrast(1.05); }
+.split__text .eyebrow { text-align: left !important; }
+.split__text h2 { text-align: left !important; }
+.split__text .prose { margin: 0; max-width: none; }
+.split--reverse .split__photo { order: 2; }
+
+/* Clarity banner: keep "end-to-end" whole, remove hyphen breaks */
+.clarity-banner .lead-light { max-width: 700px !important; }
+
+/* ---------------------------------------------------------------------
+   5. CARDS, TIMELINE, SERVICE GRID, CHECKLIST
+   ------------------------------------------------------------------- */
+
+/* 5a. Service grid (home + services page). Cards centred, button pinned to bottom */
+.svc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+}
+.svc-card {
+    flex: 0 1 calc((100% - 56px) / 3);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 34px 28px 30px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--ink);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.svc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 34px rgba(7,14,40,.10);
+}
+.svc-card__num {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    letter-spacing: .2em;
+    color: var(--ink);
+    opacity: .45;
+    margin-bottom: 10px;
+}
+body main .svc-card h3 {
+    font-family: var(--font-heading);
+    font-size: 21px !important;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink) !important;
+    margin: 0 0 12px;
+    text-align: center !important;
+}
+body main .svc-card p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: var(--ink-soft) !important;
+    margin: 0 0 24px !important;
+    text-align: center !important;
+    flex: 1 1 auto;
+}
+.svc-card .btn-outline { margin-top: auto; min-height: 42px; padding: 0 22px; }
+
+/* 5b. Timeline (replaces the 4 square white boxes) */
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--steps, 4), 1fr);
+    position: relative;
+    counter-reset: tl;
+}
+.timeline::before {                /* connecting rail */
+    content: "";
+    position: absolute;
+    top: 27px;
+    left: calc(100% / (var(--steps, 4) * 2));
+    right: calc(100% / (var(--steps, 4) * 2));
+    height: 2px;
+    background: linear-gradient(90deg, rgba(7,14,40,.18), rgba(7,14,40,.55), rgba(7,14,40,.18));
+}
+.band--navy .timeline::before {
+    background: linear-gradient(90deg, rgba(255,255,255,.2), rgba(255,255,255,.6), rgba(255,255,255,.2));
+}
+.timeline__step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 16px;
+    counter-increment: tl;
+}
+.timeline__dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    letter-spacing: .04em;
+    box-shadow: 0 0 0 8px var(--tl-bg, #ffffff);
+}
+.band--navy .timeline__dot { background: #ffffff; color: var(--ink); --tl-bg: var(--ink); }
+.band--tint .timeline__dot { --tl-bg: #f1f4f9; }
+body main .timeline__step h3 {
+    font-family: var(--font-heading);
+    font-size: 19px !important;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    color: var(--fg) !important;
+    text-align: center !important;
+}
+body main .timeline__step p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: var(--fg-soft) !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* 5c. Detail cards on service pages: dark, numbered, hover lift
+       (echoes the image cards Leah liked - breaks up the white/grey boxes) */
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    counter-reset: dc;
+}
+.info-card {
+    flex: 0 1 calc((100% - 48px) / 3);
+    box-sizing: border-box;
+    position: relative;
+    counter-increment: dc;
+    padding: 34px 28px 30px;
+    border-radius: 4px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.info-card::before {
+    content: counter(dc, decimal-leading-zero);
+    display: block;
+    margin-bottom: 12px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    letter-spacing: .2em;
+    opacity: .45;
+}
+.info-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(7,14,40,.10); }
+.band--navy .info-card {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.22);
+    color: #fff;
+}
+.band--navy .info-card:hover { background: rgba(255,255,255,.11); border-color: #fff; box-shadow: none; }
+body main .info-card h3 {
+    font-family: var(--font-heading);
+    font-size: 20px !important;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    color: var(--fg) !important;
+    text-align: center !important;
+}
+body main .info-card p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: var(--fg-soft) !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* 5d. Checklist (replaces plain bullet lists) */
+.checklist {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 980px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 40px;
+}
+.checklist li {
+    position: relative;
+    padding: 4px 0 4px 34px;
+    font-size: 15px !important;
+    line-height: 1.6;
+    color: var(--fg-soft);
+    text-align: left;
+}
+.checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat;
+}
+.band--navy .checklist li::before {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070e28' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E");
+}
+
+/* 5e. Image cards for "Who We Work With" */
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+.persona-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--ink);
+    color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.persona-card:hover { transform: translateY(-5px); box-shadow: 0 18px 36px rgba(7,14,40,.22); }
+.persona-card__img {
+    height: 190px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.persona-card__img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7,14,40,0) 40%, rgba(7,14,40,.9) 100%);
+}
+.persona-card__img--bw { filter: grayscale(1); }
+.persona-card__body { padding: 8px 26px 32px; }
+body main .persona-card h3 {
+    font-family: var(--font-heading);
+    font-size: 20px !important;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #ffffff !important;
+    margin: 0 0 12px;
+    text-align: center !important;
+}
+body main .persona-card p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: rgba(255,255,255,.82) !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* ---------------------------------------------------------------------
+   6. PROOF STRIP + ABOUT TWEAKS
+   ------------------------------------------------------------------- */
+body .proof-strip-section { padding: 56px 6% !important; }
+body .proof-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: var(--shell);
+    margin: 0 auto;
+}
+body .proof-item,
+body .proof-item:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 6px 24px;
+    border-right: 1px solid rgba(255,255,255,.18);
+}
+body .proof-item:last-child { border-right: 0; }
+body .proof-item strong {
+    white-space: normal;
+    text-align: center;
+    min-height: 2.4em;              /* equal heading height => every body line starts at the same y */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(18px, 1.9vw, 24px);
+}
+body .proof-item p,
+body .proof-item:last-child p {
+    text-align: center !important;
+    max-width: 240px;
+}
+
+/* About: proof ribbon + directory rows line up */
+body .about-proof-strip { align-items: stretch; }
+body .about-proof-item {
+    align-items: center !important;
+    text-align: center;
+    padding: 0 24px !important;
+}
+body .about-proof-item p { text-align: center !important; }
+body .why-row {
+    grid-template-columns: 64px 300px 1fr !important;
+    align-items: center !important;
+    gap: 32px !important;
+}
+body .why-icon { justify-self: center; }
+body .why-desc { text-align: justify; text-align-last: left; }
+body .values-bento-section .section-header { text-align: center !important; }
+body .mission-statement .eyebrow { text-align: left; }
+
+/* ---------------------------------------------------------------------
+   7. FIT PANEL + FAQ ACCORDIONS
+   ------------------------------------------------------------------- */
+.fit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: stretch;
+    max-width: var(--shell);
+    margin: 0 auto;
+}
+.fit-layout__text { display: flex; flex-direction: column; justify-content: center; }
+.fit-layout__text .eyebrow,
+.fit-layout__text h2 { text-align: left !important; }
+body main .fit-layout__text p {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: var(--ink-soft) !important;
+    text-align: justify !important;
+    text-align-last: left;
+    margin: 0 0 14px !important;
+}
+body main .fit-layout__text p.fit-note {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 17px !important;
+    color: var(--ink) !important;
+    padding: 4px 0 4px 18px;
+    border-left: 3px solid var(--ink);
+    text-align: left !important;
+    margin-top: 8px !important;
+}
+.fit-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--ink);
+    color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 22px 48px rgba(7,14,40,.18);
+}
+.fit-panel__img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.fit-panel__img::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(7,14,40,0) 30%, var(--ink) 100%);
+}
+.fit-panel__body { padding: 8px 34px 34px; }
+body main .fit-panel h3 {
+    font-family: var(--font-heading);
+    font-size: 21px !important;
+    font-weight: 500;
+    color: #ffffff !important;
+    margin: 0 0 18px;
+    text-align: left;
+}
+.fit-panel .checklist { grid-template-columns: 1fr; gap: 10px; max-width: none; --fg-soft: rgba(255,255,255,.86); }
+
+/* FAQ accordions - one look everywhere (home, FAQ page, service pages) */
+.faq-list {
+    max-width: 920px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.faq-list details {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #ffffff;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+.faq-list details:hover,
+.faq-list details[open] { border-color: var(--ink); }
+.faq-list details[open] { box-shadow: 0 10px 26px rgba(7,14,40,.07); }
+.faq-list summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 28px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-heading);
+    font-size: 17px !important;       /* one size for every question */
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    text-align: left;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1;
+}
+.faq-list details[open] summary::after { content: "\2212"; }
+.faq-list details > p,
+.faq-list .faq-answer {
+    margin: 0 !important;
+    padding: 0 28px 24px;
+    font-size: 15px !important;          /* one size for every answer */
+    line-height: 1.75 !important;
+    color: var(--ink-soft) !important;
+    text-align: justify !important;
+    text-align-last: left;
+}
+.faq-list .faq-answer ul,
+.faq-list .faq-answer ol { margin: 10px 0 0; padding-left: 22px; }
+.faq-list .faq-answer li { font-size: 15px !important; line-height: 1.75; color: var(--ink-soft); margin-bottom: 8px; text-align: left; }
+.faq-list .faq-answer p { font-size: 15px !important; line-height: 1.75 !important; color: var(--ink-soft) !important; margin: 0 0 12px !important; text-align: justify !important; text-align-last: left; }
+.faq-list .faq-answer strong { color: var(--ink); }
+.faq-list .milestone-badge {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 3px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+}
+.faq-cat-head { text-align: center; margin: 0 auto 30px; }
+.faq-intro {
+    max-width: 820px;
+    margin: 0 auto 30px !important;
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: var(--ink-soft) !important;
+    text-align: justify !important;
+    text-align-last: center;
+}
+
+/* ---------------------------------------------------------------------
+   8. CTA BAND - copy lives INSIDE the navy panel; photo fades in beside it
+   ------------------------------------------------------------------- */
+.cta-band {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    width: 100%;
+    min-height: 460px;
+    margin: 0;
+    background: var(--ink);
+    color: #ffffff;
+    overflow: hidden;
+}
+.cta-band__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 72px 4% 72px max(6vw, calc((100vw - var(--shell)) / 2));
+    box-sizing: border-box;
+}
+.cta-band__photo {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+}
+body main .cta-band .eyebrow,
+body main .cta-band .eyebrow-light {
+    margin: 0 0 12px !important;
+    color: rgba(255,255,255,.75) !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-align: left !important;
+}
+body main .cta-band h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3vw, 38px) !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important;
+    margin: 0 0 16px !important;
+    text-align: left !important;
+}
+body main .cta-band p {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+    color: rgba(255,255,255,.88) !important;
+    margin: 0 0 26px !important;
+    max-width: 520px;
+    text-align: justify !important;
+    text-align-last: left;
+}
+.cta-band .btn-banner { align-self: flex-start; }
+/* seamless join with the footer */
+.cta-band + .stratos-footer { border-top: 0; }
+
+/* ---------------------------------------------------------------------
+   9. WORLD MAP + OFFICE PINS
+   ------------------------------------------------------------------- */
+.reach {
+    position: relative;
+    background: var(--ink);
+    color: #fff;
+    padding: 84px 6% 88px;
+    text-align: center;
+}
+.reach__map {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto 30px;
+}
+.reach__map img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%) brightness(150%) contrast(115%);
+    opacity: .78;
+}
+.pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+}
+.pin__dot {
+    position: absolute;
+    left: -7px; top: -7px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #3ddc84;                       /* the "green dots" from the brief */
+    box-shadow: 0 0 0 3px rgba(61,220,132,.28), 0 0 14px rgba(61,220,132,.9);
+    z-index: 2;
+}
+.pin__pulse {
+    position: absolute;
+    left: -7px; top: -7px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid #3ddc84;
+    animation: pinPulse 2.4s ease-out infinite;
+    z-index: 1;
+}
+.pin__label {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(7,14,40,.88);
+    border: 1px solid rgba(255,255,255,.35);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+@keyframes pinPulse {
+    0%   { transform: scale(1);   opacity: .9; }
+    100% { transform: scale(3.4); opacity: 0;  }
+}
+.reach__offices {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.5;
+    color: #fff;
+}
+.reach__offices span { display: block; margin-top: 6px; font-family: var(--font-body); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.reach h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 3vw, 34px) !important;
+    font-weight: 500;
+    color: #fff !important;
+    margin: 0 0 14px !important;
+}
+.reach p.reach__lead {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.85);
+}
+
+/* Home: 3 image cards row (kept - "breaks up the boring white grey boxes") */
+.luxury-features-section .luxury-card-body { text-align: center; }
+
+/* ---------------------------------------------------------------------
+   10. FOOTER  (new markup: .stratos-footer)
+   ------------------------------------------------------------------- */
+.stratos-footer {
+    background: var(--ink);
+    color: #ffffff;
+    padding: 72px 6% 0;
+    border-top: 1px solid rgba(255,255,255,.12);
+}
+.stratos-footer__shell {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;           /* brand LEFT, then Stratos / Legal */
+    gap: 48px;
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding-bottom: 52px;
+}
+.stratos-footer__brand img { width: 120px; height: auto; margin-bottom: 20px; filter: brightness(0) invert(1); }
+.stratos-footer__brand p {
+    margin: 0 0 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.78);
+    text-align: left;
+    max-width: 340px;
+}
+.stratos-footer__brand .footer-offices {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.62);
+}
+.stratos-footer__col h4 {
+    margin: 0 0 18px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+.stratos-footer__col a {
+    display: block;
+    margin: 0 0 11px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255,255,255,.78);
+    text-decoration: none;
+    transition: color .2s ease, transform .2s ease;
+}
+.stratos-footer__col a:hover { color: #ffffff; transform: translateX(3px); }
+.stratos-footer__legal {
+    border-top: 1px solid rgba(255,255,255,.14);
+    padding: 26px 0 30px;
+    text-align: center;
+}
+.stratos-footer__legal p {
+    max-width: 980px;
+    margin: 0 auto 6px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.66);
+    text-align: center !important;
+}
+
+/* ---------------------------------------------------------------------
+   11. ARTICLE PAGES
+   ------------------------------------------------------------------- */
+.article-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 6% 40px;
+}
+.article-body h2 {
+    font-family: var(--font-heading);
+    font-size: 28px !important;
+    font-weight: 500;
+    color: var(--ink) !important;
+    margin: 44px 0 14px !important;
+    text-align: left !important;
+}
+.article-body p {
+    font-size: 16px !important;
+    line-height: 1.85 !important;
+    color: var(--ink-soft) !important;
+    text-align: justify !important;
+    text-align-last: left;
+    margin: 0 0 18px !important;
+}
+.article-body ul { padding-left: 22px; margin: 0 0 20px; }
+.article-body li { font-size: 16px; line-height: 1.8; color: var(--ink-soft); margin-bottom: 8px; }
+.article-meta { text-align: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.article-disclaimer {
+    margin-top: 40px;
+    padding: 18px 22px;
+    border-left: 3px solid var(--ink);
+    background: var(--tint);
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    text-align: left !important;
+}
+.article-nav { text-align: center; padding: 10px 6% 72px; }
+/* Article cards: centre the action row, keep hover the user liked */
+.editorial-action { justify-content: center; }
+body .editorial-content { text-align: center; }
+body .editorial-content h2 { text-align: center; }
+.articles-header { text-align: center; }
+
+/* ---------------------------------------------------------------------
+   12. RESPONSIVE
+   ------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .svc-card,
+    .info-card { flex-basis: calc((100% - 28px) / 2); }
+    .persona-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
+    .split, .fit-layout { grid-template-columns: 1fr; gap: 36px; }
+    .split__photo { min-height: 320px; order: 0 !important; }
+    .stratos-footer__shell { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .stratos-footer__brand { grid-column: 1 / -1; }
+    body .proof-strip-grid { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+    body .proof-item:nth-child(2) { border-right: 0; }
+    body .why-row { grid-template-columns: 1fr !important; text-align: center; }
+    body .why-desc { text-align: center; text-align-last: center; }
+    .checklist { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+    /* timeline turns vertical */
+    .timeline { grid-template-columns: 1fr; gap: 30px; padding-left: 0; }
+    .timeline::before {
+        top: 28px; bottom: 28px;
+        left: 27px; right: auto;
+        width: 2px; height: auto;
+        background: rgba(7,14,40,.25);
+    }
+    .band--navy .timeline::before { background: rgba(255,255,255,.35); }
+    .timeline__step { display: grid; grid-template-columns: 56px 1fr; column-gap: 20px; text-align: left; padding: 0; }
+    .timeline__dot { margin: 0; grid-row: 1 / span 2; }
+    body main .timeline__step h3,
+    body main .timeline__step p { text-align: left !important; }
+    /* CTA band stacks: photo on top, fades DOWN into the navy panel */
+    .cta-band { grid-template-columns: 1fr; min-height: 0; }
+    .cta-band__photo {
+        order: -1;
+        min-height: 220px;
+        -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+                mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+    }
+    .cta-band__content { padding: 12px 8% 56px; align-items: center; }
+    body main .cta-band h2,
+    body main .cta-band .eyebrow,
+    body main .cta-band .eyebrow-light { text-align: center !important; }
+    body main .cta-band p { text-align: center !important; text-align-last: center; }
+    .cta-band .btn-banner { align-self: center; }
+    .pin__label { font-size: 9px; padding: 3px 8px; bottom: 14px; }
+}
+@media (max-width: 768px) {
+    .band { padding: 60px 6%; }
+    .page-banner { height: auto; min-height: 460px; padding: 72px 6% 56px; }
+    .page-banner--home { min-height: 520px; }
+    .svc-card,
+    .info-card { flex-basis: 100%; }
+    .stratos-footer__shell { grid-template-columns: 1fr; text-align: center; }
+    .stratos-footer__brand p { margin-left: auto; margin-right: auto; text-align: center; }
+    .stratos-footer__brand img { margin-left: auto; margin-right: auto; }
+    .faq-list summary { padding: 18px 20px; font-size: 16px !important; }
+    .faq-list details > p,
+    .faq-list .faq-answer { padding: 0 20px 20px; }
+    .faq-list .milestone-badge { display: block; margin: 8px 0 0; width: fit-content; }
+    body .proof-strip-grid { grid-template-columns: 1fr; }
+    body .proof-item { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: 22px; }
+    body .proof-item:last-child { border-bottom: 0; }
+}
+
+/* ---------------------------------------------------------------------
+   13. ADDITIONS
+   ------------------------------------------------------------------- */
+.card-grid--4 .info-card { flex-basis: calc((100% - 72px) / 4); }
+@media (max-width: 1100px) { .card-grid--4 .info-card { flex-basis: calc((100% - 24px) / 2); } }
+@media (max-width: 640px)  { .card-grid--4 .info-card { flex-basis: 100%; } }
+
+/* "Structured Guidance" banner: no seam / black line against the banner above it,
+   navy fallback colour, centred text, same darkening on every screen. */
+body .clarity-banner + .tomorrow-banner { margin-top: -1px; }
+body .tomorrow-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 440px;
+    margin-bottom: 0;
+    padding: 60px 6% !important;
+    background-color: #0a1636;
+    background-size: cover;
+    background-position: center 45%;
+    border: 0;
+    text-align: center;
+}
+body .tomorrow-banner-overlay {
+    background: linear-gradient(180deg, rgba(7,14,40,.55) 0%, rgba(7,14,40,.35) 45%, rgba(7,14,40,.75) 100%);
+}
+body .tomorrow-banner-content { max-width: 760px; text-align: center; }
+body .tomorrow-banner h2 { text-align: center !important; }
+body .tomorrow-banner .eyebrow-light { display: inline-block; }
+/* sections never leave a hairline gap between them */
+main > section, main > div > section { margin-top: 0; margin-bottom: 0; }
+main img { vertical-align: top; }
+
+/* Recommendation image band: keep the look; just make sure heading + copy stay centred-safe */
+body .dark-band.image-band .banner-text-content p { text-align: justify; text-align-last: left; }
+
+/* ---------------------------------------------------------------------
+   14. SPECIFICITY FIXES
+   style.css has late "SITE-WIDE ALIGNMENT" rules (main section {padding-left/right: 8% !important;
+   max-width: 1440px !important}) plus grey .eyebrow colours. These beat plain class selectors,
+   so the new components need the stronger selectors below.
+   ------------------------------------------------------------------- */
+html body main section.band,
+html body main section.statement-strip,
+html body main section.reach,
+html body main section.page-banner {
+    padding-left: 6% !important;
+    padding-right: 6% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+html body main section.cta-band {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+html body main section.page-banner,
+html body main section.page-banner.page-banner--home { height: 520px; }   /* identical on EVERY page incl. home */
+@media (max-width: 768px) {
+    html body main section.page-banner,
+    html body main section.page-banner.page-banner--home { height: auto; }
+}
+
+/* header CTA: beat .nav-right-cta {position:absolute} and the late white-on-white .btn-signin rules */
+@media (min-width: 1025px) {
+    html body header .nav-right-cta {
+        position: static !important;
+        transform: none !important;
+        right: auto !important;
+        top: auto !important;
+        width: auto;
+    }
+    html body header .nav-right-cta a.btn-signin {
+        background: #ffffff !important;
+        color: var(--ink) !important;
+        border: 1px solid #ffffff !important;
+        opacity: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        padding: 0 22px !important;
+        font-size: 12px !important;
+        white-space: nowrap;
+    }
+    html body header .nav-right-cta a.btn-signin:hover {
+        background: transparent !important;
+        color: #ffffff !important;
+    }
+}
+
+/* eyebrows: kill the grey / line-height:0 legacy rule */
+html body main .page-banner p.eyebrow-light,
+html body main .cta-band p.eyebrow-light,
+html body main .reach p.eyebrow-light {
+    color: rgba(255,255,255,.85) !important;
+    opacity: 1 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .22em !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+}
+html body main .page-banner p.eyebrow-light,
+html body main .reach p.eyebrow-light { text-align: center !important; }
+html body main .band p.eyebrow,
+html body main .band p.eyebrow-light { line-height: 1.4 !important; }
+
+/* proof strip: every item centred, equal columns (beats "Proof Strip Left Alignment Fix") */
+html body .proof-strip-grid .proof-item,
+html body .proof-strip-grid .proof-item:last-child {
+    align-items: center !important;
+    text-align: center !important;
+}
+html body .proof-strip-grid .proof-item strong { text-align: center !important; white-space: normal !important; }
+html body .proof-strip-grid .proof-item p,
+html body .proof-strip-grid .proof-item:last-child p { text-align: center !important; }
+
+/* headings inside split / fit layouts stay left, next to their photo */
+html body main .band .split__text h2,
+html body main .band .split__text p.eyebrow,
+html body main .band .fit-layout__text h2,
+html body main .band .fit-layout__text p.eyebrow { text-align: left !important; }
+
+/* map section: centred everything */
+html body main .reach h2,
+html body main .reach p,
+html body main .reach .reach__offices { text-align: center !important; text-align-last: center !important; }
+
+/* home services grid = 4 + 3 */
+.svc-grid--4 .svc-card { flex-basis: calc((100% - 84px) / 4); }
+@media (max-width: 1100px) { .svc-grid--4 .svc-card { flex-basis: calc((100% - 28px) / 2); } }
+@media (max-width: 640px)  { .svc-grid--4 .svc-card { flex-basis: 100%; } }
+
+/* balanced wrapping so a single word never dangles on its own line */
+.clarity-banner .lead-light,
+.band__head h2,
+.banner-subtitle,
+.cta-band h2 { text-wrap: balance; }
+.clarity-banner .lead-light { max-width: 760px !important; }
+
+/* header is position:fixed; body padding must equal its height (was 80px vs 76px => 4px white seam) */
+@media (min-width: 1025px) { html body { padding-top: 76px !important; } }
+[id] { scroll-margin-top: 96px; }
+
+html body main section.statement-strip h2,
+html body main section.statement-strip p { text-align: center !important; }
+html body main section.statement-strip p { text-align: justify !important; text-align-last: center !important; }
+
+/* FAQ answers run the full width of the box (rows used to look like they "ended" early) */
+html body .faq-list details > p,
+html body .faq-list .faq-answer,
+html body .faq-list .faq-answer p,
+html body .faq-list .faq-answer ul,
+html body .faq-list .faq-answer ol {
+    max-width: none !important;
+    width: auto !important;
+}
+html body .faq-list details { max-width: none !important; }
+
+/* Articles grid: header + cards centred */
+html body main .articles-header,
+html body main .articles-header h2,
+html body main .articles-header p { text-align: center !important; }
+html body main .editorial-content h2,
+html body main .editorial-content p,
+html body main .editorial-content .editorial-category { text-align: center !important; text-align-last: center !important; }
+html body main .premium-articles-section { padding-left: 6% !important; padding-right: 6% !important; max-width: var(--shell) !important; margin-left: auto !important; margin-right: auto !important; }
+
+/* About: section headers centred (values + directory); mission split stays left beside its column */
+html body main .values-bento-section .section-header,
+html body main .values-bento-section .section-header *,
+html body main .why-directory-section .section-header,
+html body main .why-directory-section .section-header * { text-align: center !important; }
+html body main .why-directory-section .section-header h2 { margin-bottom: 8px !important; }
+
+/* long button labels wrap instead of overflowing on phones */
+body .btn-outline, body .btn-banner { max-width: 100%; white-space: normal; }
+
+/* ---------------------------------------------------------------------
+   15. PROOF STRIP v2 - four equal columns, everything centred, equal-height dividers.
+   Block layout (no flex alignment to fight the legacy rules), dividers stretch the full row.
+   ------------------------------------------------------------------- */
+html body main .proof-strip-section { padding: 64px 6% !important; }
+html body main .proof-strip-section .proof-strip-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    max-width: var(--shell) !important;
+    margin: 0 auto !important;
+}
+html body main .proof-strip-section .proof-item,
+html body main .proof-strip-section .proof-item:last-child {
+    display: block !important;
+    box-sizing: border-box;
+    padding: 4px 28px !important;
+    text-align: center !important;
+    border-right: 0 !important;
+    border-left: 1px solid rgba(255,255,255,.18) !important;
+}
+html body main .proof-strip-section .proof-item:first-child { border-left: 0 !important; }
+html body main .proof-strip-section .proof-item::before {      /* small accent rule above each figure */
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin: 0 auto 16px;
+    background: rgba(255,255,255,.55);
+}
+html body main .proof-strip-section .proof-item strong {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 10px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    font-size: clamp(19px, 1.75vw, 25px) !important;
+    line-height: 1.25 !important;
+}
+html body main .proof-strip-section .proof-item p,
+html body main .proof-strip-section .proof-item:last-child p {
+    max-width: 250px;
+    margin: 0 auto !important;
+    text-align: center !important;
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    opacity: .85;
+}
+@media (max-width: 1100px) {
+    html body main .proof-strip-section .proof-strip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; row-gap: 36px !important; }
+    html body main .proof-strip-section .proof-item:nth-child(3) { border-left: 0 !important; }
+    html body main .proof-strip-section .proof-item strong { white-space: normal !important; }
+}
+@media (max-width: 560px) {
+    html body main .proof-strip-section .proof-strip-grid { grid-template-columns: 1fr !important; }
+    html body main .proof-strip-section .proof-item,
+    html body main .proof-strip-section .proof-item:last-child { border-left: 0 !important; border-top: 1px solid rgba(255,255,255,.14) !important; padding-top: 28px !important; }
+    html body main .proof-strip-section .proof-item:first-child { border-top: 0 !important; padding-top: 4px !important; }
+}
+
+/* ---------------------------------------------------------------------
+   16. SECTION-HEAD CENTRING FIX
+   The eyebrow inherited "max-width: 780px" from the paragraph rule but lost its auto side margins
+   to the eyebrow rule, so it sat ~40px left of the heading and paragraph below it.
+   Now eyebrow, heading and paragraph share one centre line.
+   ------------------------------------------------------------------- */
+html body main .band .band__head { display: block; text-align: center; }
+html body main .band .band__head p.eyebrow,
+html body main .band .band__head p.eyebrow-light {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 0 14px !important;
+    padding: 0 0 0 .22em !important;     /* balances the trailing letter-space so the text is truly centred */
+    letter-spacing: .22em !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+}
+html body main .band .band__head h2,
+html body main .band .band__head p:not(.eyebrow):not(.eyebrow-light) {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+
+/* ---------------------------------------------------------------------
+   17. "STRUCTURED GUIDANCE" BANNER - dead centre at every width.
+   Auto margins centre the text block inside the flex banner regardless of any legacy
+   justify-content / max-width / left-padding rules; the eyebrow is centred too.
+   ------------------------------------------------------------------- */
+html body main .tomorrow-banner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+html body main .tomorrow-banner .tomorrow-banner-content {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+html body main .tomorrow-banner h2 {
+    margin: 0 auto 20px !important;
+    max-width: none !important;
+    text-align: center !important;
+}
+html body main .tomorrow-banner p.eyebrow-light {
+    display: inline-block !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    letter-spacing: .2em !important;
+    padding: 0 0 4px .2em !important;
+}
+
+/* ---------------------------------------------------------------------
+   18. INTRO STRIP - the old hero paragraph, moved below the banner on every inner page
+   ------------------------------------------------------------------- */
+html body main section.statement-strip--intro { padding-top: 52px; padding-bottom: 52px; }
+html body main .statement-strip--intro p {
+    max-width: 880px;
+    margin: 0 auto !important;
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+}
+/* Services: lead paragraph first, hairline, then "One Business. Connected Decisions." */
+html body main .statement-strip p.strip-lead {
+    max-width: 880px;
+    margin: 0 auto 40px !important;
+    padding-bottom: 40px;
+    font-size: 16px !important;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+/* ---------------------------------------------------------------------
+   19. HOME IMAGE CARDS (Company Formation / Banking / Accounting & Tax)
+   Justified text was stretching words apart; everything in the card is now centred, the
+   3-card row is centred on the page with equal side gaps, and cards are equal height.
+   ------------------------------------------------------------------- */
+html body main .luxury-features-section .luxury-services-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    width: 100% !important;
+    max-width: var(--shell) !important;
+    margin: 0 auto !important;
+    align-items: stretch !important;
+}
+html body main .luxury-features-section .luxury-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100%;
+}
+html body main .luxury-features-section .luxury-card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto;
+    align-items: center;
+    text-align: center !important;
+    padding: 30px 28px 32px !important;
+}
+html body main .luxury-features-section .luxury-card-body h3 {
+    text-align: center !important;
+    margin: 0 0 14px !important;
+    letter-spacing: .04em;
+}
+html body main .luxury-features-section .luxury-card-body p {
+    flex: 1 1 auto;
+    max-width: 340px;
+    margin: 0 auto 22px !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    text-justify: auto !important;
+    word-spacing: normal !important;
+    letter-spacing: normal !important;
+    line-height: 1.7 !important;
+    font-size: 15px !important;
+    text-wrap: pretty;
+}
+html body main .luxury-features-section .luxury-read-more {
+    margin-top: auto !important;
+    text-align: center !important;
+}
+@media (max-width: 900px) {
+    html body main .luxury-features-section .luxury-services-grid { grid-template-columns: 1fr !important; max-width: 520px !important; }
+}
+
+/* ---------------------------------------------------------------------
+   20. CENTRED BODY COPY IN BANDS
+   Paragraph blocks under a centred heading stay justified, but the last line of each paragraph is
+   now centred instead of hanging left (short paragraphs used to look left-aligned).
+   Split layouts (photo beside text) keep their left-aligned last line.
+   ------------------------------------------------------------------- */
+html body main .band .prose p { text-align: justify !important; text-align-last: center !important; }
+html body main .band .split__text .prose p { text-align-last: left !important; }
+html body main .band .prose p { text-wrap: pretty; }
+
+/* ---------------------------------------------------------------------
+   21. ACTIVE NAV TAB
+   base.html adds class="active" to the link for the page you are on (Services stays active on every
+   service page, Articles on every article). Desktop: bright text + a white bar underneath.
+   Mobile drawer: a white bar on the left edge.
+   ------------------------------------------------------------------- */
+html body header #primaryNav a.active {
+    opacity: 1 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+@media (min-width: 1025px) {
+    html body header #primaryNav > ul > li > a { position: relative; }
+    html body header #primaryNav > ul > li > a.active::after {
+        content: "";
+        position: absolute;
+        left: 2px; right: 2px; bottom: 2px;
+        height: 2px;
+        border-radius: 2px;
+        background: #ffffff;
+    }
+    /* soft hint on hover for the tabs that are not active */
+    html body header #primaryNav > ul > li > a:not(.active):hover::after {
+        content: "";
+        position: absolute;
+        left: 2px; right: 2px; bottom: 2px;
+        height: 2px;
+        background: rgba(255,255,255,.45);
+    }
+    /* active item inside the Services dropdown */
+    html body header #primaryNav .dropdown-menu a.active { background: rgba(255,255,255,.10); }
+}
+@media (max-width: 1024px) {
+    html body header #primaryNav a.active {
+        box-shadow: inset 3px 0 0 #ffffff;
+        padding-left: 12px;
+        background: rgba(255,255,255,.06);
+    }
+}
+
+/* Footer: no bullet arrows before links (marked up in review) - links are plain text */
+html body .stratos-footer__col a::before { content: none !important; display: none !important; }
+html body .stratos-footer__col a { padding-left: 0 !important; }
+
+/* ---------------------------------------------------------------------
+   22. CTA + FOOTER POLISH ("this just feels awkward")
+   Logo glyph lines up with the text under it; the offices line no longer breaks into two lines;
+   footer columns sit closer to the brand block so the row reads as one unit.
+   ------------------------------------------------------------------- */
+html body .stratos-footer__shell { grid-template-columns: 1.5fr 1fr 1fr !important; gap: 40px !important; max-width: var(--shell) !important; }
+html body .stratos-footer__brand img { margin-left: -20px; width: 110px; }
+html body .stratos-footer__brand p { max-width: 380px; }
+html body .stratos-footer__brand .footer-offices { font-size: 11px; letter-spacing: .1em; white-space: normal; max-width: 460px; }
+@media (max-width: 1024px) { html body .stratos-footer__shell { grid-template-columns: 1fr 1fr !important; } }
+@media (max-width: 768px)  { html body .stratos-footer__shell { grid-template-columns: 1fr !important; } html body .stratos-footer__brand img { margin-left: auto; margin-right: auto; } html body .stratos-footer__brand .footer-offices { white-space: normal; } }
+html body .stratos-footer__brand .footer-offices { text-wrap: balance; letter-spacing: .08em; }
+
+/* ---------------------------------------------------------------------
+   23. IMAGE SYSTEM  (image audit pass - see README "Images")
+   a) Banner photo is its own layer: black-and-white option + slow drift so the page feels alive.
+   b) Text-safe scrim: a soft navy spotlight sits ONLY behind the heading; the edges of the photo stay
+      bright. Photos with calm sky/haze behind the text are positioned with `pos` (see app.py).
+   c) Photos that are close-ups of buildings never carry text; they are used beside text instead.
+   ------------------------------------------------------------------- */
+.page-banner { background-image: none !important; }
+.page-banner__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.02);
+    animation: bannerDrift 28s ease-in-out infinite alternate;
+    will-change: transform;
+}
+@keyframes bannerDrift {
+    from { transform: scale(1.02) translate3d(0, 0, 0); }
+    to   { transform: scale(1.09) translate3d(-1.2%, -1%, 0); }
+}
+.page-banner--bw .page-banner__bg { filter: grayscale(1) contrast(1.08); }
+.page-banner::before {
+    background:
+        radial-gradient(ellipse 62% 72% at 50% 50%, rgba(7,14,40,.70) 0%, rgba(7,14,40,.42) 55%, rgba(7,14,40,0) 100%),
+        linear-gradient(180deg, rgba(7,14,40,.34) 0%, rgba(7,14,40,.16) 42%, rgba(7,14,40,.66) 100%) !important;
+}
+
+/* Photo beside text: framed, offset colour block (Audrey-style), optional B&W */
+.split__photo--frame {
+    overflow: visible;
+    box-shadow: 18px 18px 0 0 var(--frame, #e3e9f3);
+}
+.band--tint .split__photo--frame { --frame: #ffffff; }
+.band--navy .split__photo--frame { --frame: rgba(255,255,255,.14); }
+.split--reverse .split__photo--frame { box-shadow: -18px 18px 0 0 var(--frame, #e3e9f3); }
+.split__photo--bw { filter: grayscale(1) contrast(1.06); }
+
+/* Navy band with a faded black-and-white photo behind glass cards */
+.band--photo { position: relative; overflow: hidden; isolation: isolate; }
+.band--photo::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -2;
+    background: var(--bg) center / cover no-repeat;
+    opacity: .30;
+    filter: grayscale(1) contrast(1.1);
+}
+.band--photo::after {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, var(--ink) 0%, rgba(7,14,40,.70) 45%, var(--ink) 100%);
+}
+.band--photo .info-card {
+    background: rgba(255,255,255,.09);
+    -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+    border-color: rgba(255,255,255,.28);
+}
+
+/* Photo hover life on image cards */
+.persona-card__img, .luxury-card-image img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.persona-card:hover .persona-card__img { transform: scale(1.06); }
+.persona-card__img { overflow: hidden; }
+.luxury-card:hover .luxury-card-image img { transform: scale(1.06); }
+
+/* Scroll-reveal (added by stratos-motion.js; harmless if JS is off) */
+.js-motion .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s);
+}
+.js-motion .reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    .page-banner__bg { animation: none; }
+    .js-motion .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+@media (max-width: 768px) {
+    .split__photo--frame, .split--reverse .split__photo--frame { box-shadow: 10px 10px 0 0 var(--frame, #e3e9f3); }
+}
+
+/* =====================================================================
+   24. "POP" PASS  - keep the site, lose the plain white/grey squares
+   Brief (voice notes): love the dark blue; use grey / white / blue; make it easier and more
+   intriguing to read; it should make you go "wow"; no plain white-and-grey boxes.
+   Palette stays navy + steel-blue + white, with ONE bright-blue accent used sparingly
+   (numbers, rules, glows, hover). Everything below is CSS + the small motion script.
+   ===================================================================== */
+:root {
+    --navy-2: #0c1d4d;
+    --blue: #2f6bff;
+    --blue-2: #5b95ff;
+    --steel: #93a8cf;
+    --glow: rgba(79, 140, 255, .28);
+}
+
+/* ---- Light bands: from flat grey-white to a soft steel-blue wash with a light glow ---- */
+html body main .band--tint {
+    background:
+        radial-gradient(circle at 88% 0%, rgba(79,140,255,.20) 0, transparent 46%),
+        radial-gradient(circle at 0% 100%, rgba(47,107,255,.10) 0, transparent 42%),
+        linear-gradient(180deg, #e9f0fd 0%, #dbe6fa 100%);
+}
+html body main .band--white {
+    background:
+        radial-gradient(circle at 100% 0%, rgba(79,140,255,.07) 0, transparent 40%),
+        #ffffff;
+}
+
+/* ---- Navy bands: deep blue gradient, blueprint grid, drifting glows ---- */
+html body main .band--navy,
+html body main .band--photo { background-color: var(--ink); }
+html body main .band--navy {
+    background:
+        radial-gradient(ellipse 60% 80% at 15% 0%, rgba(47,107,255,.34) 0, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 100% 100%, rgba(91,149,255,.20) 0, transparent 60%),
+        linear-gradient(160deg, #0c1d4d 0%, #070e28 60%);
+    position: relative;
+    isolation: isolate;
+}
+html body main .band--navy::before {          /* blueprint grid that fades out */
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background-image:
+        linear-gradient(rgba(147,168,207,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147,168,207,.08) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, #000 30%, transparent 100%);
+            mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, #000 30%, transparent 100%);
+}
+html body main .band--navy.band--photo::before { background-image: var(--bg); background-size: cover; background-position: center; -webkit-mask-image: none; mask-image: none; opacity: .28; filter: grayscale(1) contrast(1.1); z-index: -2; }
+html body main .band--navy.band--photo::after { background: linear-gradient(180deg, rgba(7,14,40,.92) 0%, rgba(12,29,77,.62) 50%, rgba(7,14,40,.94) 100%); z-index: -1; }
+
+/* ---- Eyebrows + headings get colour and an accent rule ---- */
+html body main .band--white p.eyebrow,
+html body main .band--tint p.eyebrow { color: var(--blue) !important; }
+html body main .band--navy p.eyebrow { color: var(--blue-2) !important; }
+html body main .band__head h2::after {
+    content: "";
+    display: block;
+    width: 64px; height: 3px;
+    margin: 18px auto 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-2));
+}
+html body main .band .split__text h2::after { margin-left: 0; }
+
+/* ---- Cards: no more plain white squares ---- */
+html body main .svc-card {
+    position: relative;
+    background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+    border: 1px solid rgba(47,107,255,.16);
+    border-top: 0;
+    box-shadow: 0 12px 32px rgba(20,50,140,.10);
+    overflow: hidden;
+}
+html body main .svc-card::before {              /* gradient top edge */
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 4px;
+    background: linear-gradient(90deg, var(--navy-2), var(--blue), var(--blue-2));
+}
+html body main .svc-card__num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; margin-bottom: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-2), var(--blue));
+    color: #fff; opacity: 1;
+    font-size: 13px; letter-spacing: .04em;
+    box-shadow: 0 6px 16px var(--glow);
+}
+html body main .svc-card:hover,
+html body main .info-card:hover { box-shadow: 0 22px 46px rgba(20,50,140,.22), 0 0 0 1px rgba(79,140,255,.45); }
+
+/* light-band info cards + navy-band glass cards */
+html body main .info-card {
+    background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+    border: 1px solid rgba(47,107,255,.16);
+    box-shadow: 0 12px 30px rgba(20,50,140,.09);
+}
+html body main .info-card::before {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; margin: 0 auto 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-2), var(--blue));
+    color: #fff; opacity: 1; font-size: 12px; letter-spacing: .04em;
+    box-shadow: 0 6px 14px var(--glow);
+}
+html body main .band--navy .info-card {
+    background: linear-gradient(160deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.04) 100%);
+    border: 1px solid rgba(147,168,207,.35);
+    box-shadow: 0 16px 40px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.18);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+html body main .band--navy .info-card:hover { border-color: var(--blue-2); box-shadow: 0 22px 50px rgba(0,0,0,.4), 0 0 32px var(--glow); }
+
+/* cursor spotlight (set by stratos-motion.js) */
+.svc-card, .info-card, .persona-card, .fit-panel, .luxury-card { --mx: 50%; --my: 0%; }
+.svc-card::after, .info-card::after, .persona-card::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(360px circle at var(--mx) var(--my), rgba(91,149,255,.22), transparent 60%);
+    opacity: 0; transition: opacity .3s ease;
+    pointer-events: none;
+}
+.svc-card:hover::after, .info-card:hover::after, .persona-card:hover::after { opacity: 1; }
+.info-card, .persona-card { position: relative; }
+
+/* persona cards: blue-lit */
+html body main .persona-card {
+    background: linear-gradient(170deg, var(--navy-2) 0%, var(--ink) 100%);
+    border: 1px solid rgba(91,149,255,.25);
+    box-shadow: 0 16px 40px rgba(12,29,77,.30);
+}
+html body main .persona-card:hover { box-shadow: 0 24px 54px rgba(12,29,77,.45), 0 0 30px var(--glow); }
+
+/* ---- Buttons: filled blue-navy gradient on light bands; glow on hover ---- */
+html body .btn-outline {
+    background: linear-gradient(135deg, var(--navy-2) 0%, var(--blue) 100%);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(47,107,255,.28);
+}
+html body .btn-outline:hover {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(47,107,255,.42);
+}
+html body .btn-banner:not(.btn-banner-transparent):hover { box-shadow: 0 10px 26px rgba(91,149,255,.45); }
+
+/* ---- Timeline: glowing dots + rail that draws itself ---- */
+html body main .timeline__dot {
+    background: linear-gradient(135deg, var(--navy-2), var(--blue));
+    box-shadow: 0 0 0 8px var(--tl-bg, #fff), 0 8px 22px var(--glow);
+}
+html body main .band--navy .timeline__dot { background: linear-gradient(135deg, #fff, #cfe0ff); color: var(--ink); box-shadow: 0 0 0 8px var(--ink), 0 0 26px var(--glow); }
+.timeline::before { background: linear-gradient(90deg, var(--navy-2), var(--blue), var(--blue-2)) !important; transform-origin: left center; }
+.js-motion .timeline::before { transform: scaleX(0); transition: transform 1.4s cubic-bezier(.2,.7,.2,1) .2s; }
+.js-motion .timeline.tl-in::before { transform: scaleX(1); }
+
+/* ---- Proof strip: bigger, lit numbers ---- */
+html body main .proof-strip-section {
+    background:
+        radial-gradient(ellipse 60% 120% at 20% 0%, rgba(47,107,255,.32) 0, transparent 60%),
+        radial-gradient(ellipse 50% 120% at 100% 100%, rgba(91,149,255,.18) 0, transparent 60%),
+        linear-gradient(160deg, #0c1d4d, #070e28) !important;
+}
+html body main .proof-strip-section .proof-item strong {
+    font-size: clamp(22px, 2.3vw, 30px) !important;
+    background: linear-gradient(180deg, #ffffff 30%, #a9c4ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+}
+html body main .proof-strip-section .proof-item::before { background: linear-gradient(90deg, var(--blue), var(--blue-2)); width: 36px; }
+
+/* ---- FAQ accordions: blue accent bar + lit open state ---- */
+html body .faq-list details {
+    background: linear-gradient(180deg, #ffffff 0%, #f1f6ff 100%);
+    border: 1px solid rgba(47,107,255,.16);
+    border-left: 4px solid rgba(47,107,255,.35);
+    box-shadow: 0 8px 22px rgba(20,50,140,.06);
+}
+html body .faq-list details:hover { border-left-color: var(--blue); }
+html body .faq-list details[open] {
+    border-left-color: var(--blue);
+    background: linear-gradient(180deg, #ffffff 0%, #e6efff 100%);
+    box-shadow: 0 16px 36px rgba(20,50,140,.14);
+}
+html body .faq-list summary::after {
+    width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: linear-gradient(135deg, var(--navy-2), var(--blue)); color: #fff; font-size: 18px;
+}
+
+/* ---- Checklist ticks + callouts in blue ---- */
+html body main .checklist li::before { background-color: var(--blue); }
+html body main .callout { border-color: rgba(47,107,255,.35); }
+
+/* ---- Framed photos pick up the accent colour ---- */
+.split__photo--frame { --frame: rgba(47,107,255,.22); }
+.band--tint .split__photo--frame { --frame: rgba(255,255,255,.75); }
+
+/* ---- Banner: slim bright edge so the hero feels lit from below ---- */
+.page-banner::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 2;
+    background: linear-gradient(90deg, transparent, var(--blue-2), transparent);
+    opacity: .9;
+}
+
+/* ---- CTA band: blue glow behind the copy ---- */
+.cta-band { background: radial-gradient(ellipse 60% 100% at 10% 50%, rgba(47,107,255,.30) 0, transparent 65%), linear-gradient(160deg, #0c1d4d, #070e28); }
+
+/* stats strip: gradient text is clipped to its box, so let long labels wrap instead of overflowing */
+html body main .proof-strip-section .proof-item strong {
+    white-space: normal !important;
+    display: block;
+    width: 100%;
+    font-size: clamp(20px, 1.9vw, 27px) !important;
+    line-height: 1.25 !important;
+    padding-bottom: 2px;
+}
+html body main .proof-strip-section .proof-item { padding-left: 16px !important; padding-right: 16px !important; }
+html body main .proof-strip-section .proof-item strong { font-size: clamp(18px, 1.55vw, 22px) !important; white-space: nowrap !important; }
+@media (max-width: 1100px) { html body main .proof-strip-section .proof-item strong { white-space: normal !important; font-size: 22px !important; } }
+
+/* =====================================================================
+   25. LIGHTER BLUE
+   Same layout, same accents; the deep navy surfaces move up to a brighter royal / steel blue.
+   Tune everything from these four variables.
+   ===================================================================== */
+:root {
+    --blue-deep: #16357f;      /* darkest surface (header, footer, stats) */
+    --blue-mid:  #1f4bb0;      /* main band colour */
+    --blue-lite: #3f78e6;      /* glow / highlights */
+    --navy-2: #2450bd;         /* badge + button gradient start */
+}
+html body header { background: var(--blue-deep) !important; box-shadow: 0 6px 24px rgba(16,40,110,.28); }
+html body .stratos-footer { background: linear-gradient(180deg, #17398a 0%, var(--blue-deep) 100%) !important; }
+
+html body main .band--navy,
+html body main .proof-strip-section,
+html body main .statement-strip,
+html body main .clarity-banner {
+    background:
+        radial-gradient(ellipse 60% 80% at 15% 0%, rgba(120,170,255,.38) 0, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 100% 100%, rgba(150,190,255,.22) 0, transparent 60%),
+        linear-gradient(160deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important;
+}
+html body main .band--navy.band--photo::after { background: linear-gradient(180deg, rgba(22,53,127,.90) 0%, rgba(31,75,176,.58) 50%, rgba(22,53,127,.92) 100%); }
+.cta-band { background: radial-gradient(ellipse 60% 100% at 10% 50%, rgba(120,170,255,.36) 0, transparent 65%), linear-gradient(160deg, var(--blue-mid), var(--blue-deep)) !important; }
+.cta-band__photo { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%); mask-image: linear-gradient(90deg, transparent 0%, #000 55%); }
+
+/* hero scrims: lighter and bluer so the photos read brighter, text still sits on a soft blue spotlight */
+.page-banner::before {
+    background:
+        radial-gradient(ellipse 62% 72% at 50% 50%, rgba(22,53,127,.62) 0%, rgba(22,53,127,.34) 55%, rgba(22,53,127,0) 100%),
+        linear-gradient(180deg, rgba(22,53,127,.26) 0%, rgba(22,53,127,.10) 42%, rgba(22,53,127,.55) 100%) !important;
+}
+body .tomorrow-banner-overlay { background: linear-gradient(180deg, rgba(22,53,127,.45) 0%, rgba(22,53,127,.25) 45%, rgba(22,53,127,.62) 100%) !important; }
+.dark-band.image-band, .dark-band.image-band .banner-text-content { background-color: var(--blue-deep); }
+
+/* cards on navy + persona + fit panel follow */
+html body main .persona-card, .fit-panel { background: linear-gradient(170deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important; border-color: rgba(150,190,255,.35); }
+html body main .band--navy .info-card { background: linear-gradient(160deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.07) 100%); border-color: rgba(190,210,255,.45); }
+.band--navy .timeline__dot { box-shadow: 0 0 0 8px var(--blue-mid), 0 0 26px rgba(150,190,255,.5); }
+
+/* light bands: a touch brighter blue wash */
+html body main .band--tint {
+    background:
+        radial-gradient(circle at 88% 0%, rgba(90,150,255,.26) 0, transparent 46%),
+        radial-gradient(circle at 0% 100%, rgba(63,120,230,.14) 0, transparent 42%),
+        linear-gradient(180deg, #eaf2ff 0%, #d6e5ff 100%);
+}
+html body .btn-outline { background: linear-gradient(135deg, #2b5fd6 0%, #4d8bff 100%); box-shadow: 0 10px 24px rgba(63,120,230,.35); }
+html body main .band--navy p.eyebrow { color: #b9d0ff !important; }
+
+/* remaining dark surfaces -> same lighter blue */
+html body main .luxury-features-section,
+html body main .reach {
+    background:
+        radial-gradient(ellipse 60% 80% at 15% 0%, rgba(120,170,255,.34) 0, transparent 60%),
+        linear-gradient(160deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important;
+}
+html body main .luxury-card { background: rgba(255,255,255,.10) !important; border-color: rgba(190,210,255,.40) !important; }
+html body main .luxury-card-body { background: transparent !important; }
+html body .luxury-icon-badge { background: var(--blue-deep) !important; }
+html body .faq-list details { padding: 0 !important; }
+html body .faq-list summary { padding: 20px 26px !important; min-height: 0 !important; margin: 0 !important; line-height: 1.4 !important; }
+
+/* =====================================================================
+   26. ROLLBACK: header, footer and picture areas go back to the original dark navy.
+   The lighter blue stays on the content bands only (stats, How We Work, etc.).
+   ===================================================================== */
+html body header { background: #070e28 !important; box-shadow: 0 4px 20px rgba(0,0,0,.30); }
+html body .stratos-footer { background: #070e28 !important; }
+
+/* banner photos: neutral dark navy scrim again (no blue wash) */
+.page-banner::before {
+    background:
+        radial-gradient(ellipse 62% 72% at 50% 50%, rgba(7,14,40,.60) 0%, rgba(7,14,40,.36) 55%, rgba(7,14,40,0) 100%),
+        linear-gradient(180deg, rgba(7,14,40,.30) 0%, rgba(7,14,40,.14) 42%, rgba(7,14,40,.62) 100%) !important;
+}
+.page-banner::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); }
+body .tomorrow-banner-overlay { background: linear-gradient(180deg, rgba(7,14,40,.30) 0%, rgba(7,14,40,.18) 45%, rgba(7,14,40,.70) 100%) !important; }
+.dark-band.image-band, .dark-band.image-band .banner-text-content { background-color: #070e28; }
+
+/* closing CTA band (photo + copy) back to navy */
+.cta-band { background: #070e28 !important; }
+
+/* image-card section (Company Formation / Banking / Accounting) back to navy */
+html body main .luxury-features-section { background: #070e28 !important; }
+html body main .luxury-card { background: #0f1734 !important; border-color: rgba(255,255,255,.14) !important; }
+html body .luxury-icon-badge { background: #070e28 !important; }
+
+/* photo cards + fit panel headers: no blue cast */
+html body main .persona-card, .fit-panel { background: #070e28 !important; border-color: rgba(255,255,255,.14); }
+html body main .band--navy.band--photo::after { background: linear-gradient(180deg, rgba(7,14,40,.90) 0%, rgba(7,14,40,.62) 50%, rgba(7,14,40,.92) 100%); }
+html body main .reach { background: #070e28 !important; }
+
+/* =====================================================================
+   27. ONE HARMONIOUS PALETTE  (fixes the clash)
+   The bright royal blue fought the brand navy, the warm skyline photos and the black-and-white shots.
+   Everything now comes from the same family:  brand navy  ->  deep slate-navy  ->  steel blue  ->  cool ice.
+   No saturated blue anywhere. Change the look from these variables only.
+   ===================================================================== */
+:root {
+    --ink:       #070e28;      /* brand navy (header, footer, headings) */
+    --blue-deep: #0b1636;      /* darkest band */
+    --blue-mid:  #15265a;      /* lifted navy band */
+    --navy-2:    #15265a;
+    --blue:      #5f7fb8;      /* muted steel accent */
+    --blue-2:    #9db4dc;      /* light steel */
+    --blue-lite: #9db4dc;
+    --steel:     #93a8cf;
+    --glow:      rgba(157,180,220,.30);
+    --tint-a:    #eef2f9;      /* cool ice */
+    --tint-b:    #e1e8f4;
+}
+
+/* light bands: back to the calm ice tint (original family), with a whisper of steel light */
+html body main .band--tint {
+    background:
+        radial-gradient(circle at 90% 0%, rgba(147,168,207,.22) 0, transparent 46%),
+        linear-gradient(180deg, var(--tint-a) 0%, var(--tint-b) 100%);
+}
+html body main .band--white { background: radial-gradient(circle at 100% 0%, rgba(147,168,207,.10) 0, transparent 40%), #ffffff; }
+
+/* navy bands: same navy, just a touch of steel glow */
+html body main .band--navy,
+html body main .proof-strip-section,
+html body main .statement-strip,
+html body main .clarity-banner {
+    background:
+        radial-gradient(ellipse 60% 80% at 15% 0%, rgba(147,168,207,.20) 0, transparent 60%),
+        linear-gradient(160deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important;
+}
+html body main .band--navy::before { background-image: linear-gradient(rgba(147,168,207,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(147,168,207,.06) 1px, transparent 1px); }
+html body main .band--navy.band--photo::after { background: linear-gradient(180deg, rgba(7,14,40,.90) 0%, rgba(11,22,54,.66) 50%, rgba(7,14,40,.92) 100%); }
+
+/* accents: steel, not electric */
+html body main .band--white p.eyebrow,
+html body main .band--tint p.eyebrow { color: #46608f !important; }
+html body main .band--navy p.eyebrow { color: var(--blue-2) !important; }
+html body main .band__head h2::after { background: linear-gradient(90deg, var(--ink), var(--blue)); height: 2px; }
+
+/* cards: white -> ice, hairline steel border, navy badge */
+html body main .svc-card,
+html body main .info-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f1f4fa 100%);
+    border: 1px solid rgba(21,38,90,.14);
+    box-shadow: 0 10px 28px rgba(7,14,40,.08);
+}
+html body main .svc-card::before { background: linear-gradient(90deg, var(--ink), var(--blue-mid), var(--blue)); }
+html body main .svc-card__num,
+html body main .info-card::before { background: linear-gradient(135deg, var(--ink), var(--blue-mid)); box-shadow: 0 6px 14px rgba(7,14,40,.22); }
+html body main .svc-card:hover,
+html body main .info-card:hover { box-shadow: 0 20px 42px rgba(7,14,40,.16), 0 0 0 1px rgba(95,127,184,.45); }
+html body main .band--navy .info-card {
+    background: linear-gradient(160deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.03) 100%);
+    border-color: rgba(157,180,220,.30);
+}
+html body main .band--navy .info-card:hover { border-color: var(--blue-2); box-shadow: 0 20px 44px rgba(0,0,0,.40), 0 0 26px var(--glow); }
+.svc-card::after, .info-card::after, .persona-card::after { background: radial-gradient(360px circle at var(--mx) var(--my), rgba(157,180,220,.20), transparent 60%); }
+
+/* buttons: brand navy, steel on hover (no electric blue) */
+html body .btn-outline { background: var(--ink); border-color: var(--ink); color: #fff; box-shadow: 0 8px 20px rgba(7,14,40,.22); }
+html body .btn-outline:hover { background: var(--blue-mid); border-color: var(--blue-mid); color: #fff; box-shadow: 0 12px 26px rgba(7,14,40,.30); transform: translateY(-2px); }
+html body .btn-banner:not(.btn-banner-transparent):hover { box-shadow: 0 10px 26px rgba(157,180,220,.40); }
+
+/* timeline, stats, ticks, faq */
+html body main .timeline__dot { background: linear-gradient(135deg, var(--ink), var(--blue-mid)); box-shadow: 0 0 0 8px var(--tl-bg, #fff), 0 8px 20px rgba(7,14,40,.22); }
+html body main .band--navy .timeline__dot { background: #fff; color: var(--ink); box-shadow: 0 0 0 8px var(--blue-deep), 0 0 24px var(--glow); }
+.timeline::before { background: linear-gradient(90deg, var(--blue-mid), var(--blue), var(--blue-2)) !important; }
+html body main .proof-strip-section .proof-item strong { background: linear-gradient(180deg, #fff 35%, #c3d2ec 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+html body main .proof-strip-section .proof-item::before { background: var(--blue-2); }
+html body main .checklist li::before { background-color: var(--blue-mid); }
+html body main .callout { border-color: rgba(21,38,90,.28); }
+html body .faq-list details { background: linear-gradient(180deg, #fff 0%, #f3f6fb 100%); border: 1px solid rgba(21,38,90,.14); border-left: 4px solid rgba(21,38,90,.30); box-shadow: 0 6px 18px rgba(7,14,40,.05); }
+html body .faq-list details:hover, html body .faq-list details[open] { border-left-color: var(--blue-mid); }
+html body .faq-list details[open] { background: linear-gradient(180deg, #fff 0%, #e9eef8 100%); box-shadow: 0 14px 32px rgba(7,14,40,.10); }
+html body .faq-list summary::after { background: var(--ink); }
+
+/* framed photos, banner hairline */
+.split__photo--frame { --frame: rgba(147,168,207,.35); }
+.band--tint .split__photo--frame { --frame: rgba(255,255,255,.85); }
+.page-banner::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); }
+
+/* =====================================================================
+   28. FULL-WIDTH HEADER + FULL-SCREEN HOME HERO + SCROLL CUE
+   ===================================================================== */
+/* legacy rule capped the header at 1440px and centred it, leaving white strips on wide screens */
+html body header {
+    left: 0 !important; right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important; margin-right: 0 !important;
+    box-sizing: border-box;
+}
+/* same for the banners and bands so nothing is capped on wide monitors */
+html body main section.page-banner,
+html body main section.band { max-width: none !important; }
+
+/* Home hero = exactly the visible screen below the header, so the picture + words are the first thing you see */
+:root { --hdr: 76px; }
+@media (max-width: 1024px) { :root { --hdr: 68px; } }
+html body main section.page-banner.page-banner--home {
+    height: calc(100vh - var(--hdr)) !important;
+    height: calc(100svh - var(--hdr)) !important;
+    min-height: 520px !important;
+}
+
+/* scroll cue */
+.scroll-cue {
+    position: absolute;
+    left: 50%; bottom: 26px;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    opacity: 0;
+    animation: cueIn 1s ease 1.6s forwards;
+    transition: opacity .5s ease, visibility .5s ease;
+}
+.scroll-cue svg { animation: cueBob 2.2s ease-in-out 2.6s infinite; }
+@keyframes cueIn  { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: .8; transform: translate(-50%, 0); } }
+@keyframes cueBob { 0%, 100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(7px); opacity: 1; } }
+.scroll-cue.is-gone { opacity: 0 !important; visibility: hidden; pointer-events: none; animation: none; }
+@media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
+@media (max-width: 768px) { .scroll-cue { bottom: 16px; } }

@@ -1,38 +1,35 @@
 {% extends 'base.html' %}
+{% from '_components.html' import cta_band with context %}
 {% block title %}UAE Company Formation & Corporate Services | Stratos{% endblock %}
 {% block meta_description %}Advisory-led UAE company formation for international founders, private investment groups and businesses, with banking, bookkeeping and ongoing support.{% endblock %}
 {% block content %}
-<!-- HERO --><div class="home-page-content">
-<section class="hero-banner" style="display: flex; align-items: center;">
+<div class="home-page-content">
+
+<!-- 1. HERO -------------------------------------------------------------
+     Same component as every other page (.page-banner). The old rotating
+     text slider is gone: both paragraphs now sit still, stacked. -->
+<section class="page-banner page-banner--home">
     <div class="hero-bg-slider">
         <div class="hero-bg-slide slide-1"></div>
         <div class="hero-bg-slide slide-2"></div>
         <div class="hero-bg-slide slide-3"></div>
     </div>
-    <div class="hero-banner-overlay"></div>
-    
-    <!-- Widened Content Container -->
-    <div class="hero-banner-content" style="max-width: 850px; position: relative; z-index: 3;">
+    <div class="page-banner__inner">
         <p class="eyebrow-light">STRATOS CONSULTING</p>
-        <h1 style="font-size: clamp(34px, 4.5vw, 48px); margin: 12px 0 24px; color: #ffffff;">Establish Your Business in the UAE with Confidence.</h1>
-        
-        <!-- Animated Text Slider -->
-        <div class="text-slider-container">
-            <p class="lead-light text-slide slide-a">Stratos Consulting helps private founders, international investment groups and established businesses structure, establish and operate companies in the UAE.</p>
-            <p class="lead-light text-slide slide-b">From mainland and free-zone company formation to banking, residency, accounting and ongoing corporate support, we bring every part of your UAE establishment together.</p>
-            
+        <h1>Establish Your Business in the UAE with Confidence.</h1>
+        <p class="banner-lead" style="margin-bottom: 14px;">Stratos Consulting helps private founders, international investment groups and established businesses structure, establish and operate companies in the UAE.</p>
+        <p class="banner-lead">From mainland and free-zone company formation to banking, residency, accounting and ongoing corporate support, we bring every part of your UAE establishment together.</p>
+        <div class="banner-actions">
+            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent">Explore Our Services</a>
         </div>
-
-        <div class="button-row">
-            <a href="{{ url_for('contact') }}" class="btn-banner" style="border-radius: 4px;">Book a Consultation</a>
-            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent" style="border-radius: 4px;">Explore Our Services</a>
-        </div>
-        <p style="font-size: 11px; margin-top: 16px; opacity: 0.8; color: #ffffff;">New enquiries begin with a short suitability review.</p>
     </div>
+    <!-- Soft scroll hint: fades in after a moment, gently bobs, and disappears for good once the visitor scrolls -->
+    <a href="#proof" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
 </section>
 
-<!-- PROOF STRIP -->
-<section class="proof-strip-section">
+<!-- 2. PROOF STRIP (equal columns, every item centred) -->
+<section class="proof-strip-section" id="proof">
     <div class="proof-strip-grid">
         <div class="proof-item">
             <strong>10+ Years</strong>
@@ -53,70 +50,73 @@
     </div>
 </section>
 
-
-<!-- STRUCTURE BEFORE FORMATION -->
-<section class="about-split-section">
-    <div class="about-content">
-        <p class="eyebrow">STRUCTURE BEFORE FORMATION</p>
-        <h2>Choosing the Right Structure for Your UAE Business</h2>
-        
-        <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
-        <p>There is no single UAE company structure that is right for every business.</p>
-        <p>The appropriate mainland or free-zone option depends on how your business will operate, who will own it, where it will trade, its banking and residency requirements, and its plans for future growth.</p>
-        <p>Stratos assesses these requirements before recommending a structure, so the company is established around the needs of the business from the outset.</p>
-        
-        <p style="font-size: 16px; font-weight: 600; color: var(--navy-dark); margin: 24px 0; border-left: 3px solid var(--navy-dark); padding-left: 16px; text-align: left;">
-            Our recommendations are based on your business requirements, not a pre-selected formation package.
-        </p>
-    </div>
-    
-    <div class="about-photo-wrap">
-        <img class="about-photo" src="{{ url_for('image_asset', filename='p3.jfif') }}" alt="UAE Corporate Structuring">
+<!-- 3. STRUCTURE BEFORE FORMATION  (photo LEFT, text RIGHT; black-and-white photo) -->
+<section class="band band--white">
+    <div class="split">
+        <div class="split__photo split__photo--bw split__photo--frame" style="background-image: url('{{ url_for('image_asset', filename='p3.jfif') }}');" role="img" aria-label="UAE corporate structuring"></div>
+        <div class="split__text">
+            <p class="eyebrow">STRUCTURE BEFORE FORMATION</p>
+            <h2>Choosing the Right Structure for Your UAE Business</h2>
+            <div class="prose">
+                <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
+                <p>There is no single UAE company structure that is right for every business. The appropriate mainland or free-zone option depends on how your business will operate, who will own it, where it will trade, its banking and residency requirements, and its plans for future growth.</p>
+                <p>Stratos assesses these requirements before recommending a structure, so the company is established around the needs of the business from the outset.</p>
+                <p class="callout" style="text-align:left !important; text-align-last:left;">Our recommendations are based on your business requirements, not a pre-selected formation package.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- A CLEARER WAY FORWARD BANNER -->
+<!-- 4. A CLEARER WAY FORWARD  ("end-to-end" is kept whole with .nb so it can never split onto two lines) -->
 <section class="clarity-banner">
     <div class="clarity-banner-content">
         <p class="eyebrow-light">A CLEARER WAY FORWARD</p>
         <h2>Complexity into Clarity.</h2>
-        <p class="lead-light">We simplify the UAE business landscape with expert guidance, local insight and end-to-end support.</p>
+        <p class="lead-light">We simplify the UAE business landscape with expert guidance, local insight and <span class="nb">end&#8209;to&#8209;end</span> support.</p>
     </div>
 </section>
 
-<!-- WHO WE WORK WITH -->
-<section class="services-section who-we-work-with-section">
-    <div class="section-header" style="margin-bottom: 32px; max-width: 100%;">
-        <p class="eyebrow">WHO WE WORK WITH</p>
-        <h2>For Private Founders, International Investors and Established Businesses.</h2>
-    </div>
-
-    <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px; width: 100%;">
-        <div style="background: #ffffff; padding: 24px; border: 1px solid rgba(7,14,40,0.1); width: 100%;">
-            <h3 style="font-size: 18px; margin: 0 0 8px;">Private Founders &amp; International Investment Groups</h3>
-            <p style="margin: 0;">For private founders, family offices and international investment groups establishing UAE companies as part of their wider business, investment or ownership structures.</p>
+<!-- 5. WHO WE WORK WITH  (image cards instead of white/grey boxes; one B&W) -->
+<section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">WHO WE WORK WITH</p>
+            <h2>For Private Founders, International Investors and Established Businesses.</h2>
+            <p>Our clients operate across a range of sectors, including international trade and commodities, technology and professional services, private investment, property and hospitality, manufacturing and logistics.</p>
         </div>
-        <div style="background: #ffffff; padding: 24px; border: 1px solid rgba(7,14,40,0.1); width: 100%;">
-            <h3 style="font-size: 18px; margin: 0 0 8px;">International Founders</h3>
-            <p style="margin: 0;">For founders building or expanding businesses across multiple markets, with international shareholders, customers, suppliers or operations.</p>
+        <div class="persona-grid">
+            <article class="persona-card">
+                <div class="persona-card__img persona-card__img--bw" style="background-image: url('{{ url_for('image_asset', filename='rahul-sharma-auVibNu6bO8-unsplash.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>Private Founders &amp; International Investment Groups</h3>
+                    <p>For private founders, family offices and international investment groups establishing UAE companies as part of their wider business, investment or ownership structures.</p>
+                </div>
+            </article>
+            <article class="persona-card">
+                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>International Founders</h3>
+                    <p>For founders building or expanding businesses across multiple markets, with international shareholders, customers, suppliers or operations.</p>
+                </div>
+            </article>
+            <article class="persona-card">
+                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>Established Businesses Entering the UAE</h3>
+                    <p>For established companies expanding into the UAE and requiring a structure that integrates with their existing operations, ownership and international business activities.</p>
+                </div>
+            </article>
         </div>
-        <div style="background: #ffffff; padding: 24px; border: 1px solid rgba(7,14,40,0.1); width: 100%;">
-            <h3 style="font-size: 18px; margin: 0 0 8px;">Established Businesses Entering the UAE</h3>
-            <p style="margin: 0;">For established companies expanding into the UAE and requiring a structure that integrates with their existing operations, ownership and international business activities.</p>
+        <div class="actions actions--mt">
+            <a href="{{ url_for('who_we_work_with') }}" class="btn-outline">Explore Who We Work With</a>
         </div>
-    </div>
-
-    <p class="lead" style="margin-bottom: 24px; width: 100%; max-width: 100%;">
-        Our clients operate across a range of sectors, including international trade and commodities, technology and professional services, private investment, property and hospitality, manufacturing and logistics.
-    </p>
-
-    <div>
-        <a href="{{ url_for('who_we_work_with') }}" class="btn-outline">Explore Who We Work With</a>
     </div>
 </section>
 
-<!-- A STRONGER TOMORROW BANNER -->
-<section class="tomorrow-banner">
+<!-- 6. STRUCTURED GUIDANCE IMAGE BANNER
+     Photo swapped from p1.jfif (warm yellow horizon that clashed with the navy palette)
+     to b3.jfif (blue dusk). See stratos-refresh.css / README for the black-line fix. -->
+<section class="tomorrow-banner" style="background-image: url('{{ url_for('image_asset', filename='b3.jfif') }}');">
     <div class="tomorrow-banner-overlay"></div>
     <div class="tomorrow-banner-content">
         <h2>Structured Guidance.<br>Seamless Entry.<br>Long-Term Operations.</h2>
@@ -124,45 +124,45 @@
     </div>
 </section>
 
-<!-- COMPLETE UAE ESTABLISHMENT -->
-<section class="services-section uae-establishment-section">
-    <div class="section-header" style="max-width: 100%; margin-bottom: 40px;">
-        <p class="eyebrow">COMPLETE UAE ESTABLISHMENT</p>
-        <h2>From Initial Planning to an Established UAE Business.</h2>
-        <p class="lead" style="margin-bottom: 12px;">Our Complete UAE Establishment service brings the key stages of setting up and operating in the UAE into one coordinated process.</p>
-        <p class="lead">We assess your requirements, recommend the appropriate structure and manage the agreed steps through company formation and operational set-up.</p>
-    </div>
+<!-- 7. COMPLETE UAE ESTABLISHMENT  (timeline instead of four square boxes) -->
+<section class="band band--white">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">COMPLETE UAE ESTABLISHMENT</p>
+            <h2>From Initial Planning to an Established UAE Business.</h2>
+            <p>Our Complete UAE Establishment service brings the key stages of setting up and operating in the UAE into one coordinated process. We assess your requirements, recommend the appropriate structure and manage the agreed steps through company formation and operational set-up.</p>
+        </div>
 
-    <!-- Process Step Cards Grid -->
-    <div class="establishment-cards-grid">
-        <div class="establishment-card">
-            <span class="card-step-num">01</span>
-            <h3>Understand Your Business</h3>
-            <p>We review your business activities, ownership, markets, existing companies, banking requirements, residency needs and intended timeline.</p>
-        </div>
-        <div class="establishment-card">
-            <span class="card-step-num">02</span>
-            <h3>Recommend the Right Structure</h3>
-            <p>We assess the appropriate mainland and free-zone options and provide a clear recommendation based on how your business intends to operate.</p>
-        </div>
-        <div class="establishment-card">
-            <span class="card-step-num">03</span>
-            <h3>Establish the Company</h3>
-            <p>We coordinate the required documentation, licence applications, company registration and incorporation process.</p>
-        </div>
-        <div class="establishment-card">
-            <span class="card-step-num">04</span>
-            <h3>Set Up the Essentials</h3>
-            <p>Once the company is established, we coordinate the agreed banking, residency, bookkeeping and corporate administration.</p>
-        </div>
-    </div>
+        <ol class="timeline" style="--steps: 4;">
+            <li class="timeline__step">
+                <span class="timeline__dot">01</span>
+                <h3>Understand Your Business</h3>
+                <p>We review your business activities, ownership, markets, existing companies, banking requirements, residency needs and intended timeline.</p>
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">02</span>
+                <h3>Recommend the Right Structure</h3>
+                <p>We assess the appropriate mainland and free-zone options and provide a clear recommendation based on how your business intends to operate.</p>
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">03</span>
+                <h3>Establish the Company</h3>
+                <p>We coordinate the required documentation, licence applications, company registration and incorporation process.</p>
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">04</span>
+                <h3>Set Up the Essentials</h3>
+                <p>Once the company is established, we coordinate the agreed banking, residency, bookkeeping and corporate administration.</p>
+            </li>
+        </ol>
 
-    <div style="margin-top: 40px;">
-        <a href="{{ url_for('services') }}" class="btn-outline">Explore Complete UAE Establishment</a>
+        <div class="actions actions--mt">
+            <a href="{{ url_for('complete_uae_establishment') }}" class="btn-outline">Explore Complete UAE Establishment</a>
+        </div>
     </div>
 </section>
 
-<!-- FEATURED STATEMENT (Image Band Fade) -->
+<!-- 8. RECOMMENDATION IMAGE BAND (kept exactly as it was - this is the section that works) -->
 <section class="dark-band image-band">
     <img class="section-photo" src="{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}" alt="Written Recommendation">
     <div class="banner-text-content">
@@ -175,111 +175,113 @@
     </div>
 </section>
 
-<!-- SERVICES DIRECTORY -->
-<section class="services-section">
-    <div class="section-header">
-        <p class="eyebrow">OUR SERVICES</p>
-        <h2>Everything You Need to Establish and Operate in the UAE.</h2>
-        <p>From company formation and residency to banking, accounting and ongoing corporate support, Stratos provides the services required to establish your UAE business and keep it operating effectively.</p>
-    </div>
-    
-    <div style="display: flex; flex-direction: column; border-top: 1px solid rgba(7, 14, 40, 0.15);">
-        <!-- Service Rows omitted for brevity (Keep identical to previous message's service rows here) -->
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">Complete UAE Establishment</h3>
-                <p style="margin: 0; color: var(--navy-light);">A complete, coordinated service for clients who want Stratos to manage the process from initial planning and company formation through to the practical requirements of establishing operations in the UAE.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">UAE Company Formation</h3>
-                <p style="margin: 0; color: var(--navy-light);">Activity selection, document preparation, licence applications and incorporation coordination for appropriate UAE mainland and free-zone companies.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">Accounting &amp; Bookkeeping</h3>
-                <p style="margin: 0; color: var(--navy-light);">Ongoing bookkeeping, reconciliations, financial records and management reporting to give you clear oversight of your UAE business.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">Business Banking Support</h3>
-                <p style="margin: 0; color: var(--navy-light);">Support preparing your UAE business banking application, including business and KYC documentation, application preparation and assistance throughout the bank's review process.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">UAE Residency &amp; Visa Support</h3>
-                <p style="margin: 0; color: var(--navy-light);">Application and renewal support for eligible business owners, investors, employees and dependants, coordinated alongside your company requirements.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">Corporate Administration</h3>
-                <p style="margin: 0; color: var(--navy-light);">Ongoing support with licence renewals, company amendments, corporate records and the administrative requirements involved in maintaining your UAE company.</p>
-            </div>
-        </a>
-        <a href="{{ url_for('services') }}" class="service-row" style="text-decoration: none; align-items: center; cursor: pointer; transition: background 0.3s; border-bottom: 1px solid rgba(7,14,40,0.15);" onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background='transparent'">
-            <div style="grid-column: 1 / -1;">
-                <h3 style="font-size: 20px; color: var(--navy-dark); margin: 0 0 8px;">Corporate Tax &amp; VAT Coordination</h3>
-                <p style="margin: 0; color: var(--navy-light);">Preparation and coordination of the financial information required for UAE Corporate Tax and VAT, working with appropriately qualified tax professionals where specialist advice or filing is required.</p>
-            </div>
-        </a>
-    </div>
-    <div style="margin-top: 32px;">
-        <a href="{{ url_for('services') }}" class="btn-outline">Explore All Services</a>
+<!-- 9. SERVICES DIRECTORY  (cards, each linking to ITS OWN page; buttons centred and pinned to the bottom) -->
+<section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">OUR SERVICES</p>
+            <h2>Everything You Need to Establish and Operate in the UAE.</h2>
+            <p>From company formation and residency to banking, accounting and ongoing corporate support, Stratos provides the services required to establish your UAE business and keep it operating effectively.</p>
+        </div>
+
+        <div class="svc-grid svc-grid--4">
+            <article class="svc-card">
+                <span class="svc-card__num">01</span>
+                <h3>Complete UAE Establishment</h3>
+                <p>A complete, coordinated service for clients who want Stratos to manage the process from initial planning and company formation through to the practical requirements of establishing operations in the UAE.</p>
+                <a href="{{ url_for('complete_uae_establishment') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">02</span>
+                <h3>UAE Company Formation</h3>
+                <p>Activity selection, document preparation, licence applications and incorporation coordination for appropriate UAE mainland and free-zone companies.</p>
+                <a href="{{ url_for('uae_company_formation') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">03</span>
+                <h3>Accounting &amp; Bookkeeping</h3>
+                <p>Ongoing bookkeeping, reconciliations, financial records and management reporting to give you clear oversight of your UAE business.</p>
+                <a href="{{ url_for('accounting_management_reporting') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">04</span>
+                <h3>Business Banking Support</h3>
+                <p>Support preparing your UAE business banking application, including business and KYC documentation, application preparation and assistance throughout the bank's review process.</p>
+                <a href="{{ url_for('business_bank_account_support') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">05</span>
+                <h3>UAE Residency &amp; Visa Support</h3>
+                <p>Application and renewal support for eligible business owners, investors, employees and dependants, coordinated alongside your company requirements.</p>
+                <a href="{{ url_for('residence_visa_support') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">06</span>
+                <h3>Corporate Administration</h3>
+                <p>Ongoing support with licence renewals, company amendments, corporate records and the administrative requirements involved in maintaining your UAE company.</p>
+                <a href="{{ url_for('corporate_administration_governance') }}" class="btn-outline">Learn More</a>
+            </article>
+            <article class="svc-card">
+                <span class="svc-card__num">07</span>
+                <h3>Corporate Tax &amp; VAT Coordination</h3>
+                <p>Preparation and coordination of the financial information required for UAE Corporate Tax and VAT, working with appropriately qualified tax professionals where specialist advice or filing is required.</p>
+                <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-outline">Learn More</a>
+            </article>
+        </div>
+
+        <div class="actions actions--mt">
+            <a href="{{ url_for('services') }}" class="btn-outline">Explore All Services</a>
+        </div>
     </div>
 </section>
 
-<!-- HOW STRATOS WORKS -->
-<section class="services-section" style="background: #f8fafc;">
-    <div class="section-header">
-        <p class="eyebrow">HOW WE WORK</p>
-        <h2>A Single Point of Contact Throughout the Process.</h2>
-        <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
+<!-- 10. HOW WE WORK  (navy band with dark cards - replaces the grey band with four white boxes) -->
+<section class="band band--navy band--photo" style="--bg: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">HOW WE WORK</p>
+            <h2>A Single Point of Contact Throughout the Process.</h2>
+            <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
+        </div>
+        <div class="card-grid card-grid--4">
+            <article class="info-card">
+                <h3>Dedicated Relationship Manager</h3>
+                <p>One point of contact coordinates your engagement, keeps you updated and manages the agreed next steps throughout the process.</p>
+            </article>
+            <article class="info-card">
+                <h3>Advice Based on Your Business</h3>
+                <p>Our recommendations are based on your business activities, ownership, operational requirements and objectives in the UAE.</p>
+            </article>
+            <article class="info-card">
+                <h3>Clear Process &amp; Communication</h3>
+                <p>We explain the recommended approach, the steps involved and the information required from you as the engagement progresses.</p>
+            </article>
+            <article class="info-card">
+                <h3>Independent Decisions Remain Independent</h3>
+                <p>Company formation, banking, residency and other applications remain subject to the requirements and approval of the relevant authorities and institutions.</p>
+            </article>
+        </div>
+        <div class="actions actions--mt">
+            <a href="{{ url_for('about') }}" class="btn-banner">About Stratos</a>
+        </div>
     </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 48px;">
-        <div style="background: #ffffff; padding: 32px; border: 1px solid rgba(7,14,40,0.1);">
-            <h3 style="font-size: 20px; margin: 0 0 12px;">Dedicated Relationship Manager</h3>
-            <p style="margin: 0;">One point of contact coordinates your engagement, keeps you updated and manages the agreed next steps throughout the process.</p>
-        </div>
-        <div style="background: #ffffff; padding: 32px; border: 1px solid rgba(7,14,40,0.1);">
-            <h3 style="font-size: 20px; margin: 0 0 12px;">Advice Based on Your Business</h3>
-            <p style="margin: 0;">Our recommendations are based on your business activities, ownership, operational requirements and objectives in the UAE.</p>
-        </div>
-        <div style="background: #ffffff; padding: 32px; border: 1px solid rgba(7,14,40,0.1);">
-            <h3 style="font-size: 20px; margin: 0 0 12px;">Clear Process &amp; Communication</h3>
-            <p style="margin: 0;">We explain the recommended approach, the steps involved and the information required from you as the engagement progresses.</p>
-        </div>
-        <div style="background: #ffffff; padding: 32px; border: 1px solid rgba(7,14,40,0.1);">
-            <h3 style="font-size: 20px; margin: 0 0 12px;">Independent Decisions Remain Independent</h3>
-            <p style="margin: 0;">Company formation, banking, residency and other applications remain subject to the requirements and approval of the relevant authorities and institutions.</p>
-        </div>
-    </div>
-    <a href="{{ url_for('about') }}" class="btn-outline">About Stratos</a>
 </section>
 
-<!-- BEFORE YOU ENQUIRE -->
-<section class="before-you-enquire-section">
-    <div class="before-enquire-container">
-        <!-- Left Side: Content Column -->
-        <div class="before-enquire-content">
-        
+<!-- 11. BEFORE YOU ENQUIRE  (the "fit" box is now a proper panel with a photo header and tick list) -->
+<section class="band band--white">
+    <div class="fit-layout">
+        <div class="fit-layout__text">
             <p class="eyebrow">BEFORE YOU ENQUIRE</p>
-            <h2 class="section-title">A Good Fit Matters on Both Sides.</h2>
-            
-            <p class="lead-prose">Stratos is designed for clients who want an advisory-led UAE establishment, a reasoned structural recommendation and continued accountability after incorporation.</p>
-            <p class="lead-prose">We are particularly well suited where ownership, banking, residence, international operations or an existing group structure makes the decision more involved.</p>
-
-            <p class="disclaimer-note">Our model is not designed for a stand-alone search for the cheapest available licence or visa.</p>
-            
-            <!-- Good Fit Card Component -->
-            <div class="fit-card">
+            <h2>A Good Fit Matters on Both Sides.</h2>
+            <p>Stratos is designed for clients who want an advisory-led UAE establishment, a reasoned structural recommendation and continued accountability after incorporation.</p>
+            <p>We are particularly well suited where ownership, banking, residence, international operations or an existing group structure makes the decision more involved.</p>
+            <p class="fit-note">Our model is not designed for a stand-alone search for the cheapest available licence or visa.</p>
+        </div>
+        <aside class="fit-panel">
+            <div class="fit-panel__img" style="background-image: url('{{ url_for('image_asset', filename='amir-hanna-KjWMGF0PYuE-unsplash (1).jpg') }}');"></div>
+            <div class="fit-panel__body">
                 <h3>Stratos may be a good fit if:</h3>
-                <ul class="fit-list">
+                <ul class="checklist">
                     <li>The UAE company must fit a wider business or ownership structure.</li>
                     <li>You want to compare viable routes before committing to one.</li>
                     <li>Banking, residence, bookkeeping and administration need to be considered together.</li>
@@ -287,69 +289,12 @@
                     <li>Ownership, business activity and source-of-funds information can be clearly substantiated.</li>
                 </ul>
             </div>
-        </div>
-
-        <!-- Right Side: Image Column -->
-        <div class="before-enquire-photo-wrap">
-            <img class="before-enquire-photo" src="{{ url_for('image_asset', filename='amir-hanna-KjWMGF0PYuE-unsplash (1).jpg') }}" alt="Consultation at Stratos">
-        </div>
+        </aside>
     </div>
 </section>
 
-<!-- HOME FAQ -->
-<section class="services-section">
-    <div class="section-header">
-        <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
-        <h2>Questions Worth Asking Before Formation.</h2>
-    </div>
-    <div>
-        <details>
-            <summary>Should I establish a UAE mainland or free-zone company?</summary>
-            <p>That depends on how the company will operate. Its activities, customers, place of business, ownership, staffing, visa requirements, banking profile and ongoing obligations all matter. We compare the appropriate routes against those requirements before recommending one.</p>
-        </details>
-        <details>
-            <summary>What do I receive before formation begins?</summary>
-            <p>Under our Complete UAE Establishment engagement, you receive a written comparison of the appropriate mainland and free-zone options and a reasoned structural recommendation. You also receive an itemised proposal setting out the agreed scope, professional fees, government charges, known third-party costs, assumptions and exclusions.</p>
-        </details>
-        <details>
-            <summary>Does forming a UAE company include opening a bank account?</summary>
-            <p>No. Company incorporation and bank-account approval are separate processes. Stratos can assess potential bank fit, prepare the business profile and KYC application pack, support the application process where appropriate and assist with follow-up. The bank makes the final decision independently.</p>
-        </details>
-        <details>
-            <summary>How much does UAE company formation cost?</summary>
-            <p>A meaningful figure depends on the activities, ownership, jurisdiction, premises, visas and connected services required. Suitable clients receive an itemised proposal following the initial assessment.</p>
-        </details>
-        <details>
-            <summary>What happens after I submit an enquiry?</summary>
-            <p>We review the proposed business, ownership, timing and required services. If the engagement appears suited to our model, we will invite you to a consultation or request additional information.</p>
-        </details>
-    </div>
-    <div style="margin-top: 40px;">
-        <a href="{{ url_for('faqs') }}" class="btn-outline">View All FAQs</a>
-    </div>
-</section>
-
-
-<!-- FINAL HOME CTA -->
-<section class="services-section" style="border: none;">
-    <div class="section-header" style="max-width: 100%; width: 100%;">
-        <p class="eyebrow">START A CONVERSATION</p>
-        <h2 style="margin-bottom: 24px;">Tell Us What the Business Needs to Accomplish in the UAE.</h2>
-        <p class="lead" style="margin-bottom: 12px; width: 100%; max-width: 100%;">Our short enquiry form asks about the proposed activities, ownership, timing, required visas, banking needs and continuing support.</p>
-        <p class="lead" style="margin-bottom: 32px; width: 100%; max-width: 100%;">We will review the information and, where we believe Stratos can add value, invite you to a consultation.</p>
-        
-       <!-- START A CONVERSATION CTA -->
-<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
-    <a href="{{ url_for('contact') }}" class="btn-outline">Tell Us About Your Plans</a>
-    <br>
-    <span style="font-size: 11px; color: var(--navy-light);">About five minutes. No documents are required at this stage.</span>
-</div>
-    </div>
-</section>
-
-<!-- STRATOS GLOBAL REACH & SPECIALIST SERVICES -->
+<!-- 12. SPECIALIST SERVICE IMAGE CARDS (kept - "breaks up the boring white/grey boxes") -->
 <section class="luxury-features-section">
-    <!-- Top 3-Card Services Row -->
     <div class="luxury-services-grid">
         <div class="luxury-card">
             <div class="luxury-card-image">
@@ -360,7 +305,7 @@
             </div>
             <div class="luxury-card-body">
                 <h3>COMPANY FORMATION</h3>
-                <p>Structure and establish mainland or free-zone entities aligned with your long-term operating, residency, and banking requirements.</p>
+                <p>Structure and establish mainland or <span class="nb">free&#8209;zone</span> entities aligned with your long-term operating, residency, and banking requirements.</p>
                 <a href="{{ url_for('uae_company_formation') }}" class="luxury-read-more">Explore route &rarr;</a>
             </div>
         </div>
@@ -393,25 +338,62 @@
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Bottom World Map CTA Block -->
-    <div class="luxury-map-banner">
-        <!-- Local Image Asset Container -->
-        <div class="silver-world-map-wrap">
-            <img src="{{ url_for('image_asset', filename='wrld4.png') }}" alt="Global Reach World Map" class="silver-map-img">
+<!-- 13. HOME FAQ  (same accordion as the FAQ page, full width of its column, so the rows no longer "end" short) -->
+<section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+            <h2>Questions Worth Asking Before Formation.</h2>
         </div>
-
-        <!-- Content Stacked Below Map -->
-        <div class="luxury-map-content">
-            <p class="eyebrow-light" style="text-align: center;">INTERNATIONAL BUSINESS ADVISORY</p>
-            <h2>ESTABLISH YOUR GLOBAL PRESENCE IN THE UAE</h2>
-            <p class="lead-light">Structured, advisory-led market entry for international founders, private investment groups, and expanding enterprises.</p>
-            <div class="luxury-btn-group">
-                <a href="{{ url_for('contact') }}" class="btn-banner" style="border-radius: 4px;">Book a Consultation</a>
-                <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent" style="border-radius: 4px;">Explore Our Services</a>
-            </div>
+        <div class="faq-list">
+            <details>
+                <summary>Should I establish a UAE mainland or free-zone company?</summary>
+                <p>That depends on how the company will operate. Its activities, customers, place of business, ownership, staffing, visa requirements, banking profile and ongoing obligations all matter. We compare the appropriate routes against those requirements before recommending one.</p>
+            </details>
+            <details>
+                <summary>What do I receive before formation begins?</summary>
+                <p>Under our Complete UAE Establishment engagement, you receive a written comparison of the appropriate mainland and free-zone options and a reasoned structural recommendation. You also receive an itemised proposal setting out the agreed scope, professional fees, government charges, known third-party costs, assumptions and exclusions.</p>
+            </details>
+            <details>
+                <summary>Does forming a UAE company include opening a bank account?</summary>
+                <p>No. Company incorporation and bank-account approval are separate processes. Stratos can assess potential bank fit, prepare the business profile and KYC application pack, support the application process where appropriate and assist with follow-up. The bank makes the final decision independently.</p>
+            </details>
+            <details>
+                <summary>How much does UAE company formation cost?</summary>
+                <p>A meaningful figure depends on the activities, ownership, jurisdiction, premises, visas and connected services required. Suitable clients receive an itemised proposal following the initial assessment.</p>
+            </details>
+            <details>
+                <summary>What happens after I submit an enquiry?</summary>
+                <p>We review the proposed business, ownership, timing and required services. If the engagement appears suited to our model, we will invite you to a consultation or request additional information.</p>
+            </details>
+        </div>
+        <div class="actions actions--mt">
+            <a href="{{ url_for('faqs') }}" class="btn-outline">View All FAQs</a>
         </div>
     </div>
 </section>
+
+<!-- 14. GLOBAL REACH  (map with green office pins for UAE, Panama and South Africa) -->
+<section class="reach">
+    <p class="eyebrow-light" style="text-align:center; letter-spacing:.22em; font-size:11px; font-weight:700; opacity:.8; margin:0 0 12px;">INTERNATIONAL BUSINESS ADVISORY</p>
+    <h2>Establish Your Global Presence in the UAE</h2>
+    <p class="reach__lead">Structured, advisory-led market entry for international founders, private investment groups and expanding enterprises.</p>
+
+    <div class="reach__map">
+        <img src="{{ url_for('image_asset', filename='wrld4.png') }}" alt="Map showing Stratos offices in the UAE, Panama and South Africa">
+        <!-- Pin positions are % of the map image. Tweak left/top here if the map image is ever replaced. -->
+        <span class="pin" style="left: 61.5%; top: 47%;"  aria-label="United Arab Emirates"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">UAE</b></span>
+        <span class="pin" style="left: 27.5%; top: 53%;"  aria-label="Panama"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">Panama</b></span>
+        <span class="pin" style="left: 52.5%; top: 80%;"  aria-label="South Africa"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">South Africa</b></span>
+    </div>
+
+    <p class="reach__offices">We have offices in the UAE, Panama and South Africa.<span>Dubai &bull; Panama &bull; South Africa</span></p>
+</section>
+
+<!-- 15. CLOSING CTA -->
+{{ cta_band('b3.jfif', 'START A CONVERSATION', 'Tell Us What the Business Needs to Accomplish in the UAE.', 'Our short enquiry form asks about the proposed activities, ownership, timing, required visas, banking needs and continuing support. We will review the information and, where we believe Stratos can add value, invite you to a consultation. About five minutes; no documents are required at this stage.') }}
+
 </div>
 {% endblock %}

@@ -1,0 +1,50 @@
+{# =========================================================================
+   Shared components. Import with context so url_for works:
+   {% from '_components.html' import page_banner, cta_band with context %}
+   ========================================================================= #}
+
+{# ONE hero for every page. Big heading = the PAGE NAME, so visitors always know where they are.
+   The long descriptive line is the smaller subtitle. Same height everywhere (see .page-banner). #}
+{% macro page_banner(image, title, subtitle=None, lead=None, eyebrow=None,
+                     secondary_label='Explore Our Services', secondary_href=None,
+                     show_actions=True, extra_class='', pos='center', bw=False) -%}
+{# The photo lives in its own layer (.page-banner__bg) so it can be black-and-white and slowly zoom
+   without touching the text. `pos` keeps the calmest part of the photo (usually the sky) behind the heading. #}
+<section class="page-banner {{ extra_class }}{% if bw %} page-banner--bw{% endif %}">
+    <div class="page-banner__bg" style="background-image: url('{{ url_for('image_asset', filename=image) }}'); background-position: {{ pos }};"></div>
+    <div class="page-banner__inner">
+        {% if eyebrow %}<p class="eyebrow-light">{{ eyebrow }}</p>{% endif %}
+        <h1>{{ title }}</h1>
+        {% if subtitle %}<p class="banner-subtitle">{{ subtitle }}</p>{% endif %}
+        {% if lead %}<p class="banner-lead">{{ lead }}</p>{% endif %}
+        {% if show_actions %}
+        <div class="banner-actions">
+            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+            <a href="{{ secondary_href or url_for('services') }}" class="btn-banner btn-banner-transparent">{{ secondary_label }}</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{%- endmacro %}
+
+{# Closing CTA: copy sits INSIDE the navy panel (left); the photo fades in on the right
+   and never sits behind the text. Always the same primary CTA label. #}
+{% macro cta_band(image, eyebrow, heading, copy) -%}
+<section class="cta-band">
+    <div class="cta-band__content">
+        <p class="eyebrow-light">{{ eyebrow }}</p>
+        <h2>{{ heading }}</h2>
+        <p>{{ copy }}</p>
+        <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+    </div>
+    <div class="cta-band__photo" style="background-image: url('{{ url_for('image_asset', filename=image) }}');" role="img" aria-label="Dubai skyline"></div>
+</section>
+{%- endmacro %}
+
+{# The old hero paragraph now lives here: a navy strip directly under the banner (as marked up in review).
+   Use on every inner page: {{ intro_strip('...') }} right after the page_banner. #}
+{% macro intro_strip(text) -%}
+<section class="statement-strip statement-strip--intro">
+    <p>{{ text }}</p>
+</section>
+{%- endmacro %}

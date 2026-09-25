@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Insights | Stratos Consulting{% endblock %}
+{% from '_components.html' import page_banner, cta_band, intro_strip with context %}
+{% block title %}Articles | Stratos Consulting{% endblock %}
 {% block content %}
 
 <style>
@@ -131,164 +132,37 @@
             padding: 56px 6%;
         }
     }
-    /* =========================================
-   STATIC HERO BANNER (INSIGHTS, SERVICES & SUBPAGES)
-========================================= */
-
-.hero-banner.static-hero {
-    position: relative;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
-    padding: 100px 8% !important; /* Locks flush to global 8% horizontal site margin */
-    box-sizing: border-box;
-    width: 100% !important;
-    max-width: 1440px !important;
-    margin: 0 auto !important;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-.hero-banner.static-hero .hero-banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        rgba(7, 14, 40, 0.92) 0%, 
-        rgba(7, 14, 40, 0.75) 55%, 
-        rgba(7, 14, 40, 0.45) 100%
-    );
-    z-index: 2;
-}
-
-.hero-banner.static-hero .hero-banner-content {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 850px !important;
-    text-align: left !important;
-}
-
-.hero-banner.static-hero h1 {
-    font-family: var(--font-heading) !important;
-    font-size: clamp(34px, 4.5vw, 48px) !important;
-    line-height: 1.18 !important;
-    font-weight: 500 !important;
-    color: #ffffff !important;
-    margin: 12px 0 20px 0 !important;
-}
-
-.hero-banner.static-hero .lead-light {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin-bottom: 28px !important;
-    max-width: 720px;
-}
-
-.hero-banner.static-hero .microcopy {
-    font-size: 11px !important;
-    margin-top: 16px !important;
-    opacity: 0.8;
-    color: #ffffff !important;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .hero-banner.static-hero {
-        min-height: 440px !important;
-        padding: 90px 6% 40px !important;
-    }
-
-    .hero-banner.static-hero h1 {
-        font-size: 28px !important;
-        line-height: 1.25 !important;
-    }
-
-    .hero-banner.static-hero .lead-light {
-        font-size: 14px !important;
-        line-height: 1.55 !important;
-    }
-}
 </style>
 
-<!-- INSIGHTS HERO BANNER (STATIC BACKGROUND) -->
-<section class="hero-banner static-hero" style="background-image: url('{{ url_for('image_asset', filename='photo-1659493560381-0c74ace5ddd5.jpg') }}');">
-    <div class="hero-banner-overlay"></div>
-    
-    <!-- Unified Content Container -->
-    <div class="hero-banner-content">
-        <p class="eyebrow-light">INSIGHTS</p>
-        <h1>Clear Answers for Decisions That Are Easy to Oversimplify.</h1>
-        
-        <p class="lead-light">Our insights examine the commercial questions behind UAE establishment, banking readiness, bookkeeping, tax and continuing corporate obligations.</p>
+{# "Insights" is now "Articles". Banner photo swapped from the beige/yellow tower shot to a navy-friendly black-and-white photo. #}
+{{ page_banner('p1.jfif', 'Articles', pos='center 4%', bw=True,
+               subtitle='Clear Answers for Decisions That Are Complex.') }}
+{{ intro_strip('Our articles examine the commercial questions behind UAE establishment, banking readiness, bookkeeping, tax and continuing corporate obligations.') }}
 
-        <div class="button-row">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent">Explore Our Services</a>
-        </div>
-        <p class="microcopy">New enquiries begin with a short suitability review.</p>
-    </div>
-</section>
 <!-- EDITORIAL ARTICLE GRID -->
 <section class="premium-articles-section">
     <div class="articles-header">
-        <p class="eyebrow">LATEST INSIGHTS</p>
+        <p class="eyebrow">LATEST ARTICLES</p>
         <h2>Corporate Strategy &amp; Analysis</h2>
     </div>
 
     <div class="articles-bento-grid">
-        
-        <!-- Article 1 -->
-        <a href="#" class="editorial-card">
+        {% for slug, article in articles.items() %}
+        <!-- Each card now opens its own article page (they used to link to "#") -->
+        <a href="{{ url_for('article_detail', slug=slug) }}" class="editorial-card">
             <div class="editorial-img-wrap">
-                <img class="editorial-img" src="{{ url_for('image_asset', filename='gabriel-santos-DgLksCjEfB0-unsplash.jpg') }}" alt="Mainland or Free Zone">
+                <img class="editorial-img" src="{{ url_for('image_asset', filename=article.image) }}" alt="{{ article.title }}">
             </div>
             <div class="editorial-content">
-                <span class="editorial-category">Business Formation</span>
-                <h2>Mainland or Free Zone: Start with How the Business Will Operate</h2>
-                <p>The practical questions to examine before comparing jurisdictions, authorities or formation packages.</p>
+                <span class="editorial-category">{{ article.category }}</span>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.summary }}</p>
                 <div class="editorial-action">
                     Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </div>
             </div>
         </a>
-
-        <!-- Article 2 -->
-        <a href="#" class="editorial-card">
-            <div class="editorial-img-wrap">
-                <img class="editorial-img" src="{{ url_for('image_asset', filename='kate-trysh-70vza4NysS8-unsplash.jpg') }}" alt="Bank Account Application">
-            </div>
-            <div class="editorial-content">
-                <span class="editorial-category">Banking</span>
-                <h2>How to Prepare for a UAE Business Bank Account Application</h2>
-                <p>How ownership, commercial activity, expected transactions and supporting documents shape a corporate account application.</p>
-                <div class="editorial-action">
-                    Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-        </a>
-
-        <!-- Article 3 -->
-        <a href="#" class="editorial-card">
-            <div class="editorial-img-wrap">
-                <img class="editorial-img" src="{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}" alt="After Company Incorporation">
-            </div>
-            <div class="editorial-content">
-                <span class="editorial-category">Compliance</span>
-                <h2>What Happens After UAE Company Incorporation?</h2>
-                <p>The bookkeeping, tax, immigration, renewal and governance work that begins once the licence is issued.</p>
-                <div class="editorial-action">
-                    Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </div>
-            </div>
-        </a>
-
+        {% endfor %}
     </div>
 </section>
 

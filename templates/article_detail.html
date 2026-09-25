@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% from '_components.html' import page_banner, cta_band with context %}
+{% block title %}{{ article.title }} | Stratos Consulting{% endblock %}
+{% block meta_description %}{{ article.summary }}{% endblock %}
+{% block content %}
+
+{{ page_banner(article.banner, 'Articles', subtitle=article.title, eyebrow=article.category, show_actions=False, pos='center 20%', bw=True) }}
+
+<article class="article-body">
+    <p class="article-meta">{{ article.category }} &middot; {{ article.read_time }}</p>
+    {% for section in article.sections %}
+    <h2>{{ section.heading }}</h2>
+    {% for paragraph in section.get('paragraphs', []) %}<p>{{ paragraph }}</p>{% endfor %}
+    {% if section.get('items') %}<ul>{% for item in section['items'] %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}
+    {% endfor %}
+    <p class="article-disclaimer">This article is general information about UAE business establishment and is not legal, tax or financial advice. Requirements, fees and processing times are set by the relevant authorities and institutions and can change.</p>
+</article>
+
+<div class="article-nav">
+    <div class="actions">
+        <a href="{{ url_for('articles') }}" class="btn-outline">&larr; All Articles</a>
+        <a href="{{ url_for(service_endpoint) }}" class="btn-outline">Explore {{ service.name }}</a>
+    </div>
+</div>
+
+{{ cta_band('dubai-7237750_1920.jpg', 'GET IN TOUCH', 'Start with a Conversation About Your Business.', 'Tell us what the business will do, who will own it and what it needs from the UAE. If Stratos looks like the right fit, we will invite you to a consultation to talk through the next steps.') }}
+{% endblock %}

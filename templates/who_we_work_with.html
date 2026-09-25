@@ -1,243 +1,70 @@
 {% extends 'base.html' %}
+{% from '_components.html' import page_banner, cta_band, intro_strip with context %}
 {% block title %}Who We Work With | Stratos Consulting{% endblock %}
+{% block meta_description %}Stratos works with family offices, cross-border founders and established businesses entering the UAE.{% endblock %}
 {% block content %}
 
-<style>
-    /* Page-specific styling */
-    .who-we-work-with-page {
-        padding: 80px 10%;
-    }
+{# Big heading = page name; the long line is the subtitle. #}
+{{ page_banner('kate-trysh-70vza4NysS8-unsplash.jpg', 'Who We Work With', pos='center 8%', bw=True,
+               subtitle='Built for Situations That Do Not Fit Neatly into a Package.') }}
+{{ intro_strip('We work with international founders, private investment groups and established businesses that have cross-border or operational complexity.') }}
 
-    .wwww-intro-section {
-        margin-bottom: 80px;
-    }
-
-    .wwww-intro-section h1 {
-        font-size: 48px;
-        color: var(--navy-dark);
-        margin-bottom: 24px;
-    }
-
-    .wwww-intro-section p {
-        font-size: 16px;
-        color: var(--navy-light);
-        line-height: 1.75;
-        margin-bottom: 16px;
-    }
-
-    .wwww-clients-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 32px;
-        margin-bottom: 64px;
-    }
-
-    .client-type-card {
-        background: #ffffff;
-        padding: 32px;
-        border: 1px solid rgba(7, 14, 40, 0.12);
-        border-radius: 4px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .client-type-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(7, 14, 40, 0.08);
-    }
-
-    .client-type-card h3 {
-        font-family: var(--font-heading);
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--navy-dark);
-        margin: 0 0 16px;
-    }
-
-    .client-type-card p {
-        font-size: 15px;
-        color: var(--navy-light);
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    .industries-section {
-        background: #f8fafc;
-        padding: 48px;
-        border-radius: 4px;
-        margin-bottom: 48px;
-    }
-
-    .industries-section h2 {
-        font-size: 24px;
-        font-weight: 600;
-        color: var(--navy-dark);
-        margin: 0 0 16px;
-    }
-
-    .industries-section p {
-        font-size: 15px;
-        color: var(--navy-light);
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-        .who-we-work-with-page {
-            padding: 56px 6%;
-        }
-
-        .wwww-intro-section h1 {
-            font-size: 32px;
-        }
-
-        .wwww-clients-grid {
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-    }
-    /* =========================================
-   STATIC HERO BANNER (ALL SUBPAGES)
-========================================= */
-
-.hero-banner.static-hero {
-    position: relative;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
-    padding: 100px 8% !important; /* Locks flush to global 8% horizontal site margin */
-    box-sizing: border-box;
-    width: 100% !important;
-    max-width: 1440px !important;
-    margin: 0 auto !important;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-.hero-banner.static-hero .hero-banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        rgba(7, 14, 40, 0.92) 0%, 
-        rgba(7, 14, 40, 0.75) 55%, 
-        rgba(7, 14, 40, 0.45) 100%
-    );
-    z-index: 2;
-}
-
-.hero-banner.static-hero .hero-banner-content {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 850px !important;
-    text-align: left !important;
-}
-
-.hero-banner.static-hero h1 {
-    font-family: var(--font-heading) !important;
-    font-size: clamp(34px, 4.5vw, 48px) !important;
-    line-height: 1.18 !important;
-    font-weight: 500 !important;
-    color: #ffffff !important;
-    margin: 12px 0 20px 0 !important;
-}
-
-.hero-banner.static-hero .lead-light {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    margin-bottom: 28px !important;
-    max-width: 720px;
-}
-
-.hero-banner.static-hero .microcopy {
-    font-size: 11px !important;
-    margin-top: 16px !important;
-    opacity: 0.8;
-    color: #ffffff !important;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .hero-banner.static-hero {
-        min-height: 440px !important;
-        padding: 90px 6% 40px !important;
-    }
-
-    .hero-banner.static-hero h1 {
-        font-size: 28px !important;
-        line-height: 1.25 !important;
-    }
-
-    .hero-banner.static-hero .lead-light {
-        font-size: 14px !important;
-        line-height: 1.55 !important;
-    }
-}
-</style>
-
-<!-- HERO BANNER (WHO WE WORK WITH) -->
-<section class="hero-banner static-hero" style="background-image: url('{{ url_for('image_asset', filename='gabriel-santos-DgLksCjEfB0-unsplash.jpg') }}');">
-    <div class="hero-banner-overlay"></div>
-    
-    <!-- Unified Content Container -->
-    <div class="hero-banner-content">
-        <p class="eyebrow-light">WHO WE WORK WITH</p>
-        <h1>Built for Situations That Do Not Fit Neatly into a Package.</h1>
-        
-        <p class="lead-light">We work with international founders, private investment groups and established businesses that have cross-border or operational complexity.</p>
-
-        <div class="button-row">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent">Explore Our Services</a>
+<!-- Intro: photo LEFT (B&W, framed), text RIGHT -->
+<section class="band band--white">
+    <div class="split">
+        <div class="split__photo split__photo--bw split__photo--frame" style="background-image: url('{{ url_for('image_asset', filename='p3.jfif') }}');" role="img" aria-label="Dubai business district"></div>
+        <div class="split__text">
+            <p class="eyebrow">OUR CLIENTS</p>
+            <h2>Complexity Is Where We Add the Most Value.</h2>
+            <div class="prose">
+                <p>Stratos Consulting serves clients whose UAE establishment involves commercial assessment, cross-border considerations, or operational complexity. We are most useful to businesses that need more than a standard licence package or a simple company formation process.</p>
+            </div>
         </div>
-        <p class="microcopy">New enquiries begin with a short suitability review.</p>
     </div>
 </section>
-<!-- MAIN CONTENT -->
-<div class="who-we-work-with-page">
-    <section class="wwww-intro-section">
-        <p style="font-size: 16px; color: var(--navy-light); line-height: 1.75; margin-bottom: 32px;">
-            Stratos Consulting serves clients whose UAE establishment involves commercial assessment, cross-border considerations, or operational complexity. We are most useful to businesses that need more than a standard licence package or a simple company formation process.
-        </p>
-    </section>
 
-    <!-- CLIENT TYPES GRID -->
-    <section class="wwww-clients-grid">
-        <div class="client-type-card">
-            <h3>Family Offices &amp; Private Investment Groups</h3>
-            <p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p>
+<section class="band band--tint">
+    <div class="band__inner">
+        <div class="band__head">
+            <p class="eyebrow">WHO WE SUPPORT</p>
+            <h2>Three Kinds of Client, One Accountable Team.</h2>
         </div>
-
-        <div class="client-type-card">
-            <h3>Cross-Border Founders</h3>
-            <p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p>
+        <div class="persona-grid">
+            <article class="persona-card">
+                <div class="persona-card__img persona-card__img--bw" style="background-image: url('{{ url_for('image_asset', filename='rahul-sharma-auVibNu6bO8-unsplash.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>Family Offices &amp; Private Investment Groups</h3>
+                    <p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p>
+                </div>
+            </article>
+            <article class="persona-card">
+                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>Cross-Border Founders</h3>
+                    <p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p>
+                </div>
+            </article>
+            <article class="persona-card">
+                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');"></div>
+                <div class="persona-card__body">
+                    <h3>Established Businesses Entering the UAE</h3>
+                    <p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p>
+                </div>
+            </article>
         </div>
+    </div>
+</section>
 
-        <div class="client-type-card">
-            <h3>Established Businesses Entering the UAE</h3>
-            <p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p>
+<!-- Typical industries (navy band replaces the pale grey box) -->
+<section class="band band--navy">
+    <div class="band__inner">
+        <div class="band__head" style="margin-bottom: 0;">
+            <p class="eyebrow">SECTORS</p>
+            <h2>Typical Enquiries Involve:</h2>
+            <p>International trade and commodities, technology and professional services, property and hospitality, private investment, manufacturing, logistics and other operational businesses.</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- TYPICAL INDUSTRIES -->
-    <section class="industries-section">
-        <h2>Typical Enquiries Involve:</h2>
-        <p>International trade and commodities, technology and professional services, property and hospitality, private investment, manufacturing, logistics and other operational businesses.</p>
-    </section>
-
-    <!-- CTA SECTION -->
-    <section style="text-align: center; padding: 48px; background: #ffffff; border: 1px solid rgba(7, 14, 40, 0.1); border-radius: 4px;">
-        <h3 style="font-size: 24px; color: var(--navy-dark); margin: 0 0 16px;">Ready to Discuss Your UAE Plans?</h3>
-        <p style="font-size: 16px; color: var(--navy-light); margin: 0 0 24px;">Let's explore whether Stratos is the right fit for your business establishment.</p>
-        <a href="{{ url_for('contact') }}" class="btn-outline">Tell Us About Your Plans</a>
-    </section>
-</div>
-
+{{ cta_band('p4.jfif', 'READY WHEN YOU ARE', 'Ready to Discuss Your UAE Plans?', "Let's explore whether Stratos is the right fit for your business establishment.") }}
 {% endblock %}
