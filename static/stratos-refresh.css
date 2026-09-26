@@ -3011,3 +3011,19 @@ html body main p.sj-m.sj-m.sj-m.sj-m.sj-m, html body .stratos-footer__brand p.sj
     html body .stratos-footer__col a { display: block !important; text-align: left !important; align-self: flex-start !important; margin-left: 0 !important; padding-left: 0 !important; }
     html body .stratos-footer__col a:hover { transform: none; }
 }
+
+/* Phones: hero grows with its content (it used to be a fixed screen height, so on shorter phones the text spilled out
+   and ran into the "Scroll" hint and the header). Open menu: the white marker no longer sits on top of the first letter. */
+@media (max-width: 768px) {
+    html body main section.page-banner,
+    html body main section.page-banner.page-banner--home {
+        height: auto !important;
+        min-height: calc(100svh - var(--hdr, 68px)) !important;
+        padding-top: 56px !important;
+        padding-bottom: 118px !important;
+    }
+    html body main .page-banner .scroll-cue { bottom: 20px; }
+}
+@media (max-width: 1024px) {
+    html body #primaryNav ul li > a { padding-left: 20px !important; padding-right: 16px !important; }
+}
