@@ -15,7 +15,7 @@
         <div class="hero-bg-slide slide-3"></div>
     </div>
     <div class="page-banner__inner">
-        <p class="eyebrow-light">STRATOS CONSULTING</p>
+        <p class="eyebrow-light">UAE COMPANY FORMATION &amp; CORPORATE SERVICES</p>
         <h1>Establish Your Business in the UAE with Confidence.</h1>
         <p class="banner-lead">Stratos Consulting helps private founders, international investment groups and established businesses structure, establish and operate companies in the UAE.</p>
         <p class="banner-lead">From mainland and free-zone company formation to banking, residency, accounting and ongoing corporate support, we bring every part of your UAE establishment together.</p>
@@ -23,6 +23,7 @@
             <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
             <a href="#services" class="btn-banner btn-banner-transparent">Explore Our Services</a>
         </div>
+        <p class="banner-micro">New enquiries begin with a short suitability review.</p>
     </div>
     <!-- Soft scroll hint: fades in after a moment, gently bobs, and disappears for good once the visitor scrolls -->
     <a href="#proof" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -58,10 +59,12 @@
             <p class="eyebrow">STRUCTURE BEFORE FORMATION</p>
             <h2>Choosing the Right Structure for Your UAE Business</h2>
             <div class="prose">
-                <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
                 <p>There is no single UAE company structure that is right for every business. The appropriate mainland or free-zone option depends on how your business will operate, who will own it, where it will trade, its banking and residency requirements, and its plans for future growth.</p>
                 <p>Stratos assesses these requirements before recommending a structure, so the company is established around the needs of the business from the outset.</p>
                 <p class="callout" style="text-align:left !important; text-align-last:left;">Our recommendations are based on your business requirements, not a pre-selected formation package.</p>
+            </div>
+            <div class="actions actions--left" style="margin-top: 26px;">
+                <a href="{{ url_for('complete_uae_establishment') }}" class="btn-outline">Explore UAE Establishment</a>
             </div>
         </div>
     </div>
@@ -90,15 +93,15 @@
             <ol class="client-list">
             <li class="client-row">
                 <span class="client-row__num">01</span>
-                <div class="client-row__body"><h3>Family Offices &amp; Private Investment Groups</h3><p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p></div>
+                <div class="client-row__body"><h3>Private Founders &amp; International Investment Groups</h3><p>For private founders, family offices and international investment groups establishing UAE companies as part of their wider business, investment or ownership structures.</p></div>
             </li>
             <li class="client-row">
                 <span class="client-row__num">02</span>
-                <div class="client-row__body"><h3>Cross-Border Founders</h3><p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p></div>
+                <div class="client-row__body"><h3>International Founders</h3><p>For founders building or expanding businesses across multiple markets, with international shareholders, customers, suppliers or operations.</p></div>
             </li>
             <li class="client-row">
                 <span class="client-row__num">03</span>
-                <div class="client-row__body"><h3>Established Businesses Entering the UAE</h3><p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p></div>
+                <div class="client-row__body"><h3>Established Businesses Entering the UAE</h3><p>For established companies expanding into the UAE and requiring a structure that integrates with their existing operations, ownership and international business activities.</p></div>
             </li>
             </ol>
         </div>
@@ -111,7 +114,8 @@
         <div class="band__head">
             <p class="eyebrow">COMPLETE UAE ESTABLISHMENT</p>
             <h2>From Initial Planning to an Established UAE Business.</h2>
-            <p>Our Complete UAE Establishment service brings the key stages of setting up and operating in the UAE into one coordinated process. We assess your requirements, recommend the appropriate structure and manage the agreed steps through company formation and operational set-up.</p>
+            <p>Our Complete UAE Establishment service brings the key stages of setting up and operating in the UAE into one coordinated process.</p>
+            <p>We assess your requirements, recommend the appropriate structure and manage the agreed steps through company formation and operational set-up.</p>
         </div>
 
         <ol class="timeline" style="--steps: 4;">
@@ -171,11 +175,11 @@
             <div class="svc-tabs" role="tablist" aria-label="Services" aria-orientation="vertical">
                 <button type="button" class="svc-tab is-active" role="tab" id="svc-tab-0" aria-controls="svc-panel-0" aria-selected="true"><span class="svc-tab__num">01</span><span class="svc-tab__title">Complete UAE Establishment</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
                 <button type="button" class="svc-tab" role="tab" id="svc-tab-1" aria-controls="svc-panel-1" aria-selected="false"><span class="svc-tab__num">02</span><span class="svc-tab__title">UAE Company Formation</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-                <button type="button" class="svc-tab" role="tab" id="svc-tab-2" aria-controls="svc-panel-2" aria-selected="false"><span class="svc-tab__num">03</span><span class="svc-tab__title">Accounting &amp; Bookkeeping</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-                <button type="button" class="svc-tab" role="tab" id="svc-tab-3" aria-controls="svc-panel-3" aria-selected="false"><span class="svc-tab__num">04</span><span class="svc-tab__title">Business Banking Support</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-                <button type="button" class="svc-tab" role="tab" id="svc-tab-4" aria-controls="svc-panel-4" aria-selected="false"><span class="svc-tab__num">05</span><span class="svc-tab__title">UAE Residency &amp; Visa Support</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-                <button type="button" class="svc-tab" role="tab" id="svc-tab-5" aria-controls="svc-panel-5" aria-selected="false"><span class="svc-tab__num">06</span><span class="svc-tab__title">Corporate Administration</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-                <button type="button" class="svc-tab" role="tab" id="svc-tab-6" aria-controls="svc-panel-6" aria-selected="false"><span class="svc-tab__num">07</span><span class="svc-tab__title">Corporate Tax &amp; VAT Coordination</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+                <button type="button" class="svc-tab" role="tab" id="svc-tab-2" aria-controls="svc-panel-2" aria-selected="false"><span class="svc-tab__num">03</span><span class="svc-tab__title">Business Banking Support</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+                <button type="button" class="svc-tab" role="tab" id="svc-tab-3" aria-controls="svc-panel-3" aria-selected="false"><span class="svc-tab__num">04</span><span class="svc-tab__title">UAE Residency &amp; Visa Support</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+                <button type="button" class="svc-tab" role="tab" id="svc-tab-4" aria-controls="svc-panel-4" aria-selected="false"><span class="svc-tab__num">05</span><span class="svc-tab__title">Accounting &amp; Bookkeeping</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+                <button type="button" class="svc-tab" role="tab" id="svc-tab-5" aria-controls="svc-panel-5" aria-selected="false"><span class="svc-tab__num">06</span><span class="svc-tab__title">Corporate Tax &amp; VAT Coordination</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+                <button type="button" class="svc-tab" role="tab" id="svc-tab-6" aria-controls="svc-panel-6" aria-selected="false"><span class="svc-tab__num">07</span><span class="svc-tab__title">Corporate Administration</span><svg class="svc-tab__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
             </div>
             <div class="svc-panels">
             <article class="svc-panel is-active" role="tabpanel" id="svc-panel-0" aria-labelledby="svc-tab-0">
@@ -183,7 +187,7 @@
                     <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['complete_uae_establishment']) }}" alt="">
                     <h3>Complete UAE Establishment</h3>
                     <p>A complete, coordinated service for clients who want Stratos to manage the process from initial planning and company formation through to the practical requirements of establishing operations in the UAE.</p>
-                    <a href="{{ url_for('complete_uae_establishment') }}" class="btn-banner">Learn More</a>
+                    <a href="{{ url_for('complete_uae_establishment') }}" class="btn-banner">Explore Complete UAE Establishment</a>
                 </div>
                 <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='b3.jfif') }}');"></div>
             </article>
@@ -191,55 +195,55 @@
                 <div class="svc-panel__text">
                     <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['uae_company_formation']) }}" alt="">
                     <h3>UAE Company Formation</h3>
-                    <p>Activity selection, document preparation, licence applications and incorporation coordination for appropriate UAE mainland and free-zone companies.</p>
-                    <a href="{{ url_for('uae_company_formation') }}" class="btn-banner">Learn More</a>
+                    <p>Mainland and free-zone company formation, including structure and activity selection, documentation, licence applications and incorporation.</p>
+                    <a href="{{ url_for('uae_company_formation') }}" class="btn-banner">Explore Company Formation</a>
                 </div>
                 <div class="svc-panel__photo svc-panel__photo--bw" style="background-image: url('{{ url_for('image_asset', filename='p3.jfif') }}');"></div>
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-2" aria-labelledby="svc-tab-2">
                 <div class="svc-panel__text">
-                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['accounting_management_reporting']) }}" alt="">
-                    <h3>Accounting &amp; Bookkeeping</h3>
-                    <p>Ongoing bookkeeping, reconciliations, financial records and management reporting to give you clear oversight of your UAE business.</p>
-                    <a href="{{ url_for('accounting_management_reporting') }}" class="btn-banner">Learn More</a>
-                </div>
-                <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');"></div>
-            </article>
-            <article class="svc-panel" role="tabpanel" id="svc-panel-3" aria-labelledby="svc-tab-3">
-                <div class="svc-panel__text">
                     <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['business_bank_account_support']) }}" alt="">
                     <h3>Business Banking Support</h3>
                     <p>Support preparing your UAE business banking application, including business and KYC documentation, application preparation and assistance throughout the bank's review process.</p>
-                    <a href="{{ url_for('business_bank_account_support') }}" class="btn-banner">Learn More</a>
+                    <a href="{{ url_for('business_bank_account_support') }}" class="btn-banner">Explore Banking Support</a>
                 </div>
                 <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='gabriel-santos-DgLksCjEfB0-unsplash.jpg') }}');"></div>
             </article>
-            <article class="svc-panel" role="tabpanel" id="svc-panel-4" aria-labelledby="svc-tab-4">
+            <article class="svc-panel" role="tabpanel" id="svc-panel-3" aria-labelledby="svc-tab-3">
                 <div class="svc-panel__text">
                     <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['residence_visa_support']) }}" alt="">
                     <h3>UAE Residency &amp; Visa Support</h3>
                     <p>Application and renewal support for eligible business owners, investors, employees and dependants, coordinated alongside your company requirements.</p>
-                    <a href="{{ url_for('residence_visa_support') }}" class="btn-banner">Learn More</a>
+                    <a href="{{ url_for('residence_visa_support') }}" class="btn-banner">Explore Residency &amp; Visa Support</a>
                 </div>
                 <div class="svc-panel__photo svc-panel__photo--bw" style="background-image: url('{{ url_for('image_asset', filename='kate-trysh-70vza4NysS8-unsplash.jpg') }}');"></div>
             </article>
-            <article class="svc-panel" role="tabpanel" id="svc-panel-5" aria-labelledby="svc-tab-5">
+            <article class="svc-panel" role="tabpanel" id="svc-panel-4" aria-labelledby="svc-tab-4">
                 <div class="svc-panel__text">
-                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['corporate_administration_governance']) }}" alt="">
-                    <h3>Corporate Administration</h3>
-                    <p>Ongoing support with licence renewals, company amendments, corporate records and the administrative requirements involved in maintaining your UAE company.</p>
-                    <a href="{{ url_for('corporate_administration_governance') }}" class="btn-banner">Learn More</a>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['accounting_management_reporting']) }}" alt="">
+                    <h3>Accounting &amp; Bookkeeping</h3>
+                    <p>Ongoing bookkeeping, reconciliations, financial records and management reporting to give you clear oversight of your UAE business.</p>
+                    <a href="{{ url_for('accounting_management_reporting') }}" class="btn-banner">Explore Accounting &amp; Bookkeeping</a>
                 </div>
-                <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');"></div>
+                <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');"></div>
             </article>
-            <article class="svc-panel" role="tabpanel" id="svc-panel-6" aria-labelledby="svc-tab-6">
+            <article class="svc-panel" role="tabpanel" id="svc-panel-5" aria-labelledby="svc-tab-5">
                 <div class="svc-panel__text">
                     <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['corporate_tax_vat_coordination']) }}" alt="">
                     <h3>Corporate Tax &amp; VAT Coordination</h3>
                     <p>Preparation and coordination of the financial information required for UAE Corporate Tax and VAT, working with appropriately qualified tax professionals where specialist advice or filing is required.</p>
-                    <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-banner">Learn More</a>
+                    <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-banner">Explore Tax &amp; VAT Support</a>
                 </div>
                 <div class="svc-panel__photo svc-panel__photo--bw" style="background-image: url('{{ url_for('image_asset', filename='claudio-poggio-0xC7iBAgtr8-unsplash.jpg') }}');"></div>
+            </article>
+            <article class="svc-panel" role="tabpanel" id="svc-panel-6" aria-labelledby="svc-tab-6">
+                <div class="svc-panel__text">
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['corporate_administration_governance']) }}" alt="">
+                    <h3>Corporate Administration</h3>
+                    <p>Ongoing support with licence renewals, company amendments, corporate records and the administrative requirements involved in maintaining your UAE company.</p>
+                    <a href="{{ url_for('corporate_administration_governance') }}" class="btn-banner">Explore Corporate Administration</a>
+                </div>
+                <div class="svc-panel__photo" style="background-image: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');"></div>
             </article>
             </div>
         </div>
