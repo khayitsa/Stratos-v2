@@ -2717,3 +2717,136 @@ html body main .band--tint:has(.client-feature) {
         radial-gradient(circle at 90% 0%, rgba(147,168,207,.22) 0, transparent 46%),
         linear-gradient(180deg, var(--tint-a) 0%, var(--tint-b) 100%);
 }
+
+/* =====================================================================
+   40. CTA BAND: paragraph lines up with the heading
+   The text block shrinks to the width of the heading; the justified paragraph then fills exactly that width
+   (width:0 + min-width:100% stops the paragraph from widening the block), so both share the same left AND right edge.
+   ===================================================================== */
+.cta-band__text { width: fit-content; max-width: 100%; }
+html body main .cta-band p.cta-band__copy { width: 0; min-width: 100%; max-width: none !important; text-align: justify !important; text-align-last: left !important; }
+html body main .cta-band h2 { text-wrap: wrap; }
+@media (max-width: 900px) { .cta-band__text { width: 100%; } html body main .cta-band p.cta-band__copy { width: auto; min-width: 0; text-align: center !important; text-align-last: center !important; } }
+
+/* =====================================================================
+   41. FOOTER: link columns moved right, tighter link spacing
+   ===================================================================== */
+html body .stratos-footer__shell { grid-template-columns: 1.7fr .8fr .8fr !important; column-gap: 24px !important; }
+html body .stratos-footer__col:nth-of-type(2), html body .stratos-footer__col:nth-of-type(3) { padding-left: clamp(24px, 6vw, 110px); }
+html body .stratos-footer__col a { margin: 0 0 6px !important; line-height: 1.3 !important; font-size: 14px; }
+html body .stratos-footer__col h4 { margin-bottom: 14px !important; }
+@media (max-width: 900px) {
+    html body .stratos-footer__shell { grid-template-columns: 1fr 1fr !important; }
+    html body .stratos-footer__col:nth-of-type(2), html body .stratos-footer__col:nth-of-type(3) { padding-left: 0; }
+}
+
+/* =====================================================================
+   42. ENQUIRY FORM (Contact & Appointments): neater layout
+   Three numbered steps, aligned two-column fields, choices as selectable chips instead of tiny native
+   radios / checkboxes, and one clear submit button.
+   ===================================================================== */
+html body .general-inquiry-panel {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 100%);
+    border: 1px solid rgba(21,38,90,.14) !important;
+    border-top: 3px solid var(--ink) !important;
+    border-radius: 4px;
+    box-shadow: 0 16px 40px rgba(7,14,40,.08);
+    padding: clamp(24px, 3vw, 40px) !important;
+}
+html body .general-inquiry-panel h2 { font-size: var(--fs-h2) !important; margin: 0 0 8px !important; text-align: left !important; }
+html body .general-inquiry-panel > p { text-align: left !important; text-align-last: left !important; margin: 0 0 8px !important; font-size: var(--fs-body) !important; }
+html body .contact-form-grid { display: grid !important; grid-template-columns: 1fr 1fr; gap: 18px 20px !important; margin-top: 18px; }
+html body .contact-form-grid .full-width { grid-column: 1 / -1; }
+html body .contact-form-grid .form-group { display: flex; flex-direction: column; gap: 7px; margin: 0 !important; min-width: 0; }
+
+.form-step { display: flex; align-items: center; gap: 12px; margin: 10px 0 0 !important; padding-top: 14px; border-top: 1px solid rgba(21,38,90,.12); font-family: var(--font-heading); font-size: 17px !important; color: var(--ink) !important; text-align: left !important; }
+.form-step:first-of-type { margin-top: 0 !important; padding-top: 0; border-top: 0; }
+.form-step span { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--font-body); font-size: 12px; font-weight: 600; }
+
+html body .contact-form-grid label { font-size: 13px !important; font-weight: 600 !important; color: var(--ink) !important; text-align: left !important; margin: 0 !important; }
+html body .contact-form-grid label em { font-weight: 400; font-style: normal; opacity: .65; }
+html body .contact-form-grid input[type="text"],
+html body .contact-form-grid input[type="tel"],
+html body .contact-form-grid input[type="email"],
+html body .contact-form-grid select,
+html body .contact-form-grid textarea {
+    width: 100%; box-sizing: border-box; height: 46px; padding: 0 14px;
+    font: inherit; font-size: 14px; color: var(--ink);
+    background: #fff; border: 1px solid rgba(21,38,90,.22); border-radius: 4px; outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+html body .contact-form-grid textarea { height: auto; min-height: 120px; padding: 12px 14px; resize: vertical; }
+html body .contact-form-grid input:focus, html body .contact-form-grid select:focus, html body .contact-form-grid textarea:focus { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(95,127,184,.25); }
+html body .contact-form-grid ::placeholder { color: #8a94ad; }
+
+/* chips: hide the native control, the label becomes the button */
+html body .contact-form-grid .radio-group, html body .contact-form-grid .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+html body .contact-form-grid .radio-group label, html body .contact-form-grid .checkbox-group label {
+    position: relative; display: inline-flex; align-items: center; gap: 8px; margin: 0 !important;
+    padding: 10px 18px; font-size: 13.5px !important; font-weight: 500 !important;
+    background: #fff; border: 1px solid rgba(21,38,90,.22); border-radius: 999px; cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+html body .contact-form-grid .radio-group label:hover, html body .contact-form-grid .checkbox-group label:hover { border-color: var(--blue-mid); transform: translateY(-1px); }
+html body .contact-form-grid .radio-group input, html body .contact-form-grid .checkbox-group input { position: absolute; opacity: 0; pointer-events: none; }
+html body .contact-form-grid .checkbox-group label::before { content: ""; width: 14px; height: 14px; border: 1.5px solid rgba(21,38,90,.4); border-radius: 3px; flex: 0 0 auto; transition: background .2s ease, border-color .2s ease; }
+html body .contact-form-grid .radio-group label:has(input:checked),
+html body .contact-form-grid .checkbox-group label:has(input:checked) { background: var(--ink); color: #fff; border-color: var(--ink); }
+html body .contact-form-grid .checkbox-group label:has(input:checked)::before { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23070e28' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/10px no-repeat; border-color: #fff; }
+html body .contact-form-grid .radio-group label:has(input:focus-visible),
+html body .contact-form-grid .checkbox-group label:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+html body .contact-form-grid .form-submit, html body .contact-form-grid .btn-outline-pill {
+    width: 100%; height: 46px; margin: 0 !important; padding: 0 24px;
+    font: inherit; font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: #fff !important; background: var(--ink) !important; border: 1px solid var(--ink) !important; border-radius: 4px !important; cursor: pointer;
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+html body .contact-form-grid .form-submit:hover { background: var(--blue-mid) !important; border-color: var(--blue-mid) !important; transform: translateY(-2px); box-shadow: 0 12px 26px rgba(7,14,40,.25); }
+@media (max-width: 640px) { html body .contact-form-grid { grid-template-columns: 1fr; } html body .contact-form-grid .form-group, html body .contact-form-grid .full-width { grid-column: 1 / -1; } }
+html body .contact-form-grid .radio-group label:has(input:checked),
+html body .contact-form-grid .checkbox-group label:has(input:checked) { color: #fff !important; background: var(--ink) !important; border-color: var(--ink) !important; }
+html body .contact-form-grid .radio-group label:hover:not(:has(input:checked)),
+html body .contact-form-grid .checkbox-group label:hover:not(:has(input:checked)) { background: #eef2f9; }
+
+/* =====================================================================
+   43. REVIEW ROUND: icons from the brand kit, bigger number bubbles + justified card text, hero text that pops,
+       balanced About intro
+   ===================================================================== */
+/* brand-kit icons */
+.svc-panel__icon { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; filter: brightness(0) invert(1); opacity: .95; }
+.svc-card__icon { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; object-fit: contain; opacity: .9; }
+.info-card--icon::before { display: none !important; }
+.card-icon { display: block; width: 52px; height: 52px; object-fit: contain; margin: 0 auto 14px; }
+.band--navy .card-icon { filter: brightness(0) invert(1); }
+.value-icon { position: relative; z-index: 1; display: block; width: 46px; height: 46px; object-fit: contain; margin: 0 0 14px; }
+
+/* number bubbles bigger */
+html body main .svc-card__num { width: 54px !important; height: 54px !important; font-size: 17px !important; margin-bottom: 16px !important; }
+html body main .info-card::before { width: 48px !important; height: 48px !important; font-size: 15px !important; margin-bottom: 16px !important; }
+.timeline__dot { width: 62px !important; height: 62px !important; font-size: 19px !important; }
+
+/* card text justified (last line stays centred to match the centred cards) */
+html body main .svc-card p, html body main .info-card p, html body main .timeline__step p { text-align: justify !important; text-align-last: center !important; hyphens: none; }
+
+/* hero text pops: darker centred scrim, soft text shadow, slightly larger lead */
+.page-banner::before {
+    background:
+        radial-gradient(ellipse 68% 74% at 50% 50%, rgba(7,14,40,.72) 0%, rgba(7,14,40,.50) 52%, rgba(7,14,40,.12) 100%),
+        linear-gradient(180deg, rgba(7,14,40,.38) 0%, rgba(7,14,40,.20) 42%, rgba(7,14,40,.66) 100%) !important;
+}
+html body main .page-banner h1 { text-shadow: 0 2px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.5); }
+html body main .page-banner .banner-subtitle { text-shadow: 0 2px 14px rgba(0,0,0,.55); }
+html body main .page-banner .banner-lead { color: #fff !important; font-size: 17px !important; line-height: 1.7 !important; text-shadow: 0 1px 10px rgba(0,0,0,.6); }
+html body main .page-banner p.eyebrow-light { color: #fff !important; opacity: 1 !important; font-weight: 700; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+@media (max-width: 768px) { .page-banner::before { background: linear-gradient(180deg, rgba(7,14,40,.62), rgba(7,14,40,.72)) !important; } html body main .page-banner .banner-lead { font-size: 16px !important; } }
+
+/* About intro strip: two balanced halves (statement and supporting text similar in weight) */
+.intro-split { grid-template-columns: 1fr 1fr !important; align-items: center; gap: clamp(28px, 4vw, 64px) !important; }
+html body main .statement-strip .intro-split__lead { font-size: clamp(22px, 2.1vw, 30px) !important; line-height: 1.35 !important; }
+html body main .statement-strip .intro-split__rest { font-size: 17px !important; line-height: 1.8 !important; }
+@media (max-width: 900px) { .intro-split { grid-template-columns: 1fr !important; } }
+/* icons keep their own white tile (the brand-kit SVGs carry a white background), so no colour inversion */
+.svc-panel__icon { filter: none !important; width: 68px; height: 68px; padding: 10px; background: #fff; border-radius: 10px; box-sizing: border-box; opacity: 1; box-shadow: 0 8px 22px rgba(0,0,0,.35); }
+.band--navy .card-icon, .card-icon { filter: none !important; width: 64px; height: 64px; padding: 9px; background: #fff; border-radius: 10px; box-sizing: border-box; box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+.svc-card__icon { background: #fff; border-radius: 8px; padding: 5px; box-sizing: border-box; width: 46px; height: 46px; }

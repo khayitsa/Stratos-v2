@@ -166,12 +166,12 @@
             <div class="contact-info-block">
                 <h3>Direct Contact</h3>
                 <p><strong>Call / WhatsApp:</strong> +971 58 586 4940</p>
-                <p><strong>Email:</strong> hello@stratos.ae</p>
+                <p><strong>Email:</strong> {{ company.email }}</p>
             </div>
             
             <div class="contact-info-block">
                 <h3>Office Location</h3>
-                <p>Nad Al Sheba 1<br>Dubai, United Arab Emirates</p>
+                <p>{{ company.address_lines|join("<br>"|safe) }}</p>
             </div>
 
             <div class="map-container">
@@ -190,19 +190,21 @@
             <form class="contact-form-grid" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
                 <input type="hidden" name="_subject" value="New Inquiry from STRATOS Appointments Page">
 
+                <p class="form-step full-width"><span>1</span> Your details</p>
+
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required autocomplete="name">
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number (Incl. Code)</label>
-                    <input type="tel" id="phone" name="phone" required value="+971 ">
+                    <input type="tel" id="phone" name="phone" required placeholder="+971 50 000 0000" autocomplete="tel">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="_replyto" required>
+                    <input type="email" id="email" name="_replyto" required autocomplete="email">
                 </div>
 
                 <div class="form-group">
@@ -211,7 +213,7 @@
                 </div>
 
                 <div class="form-group full-width">
-                    <label>Preferred Contact Method:</label>
+                    <label>Preferred contact method</label>
                     <div class="radio-group">
                         <label><input type="radio" name="contact_method" value="call"> Call</label>
                         <label><input type="radio" name="contact_method" value="whatsapp"> WhatsApp</label>
@@ -219,10 +221,13 @@
                     </div>
                 </div>
 
+                <p class="form-step full-width"><span>2</span> About your business</p>
+
                 <div class="form-group">
                     <label for="nationality">Nationality</label>
                     <select id="nationality" name="nationality">
-                        <option value="Austria" selected>Austria</option>
+                        <option value="" selected disabled>Select nationality</option>
+                        <option value="Austria">Austria</option>
                         <option value="South Africa">South Africa</option>
                         <option value="United Arab Emirates">United Arab Emirates</option>
                         <option value="United Kingdom">United Kingdom</option>
@@ -236,8 +241,10 @@
                     <input type="text" id="business_activity" name="business_activity">
                 </div>
 
+                <p class="form-step full-width"><span>3</span> How can we help?</p>
+
                 <div class="form-group full-width">
-                    <label>Services Required:</label>
+                    <label>Services required <em>(select any)</em></label>
                     <div class="checkbox-group">
                         <label><input type="checkbox" name="services" value="formation"> UAE Company Formation</label>
                         <label><input type="checkbox" name="services" value="tax"> Accounting &amp; Tax</label>
@@ -248,11 +255,11 @@
 
                 <div class="form-group full-width">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us briefly about the business and what you need."></textarea>
                 </div>
 
                 <div class="form-group full-width" style="margin-top: 16px;">
-                    <button type="submit" class="btn-outline-pill">Submit Inquiry</button>
+                    <button type="submit" class="btn-outline-pill form-submit">Submit Inquiry</button>
                 </div>
             </form>
         </div>

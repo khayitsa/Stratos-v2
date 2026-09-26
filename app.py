@@ -16,7 +16,20 @@ app.config["SECRET_KEY"] = "stratos-local-development-key"
 #   STRATOS_LEGAL_NAME, STRATOS_LICENCE_NO, STRATOS_DISCLAIMER
 # While they are empty the footer simply omits those sentences (no brackets).
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# ARTICLES ARE PRIVATE until legal has approved them.
+# While False: no "Articles" link in the menu/footer and /articles + /articles/<slug>/ return 404.
+# To publish later: set ARTICLES_PUBLIC = True here (or set the env var STRATOS_ARTICLES_PUBLIC=1).
+# To preview privately meanwhile: set STRATOS_ARTICLES_PREVIEW_KEY=<secret> and open /articles?preview=<secret>
+# (that unlocks the pages for your browser session only).
+# ---------------------------------------------------------------------------
+ARTICLES_PUBLIC = os.environ.get("STRATOS_ARTICLES_PUBLIC", "") == "1"
+ARTICLES_PREVIEW_KEY = os.environ.get("STRATOS_ARTICLES_PREVIEW_KEY", "")
+
 COMPANY = {
+    "email": "info@stratosuae.com",
+    # Office address: replace with the exact wording on the Canva letterhead (one string per line).
+    "address_lines": ["Nad Al Sheba 1", "Dubai, United Arab Emirates"],
     "legal_name": os.environ.get("STRATOS_LEGAL_NAME", ""),
     "licence_no": os.environ.get("STRATOS_LICENCE_NO", ""),
     "licence_authority": "Meydan Free Zone",
@@ -26,7 +39,27 @@ COMPANY = {
 
 @app.context_processor
 def inject_globals():
-    return {"company": COMPANY, "current_year": datetime.now().year}
+    return {"company": COMPANY, "current_year": datetime.now().year,
+            "articles_public": articles_visible(), "service_icons": SERVICE_ICONS}
+
+
+def articles_visible():
+    """True when the Articles pages may be shown to this visitor."""
+    if ARTICLES_PUBLIC:
+        return True
+    return bool(ARTICLES_PREVIEW_KEY) and session.get("articles_preview") is True
+
+
+# Brand-kit icons (already in /images/icons) used for each service
+SERVICE_ICONS = {
+    "complete_uae_establishment": "remote-coordination_icon.svg",
+    "uae_company_formation": "business-formation_icon.svg",
+    "accounting_management_reporting": "accounting-and-bookkeeping_icon.svg",
+    "business_bank_account_support": "bank-account-opening_icon.svg",
+    "residence_visa_support": "residency-and-visas_icon.svg",
+    "corporate_administration_governance": "single-point-of-accountability_icon.svg",
+    "corporate_tax_vat_coordination": "auditing_icon.svg",
+}
 
 
 USERS = {
@@ -314,13 +347,25 @@ ARTICLES = {
 }
 
 
+def _unlock_preview():
+    key = request.args.get("preview", "")
+    if ARTICLES_PREVIEW_KEY and key == ARTICLES_PREVIEW_KEY:
+        session["articles_preview"] = True
+
+
 @app.get("/articles")
 def articles():
+    _unlock_preview()
+    if not articles_visible():
+        abort(404)
     return render_template("articles.html", articles=ARTICLES)
 
 
 @app.get("/articles/<slug>/")
 def article_detail(slug):
+    _unlock_preview()
+    if not articles_visible():
+        abort(404)
     article = ARTICLES.get(slug)
     if not article:
         abort(404)

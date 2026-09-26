@@ -57,7 +57,7 @@
                 </ul>
             </li>
             <li><a href="{{ url_for('who_we_work_with') }}"{% if ep == 'who_we_work_with' %} class="active" aria-current="page"{% endif %}>Who We Work With</a></li>
-            <li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>
+            {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
             <li><a href="{{ url_for('appointments') }}"{% if ep == 'appointments' %} class="active" aria-current="page"{% endif %}>Book Appointment</a></li>
         </ul>
@@ -88,7 +88,7 @@
             <a href="{{ url_for('about') }}">About Stratos</a>
             <a href="{{ url_for('services') }}">Our Services</a>
             <a href="{{ url_for('who_we_work_with') }}">Who We Work With</a>
-            <a href="{{ url_for('articles') }}">Articles</a>
+            {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
             <a href="{{ url_for('faqs') }}">FAQ</a>
             <a href="{{ url_for('contact') }}">Contact</a>
         </div>

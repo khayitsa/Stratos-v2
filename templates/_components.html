@@ -34,9 +34,11 @@
 {% macro cta_band(image, eyebrow, heading, copy) -%}
 <section class="cta-band">
     <div class="cta-band__content">
-        <p class="eyebrow-light">{{ eyebrow }}</p>
-        <h2>{{ heading }}</h2>
-        <p>{{ copy }}</p>
+        <div class="cta-band__text">
+            <p class="eyebrow-light">{{ eyebrow }}</p>
+            <h2>{{ heading }}</h2>
+            <p class="cta-band__copy">{{ copy }}</p>
+        </div>
         <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
     </div>
     <div class="cta-band__photo" style="background-image: url('{{ url_for('image_asset', filename=image) }}');" role="img" aria-label="Dubai skyline"></div>

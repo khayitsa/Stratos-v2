@@ -181,7 +181,7 @@
             <div class="svc-panels">
             <article class="svc-panel is-active" role="tabpanel" id="svc-panel-0" aria-labelledby="svc-tab-0">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">01</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['complete_uae_establishment']) }}" alt="">
                     <h3>Complete UAE Establishment</h3>
                     <p>A complete, coordinated service for clients who want Stratos to manage the process from initial planning and company formation through to the practical requirements of establishing operations in the UAE.</p>
                     <a href="{{ url_for('complete_uae_establishment') }}" class="btn-banner">Learn More</a>
@@ -190,7 +190,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-1" aria-labelledby="svc-tab-1">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">02</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['uae_company_formation']) }}" alt="">
                     <h3>UAE Company Formation</h3>
                     <p>Activity selection, document preparation, licence applications and incorporation coordination for appropriate UAE mainland and free-zone companies.</p>
                     <a href="{{ url_for('uae_company_formation') }}" class="btn-banner">Learn More</a>
@@ -199,7 +199,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-2" aria-labelledby="svc-tab-2">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">03</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['accounting_management_reporting']) }}" alt="">
                     <h3>Accounting &amp; Bookkeeping</h3>
                     <p>Ongoing bookkeeping, reconciliations, financial records and management reporting to give you clear oversight of your UAE business.</p>
                     <a href="{{ url_for('accounting_management_reporting') }}" class="btn-banner">Learn More</a>
@@ -208,7 +208,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-3" aria-labelledby="svc-tab-3">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">04</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['business_bank_account_support']) }}" alt="">
                     <h3>Business Banking Support</h3>
                     <p>Support preparing your UAE business banking application, including business and KYC documentation, application preparation and assistance throughout the bank's review process.</p>
                     <a href="{{ url_for('business_bank_account_support') }}" class="btn-banner">Learn More</a>
@@ -217,7 +217,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-4" aria-labelledby="svc-tab-4">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">05</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['residence_visa_support']) }}" alt="">
                     <h3>UAE Residency &amp; Visa Support</h3>
                     <p>Application and renewal support for eligible business owners, investors, employees and dependants, coordinated alongside your company requirements.</p>
                     <a href="{{ url_for('residence_visa_support') }}" class="btn-banner">Learn More</a>
@@ -226,7 +226,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-5" aria-labelledby="svc-tab-5">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">06</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['corporate_administration_governance']) }}" alt="">
                     <h3>Corporate Administration</h3>
                     <p>Ongoing support with licence renewals, company amendments, corporate records and the administrative requirements involved in maintaining your UAE company.</p>
                     <a href="{{ url_for('corporate_administration_governance') }}" class="btn-banner">Learn More</a>
@@ -235,7 +235,7 @@
             </article>
             <article class="svc-panel" role="tabpanel" id="svc-panel-6" aria-labelledby="svc-tab-6">
                 <div class="svc-panel__text">
-                    <span class="svc-panel__num">07</span>
+                    <img class="svc-panel__icon" src="{{ url_for('image_asset', filename='icons/' ~ service_icons['corporate_tax_vat_coordination']) }}" alt="">
                     <h3>Corporate Tax &amp; VAT Coordination</h3>
                     <p>Preparation and coordination of the financial information required for UAE Corporate Tax and VAT, working with appropriately qualified tax professionals where specialist advice or filing is required.</p>
                     <a href="{{ url_for('corporate_tax_vat_coordination') }}" class="btn-banner">Learn More</a>
@@ -260,19 +260,19 @@
             <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
         </div>
         <div class="card-grid card-grid--4">
-            <article class="info-card">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/single-point-of-accountability_icon.svg') }}" alt="">
                 <h3>Dedicated Relationship Manager</h3>
                 <p>One point of contact coordinates your engagement, keeps you updated and manages the agreed next steps throughout the process.</p>
             </article>
-            <article class="info-card">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/expert-knowledge_icon.svg') }}" alt="">
                 <h3>Advice Based on Your Business</h3>
                 <p>Our recommendations are based on your business activities, ownership, operational requirements and objectives in the UAE.</p>
             </article>
-            <article class="info-card">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/transparent-pricing_icon.svg') }}" alt="">
                 <h3>Clear Process &amp; Communication</h3>
                 <p>We explain the recommended approach, the steps involved and the information required from you as the engagement progresses.</p>
             </article>
-            <article class="info-card">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/our-vision_icon.svg') }}" alt="">
                 <h3>Independent Decisions Remain Independent</h3>
                 <p>Company formation, banking, residency and other applications remain subject to the requirements and approval of the relevant authorities and institutions.</p>
             </article>
