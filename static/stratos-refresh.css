@@ -3003,3 +3003,11 @@ html body main p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc, html body .stratos-footer__brand
 html body main p.sj-l.sj-l.sj-l.sj-l.sj-l { text-align: left !important; text-align-last: left !important; hyphens: manual !important; }
 html body main p.sj-c.sj-c.sj-c.sj-c.sj-c, html body .stratos-footer__brand p.sj-c.sj-c.sj-c.sj-c.sj-c { text-align: center !important; text-align-last: center !important; hyphens: manual !important; }
 html body main p.sj-m.sj-m.sj-m.sj-m.sj-m, html body .stratos-footer__brand p.sj-m.sj-m.sj-m.sj-m.sj-m { text-align: left !important; text-align-last: left !important; hyphens: manual !important; }
+
+/* Footer link columns on phones: links sit directly under their heading, left-aligned together */
+@media (max-width: 768px) {
+    html body .stratos-footer__col { text-align: left !important; align-items: flex-start !important; }
+    html body .stratos-footer__col h4 { text-align: left !important; }
+    html body .stratos-footer__col a { display: block !important; text-align: left !important; align-self: flex-start !important; margin-left: 0 !important; padding-left: 0 !important; }
+    html body .stratos-footer__col a:hover { transform: none; }
+}
