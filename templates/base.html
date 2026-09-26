@@ -58,7 +58,6 @@
             </li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
-            <li><a href="{{ url_for('appointments') }}"{% if ep == 'appointments' %} class="active" aria-current="page"{% endif %}>Book Appointment</a></li>
         </ul>
         
         <!-- CTA Button Aligned to the Nav Row -->
