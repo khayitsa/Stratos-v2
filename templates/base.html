@@ -44,18 +44,6 @@
         <ul>
             <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
             <li><a href="{{ url_for('about') }}"{% if ep == 'about' %} class="active" aria-current="page"{% endif %}>About</a></li>
-            <li class="nav-dropdown">
-                <a href="{{ url_for('home') }}#services"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ url_for('complete_uae_establishment') }}"{% if ep == 'complete_uae_establishment' %} class="active" aria-current="page"{% endif %}>Complete UAE Establishment</a></li>
-                    <li><a href="{{ url_for('uae_company_formation') }}"{% if ep == 'uae_company_formation' %} class="active" aria-current="page"{% endif %}>UAE Company Formation</a></li>
-                    <li><a href="{{ url_for('accounting_management_reporting') }}"{% if ep == 'accounting_management_reporting' %} class="active" aria-current="page"{% endif %}>Accounting, Bookkeeping & Management Reporting</a></li>
-                    <li><a href="{{ url_for('business_bank_account_support') }}"{% if ep == 'business_bank_account_support' %} class="active" aria-current="page"{% endif %}>Business Bank Account Application Support</a></li>
-                    <li><a href="{{ url_for('residence_visa_support') }}"{% if ep == 'residence_visa_support' %} class="active" aria-current="page"{% endif %}>Residence & Visa Application Support</a></li>
-                    <li><a href="{{ url_for('corporate_administration_governance') }}"{% if ep == 'corporate_administration_governance' %} class="active" aria-current="page"{% endif %}>Corporate Administration & Governance</a></li>
-                    <li><a href="{{ url_for('corporate_tax_vat_coordination') }}"{% if ep == 'corporate_tax_vat_coordination' %} class="active" aria-current="page"{% endif %}>Corporate Tax & VAT Coordination</a></li>
-                </ul>
-            </li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
         </ul>
@@ -84,7 +72,6 @@
         <div class="stratos-footer__col">
             <h4>Stratos</h4>
             <a href="{{ url_for('about') }}">About Stratos</a>
-            <a href="{{ url_for('home') }}#services">Our Services</a>
             <a href="{{ url_for('home') }}#who-we-work-with">Who We Work With</a>
             {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
             <a href="{{ url_for('faqs') }}">FAQ</a>
