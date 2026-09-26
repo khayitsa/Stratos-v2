@@ -2920,3 +2920,34 @@ html body main .info-card--icon p {
     text-align: justify !important; text-justify: inter-word; text-align-last: left !important;
     text-wrap: pretty; hyphens: none !important; word-break: normal; overflow-wrap: normal;
 }
+
+
+/* =====================================================================
+   50. REVIEW ROUND (26 Sep): hero breathing room, cleaner "How We Work" cards
+   ===================================================================== */
+/* Home hero: more air between the blocks. The extra gap goes AFTER the eyebrow and heading and before the
+   buttons; the two body paragraphs stay close together so they still read as one intro. */
+@media (min-width: 769px) { html body main section.page-banner.page-banner--home { min-height: 600px !important; } }
+html body main .page-banner--home p.eyebrow-light { margin: 0 0 34px !important; }
+html body main .page-banner--home h1 { margin: 0 0 32px !important; line-height: 1.18 !important; }
+html body main .page-banner--home .banner-lead { margin: 0 auto 16px !important; }
+html body main .page-banner--home .banner-lead:last-of-type { margin-bottom: 0 !important; }
+html body main .page-banner--home .banner-actions { margin-top: 42px; }
+
+/* "How We Work" cards: no number circles, and the icons sit directly on the card in brand blue (no white tile) */
+html body main .info-card--icon::before { display: none !important; content: none !important; }
+html body main .info-card--icon,
+html body main .band--navy .info-card--icon { padding-top: 34px !important; }
+html body main .info-card--icon .card-icon,
+html body main .band--navy .info-card--icon .card-icon {
+    width: 60px !important; height: 60px !important; max-width: 60px !important;
+    padding: 0 !important; margin: 0 auto 20px !important;
+    background: none !important; border-radius: 0 !important; box-shadow: none !important; filter: none !important;
+}
+
+/* "A Clearer Way Forward" eyebrow: balance the trailing letter-space so it sits dead centre over the heading */
+html body main .clarity-banner .eyebrow-light { padding-left: 2px !important; }
+@media (max-width: 768px) { html body main section.page-banner.page-banner--home { padding-bottom: 92px !important; } }   /* keeps the buttons clear of the scroll cue on phones */
+
+/* anchors on the home page (Services, Who We Work With) must clear the fixed header */
+html body main #services, html body main #who-we-work-with, html body main #proof { scroll-margin-top: 76px; }

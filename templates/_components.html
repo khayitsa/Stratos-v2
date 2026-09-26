@@ -20,7 +20,7 @@
         {% if show_actions %}
         <div class="banner-actions">
             <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="{{ secondary_href or url_for('services') }}" class="btn-banner btn-banner-transparent">{{ secondary_label }}</a>
+            <a href="{{ secondary_href or (url_for('home') ~ '#services') }}" class="btn-banner btn-banner-transparent">{{ secondary_label }}</a>
         </div>
         {% endif %}
     </div>

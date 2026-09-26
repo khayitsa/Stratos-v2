@@ -127,7 +127,8 @@ def about():
 
 @app.get("/services")
 def services():
-    return render_template("services.html")
+    # Services overview merged into the home page (26 Sep review): the home page already lists every service.
+    return redirect(url_for("home") + "#services")
 
 
 SERVICE_PAGES = {
@@ -375,7 +376,8 @@ def article_detail(slug):
 
 @app.get("/who-we-work-with")
 def who_we_work_with():
-    return render_template("who_we_work_with.html")
+    # Merged into the home page (26 Sep review): the page repeated the home page's "Who We Work With" section.
+    return redirect(url_for("home") + "#who-we-work-with")
 
 @app.get("/cookie-policy")
 def cookie_policy():
@@ -393,7 +395,8 @@ def privacy():
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html")
+    # The stand-alone Contact page was scrapped (26 Sep review): the Appointments page carries the full enquiry form.
+    return redirect(url_for("appointments"))
 
 
 @app.route("/appointments", methods=["GET", "POST"])

@@ -17,11 +17,11 @@
     <div class="page-banner__inner">
         <p class="eyebrow-light">STRATOS CONSULTING</p>
         <h1>Establish Your Business in the UAE with Confidence.</h1>
-        <p class="banner-lead" style="margin-bottom: 14px;">Stratos Consulting helps private founders, international investment groups and established businesses structure, establish and operate companies in the UAE.</p>
+        <p class="banner-lead">Stratos Consulting helps private founders, international investment groups and established businesses structure, establish and operate companies in the UAE.</p>
         <p class="banner-lead">From mainland and free-zone company formation to banking, residency, accounting and ongoing corporate support, we bring every part of your UAE establishment together.</p>
         <div class="banner-actions">
             <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
-            <a href="{{ url_for('services') }}" class="btn-banner btn-banner-transparent">Explore Our Services</a>
+            <a href="#services" class="btn-banner btn-banner-transparent">Explore Our Services</a>
         </div>
     </div>
     <!-- Soft scroll hint: fades in after a moment, gently bobs, and disappears for good once the visitor scrolls -->
@@ -77,11 +77,12 @@
 </section>
 
 <!-- 5. WHO WE WORK WITH  (image cards instead of white/grey boxes; one B&W) -->
-<section class="band band--tint">
+<section class="band band--tint" id="who-we-work-with">
     <div class="band__inner">
         <div class="band__head">
             <p class="eyebrow">WHO WE WORK WITH</p>
             <h2>For Private Founders, International Investors and Established Businesses.</h2>
+            <p>Stratos serves clients whose UAE establishment involves commercial assessment, cross-border considerations or operational complexity. We are most useful to businesses that need more than a standard licence package or a simple company formation process.</p>
             <p>Our clients operate across a range of sectors, including international trade and commodities, technology and professional services, private investment, property and hospitality, manufacturing and logistics.</p>
         </div>
         <div class="client-feature">
@@ -89,20 +90,17 @@
             <ol class="client-list">
             <li class="client-row">
                 <span class="client-row__num">01</span>
-                <div class="client-row__body"><h3>Private Founders &amp; International Investment Groups</h3><p>For private founders, family offices and international investment groups establishing UAE companies as part of their wider business, investment or ownership structures.</p></div>
+                <div class="client-row__body"><h3>Family Offices &amp; Private Investment Groups</h3><p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p></div>
             </li>
             <li class="client-row">
                 <span class="client-row__num">02</span>
-                <div class="client-row__body"><h3>International Founders</h3><p>For founders building or expanding businesses across multiple markets, with international shareholders, customers, suppliers or operations.</p></div>
+                <div class="client-row__body"><h3>Cross-Border Founders</h3><p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p></div>
             </li>
             <li class="client-row">
                 <span class="client-row__num">03</span>
-                <div class="client-row__body"><h3>Established Businesses Entering the UAE</h3><p>For established companies expanding into the UAE and requiring a structure that integrates with their existing operations, ownership and international business activities.</p></div>
+                <div class="client-row__body"><h3>Established Businesses Entering the UAE</h3><p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p></div>
             </li>
             </ol>
-        </div>
-        <div class="actions actions--mt">
-            <a href="{{ url_for('who_we_work_with') }}" class="btn-outline">Explore Who We Work With</a>
         </div>
     </div>
 </section>
@@ -159,12 +157,13 @@
 </section>
 
 <!-- 9. SERVICES DIRECTORY  (cards, each linking to ITS OWN page; buttons centred and pinned to the bottom) -->
-<section class="band band--tint">
+<section class="band band--tint" id="services">
     <div class="band__inner">
         <div class="band__head">
             <p class="eyebrow">OUR SERVICES</p>
             <h2>Everything You Need to Establish and Operate in the UAE.</h2>
             <p>From company formation and residency to banking, accounting and ongoing corporate support, Stratos provides the services required to establish your UAE business and keep it operating effectively.</p>
+            <p>The proposed activities affect the licence, the ownership affects the documents required, and the operating model affects the choice of jurisdiction. All three influence banking, visas, bookkeeping and ongoing administration. We begin with the whole business, establish the appropriate sequence and coordinate the agreed work through one accountable Relationship Manager.</p>
         </div>
 
         <!-- Services showcase: pick a service on the left, its details open on the right (all panels are visible without JavaScript) -->
@@ -245,9 +244,6 @@
             </div>
         </div>
 
-        <div class="actions actions--mt">
-            <a href="{{ url_for('services') }}" class="btn-outline">Explore All Services</a>
-        </div>
     </div>
 </section>
 
@@ -260,19 +256,19 @@
             <p>Your dedicated Relationship Manager coordinates your engagement from the initial discussion through to establishment and, where required, ongoing support. Relevant specialists are brought in as needed, while your main point of contact remains consistent.</p>
         </div>
         <div class="card-grid card-grid--4">
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/single-point-of-accountability_icon.svg') }}" alt="">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/single-point-of-accountability_icon_blue.svg') }}" alt="">
                 <h3>Dedicated Relationship Manager</h3>
                 <p>One point of contact coordinates your engagement, keeps you updated and manages the agreed next steps throughout the process.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/expert-knowledge_icon.svg') }}" alt="">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/expert-knowledge_icon_blue.svg') }}" alt="">
                 <h3>Advice Based on Your Business</h3>
                 <p>Our recommendations are based on your business activities, ownership, operational requirements and objectives in the UAE.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/transparent-pricing_icon.svg') }}" alt="">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/transparent-pricing_icon_blue.svg') }}" alt="">
                 <h3>Clear Process &amp; Communication</h3>
                 <p>We explain the recommended approach, the steps involved and the information required from you as the engagement progresses.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/our-vision_icon.svg') }}" alt="">
+            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/our-vision_icon_blue.svg') }}" alt="">
                 <h3>Independent Decisions Remain Independent</h3>
                 <p>Company formation, banking, residency and other applications remain subject to the requirements and approval of the relevant authorities and institutions.</p>
             </article>

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260925">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260926b">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -45,7 +45,7 @@
             <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
             <li><a href="{{ url_for('about') }}"{% if ep == 'about' %} class="active" aria-current="page"{% endif %}>About</a></li>
             <li class="nav-dropdown">
-                <a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a>
+                <a href="{{ url_for('home') }}#services"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ url_for('complete_uae_establishment') }}"{% if ep == 'complete_uae_establishment' %} class="active" aria-current="page"{% endif %}>Complete UAE Establishment</a></li>
                     <li><a href="{{ url_for('uae_company_formation') }}"{% if ep == 'uae_company_formation' %} class="active" aria-current="page"{% endif %}>UAE Company Formation</a></li>
@@ -56,7 +56,6 @@
                     <li><a href="{{ url_for('corporate_tax_vat_coordination') }}"{% if ep == 'corporate_tax_vat_coordination' %} class="active" aria-current="page"{% endif %}>Corporate Tax & VAT Coordination</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('who_we_work_with') }}"{% if ep == 'who_we_work_with' %} class="active" aria-current="page"{% endif %}>Who We Work With</a></li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
             <li><a href="{{ url_for('appointments') }}"{% if ep == 'appointments' %} class="active" aria-current="page"{% endif %}>Book Appointment</a></li>
@@ -86,8 +85,8 @@
         <div class="stratos-footer__col">
             <h4>Stratos</h4>
             <a href="{{ url_for('about') }}">About Stratos</a>
-            <a href="{{ url_for('services') }}">Our Services</a>
-            <a href="{{ url_for('who_we_work_with') }}">Who We Work With</a>
+            <a href="{{ url_for('home') }}#services">Our Services</a>
+            <a href="{{ url_for('home') }}#who-we-work-with">Who We Work With</a>
             {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
             <a href="{{ url_for('faqs') }}">FAQ</a>
             <a href="{{ url_for('contact') }}">Contact</a>
