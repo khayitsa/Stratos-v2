@@ -2873,3 +2873,15 @@ html body main .info-card--icon p { text-align: center !important; text-align-la
 html body main .info-card--icon .card-icon { width: 40px !important; height: 40px !important; max-width: 40px !important; margin: 0 auto 12px !important; }
 html body main .info-card--icon::before { display: flex !important; width: 68px !important; height: 68px !important; font-size: 21px !important; margin: 0 auto 14px !important; }
 html body main .info-card--icon p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; }
+
+/* 47. Icon cards: remove the odd gap under the icon, two-line titles everywhere, wider text column so justified lines don't gap */
+html body main .info-card--icon { padding-left: 20px !important; padding-right: 20px !important; }
+html body main .info-card--icon::before { margin: 18px auto 12px !important; }
+html body main .info-card--icon .card-icon { margin: 0 auto 8px !important; padding: 0 !important; }
+html body main .info-card--icon h3 { margin: 0 0 12px !important; font-size: clamp(18px, 1.35vw, 21px) !important; }
+@media (min-width: 901px) {
+    html body main .info-card--icon h3 { min-height: calc(2 * 1.25em) !important; }
+}
+html body main .info-card--icon p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; font-size: 15px !important; }
+html body main .info-card--icon .card-icon { margin-bottom: 16px !important; }
+html body main .info-card--icon h3 { margin-bottom: 16px !important; }
