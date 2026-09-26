@@ -2909,3 +2909,14 @@ html body main .info-card--icon p { font-size: 14.5px !important; line-height: 1
     html body main .timeline__step h3 { min-height: calc(2 * 1.25em); display: flex; align-items: center; justify-content: center; line-height: 1.25; margin-bottom: 14px !important; }
 }
 html body main .timeline__step p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; font-size: 14.5px !important; }
+
+/* 49. Icon cards, final: widest possible text column so justified lines stay evenly spaced */
+@media (min-width: 1101px) {
+    html body main .card-grid--4:has(.info-card--icon) { gap: 14px !important; }
+    html body main .card-grid--4 .info-card--icon { flex-basis: calc((100% - 42px) / 4) !important; padding-left: 14px !important; padding-right: 14px !important; }
+}
+html body main .info-card--icon p {
+    font-size: 14px !important; line-height: 1.7 !important; letter-spacing: 0 !important;
+    text-align: justify !important; text-justify: inter-word; text-align-last: left !important;
+    text-wrap: pretty; hyphens: none !important; word-break: normal; overflow-wrap: normal;
+}
