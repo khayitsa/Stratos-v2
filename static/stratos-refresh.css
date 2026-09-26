@@ -2857,3 +2857,19 @@ html body main .statement-strip .intro-split__rest { font-size: 17px !important;
     html body main .info-card--icon h3 { min-height: calc(3 * 1.25em); display: flex; align-items: center; justify-content: center; line-height: 1.25; margin-bottom: 14px; }
 }
 html body main .info-card--icon p { text-align: center !important; text-align-last: center !important; text-wrap: balance; word-spacing: normal; hyphens: none; }
+
+/* 45. Phone fixes from review: even side margins + justified copy in the fit intro, justified timeline copy,
+   smaller icon tiles and bigger number bubbles on the icon cards. */
+@media (max-width: 768px) {
+    html body main .fit-simple__intro { max-width: none; padding: 0 6px; }
+    html body main .fit-simple__intro p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; margin: 0 0 14px !important; }
+    html body main .timeline__step p { text-align: justify !important; text-align-last: left !important; text-wrap: pretty; }
+    html body main .info-card--icon .card-icon { width: 48px !important; height: 48px !important; max-width: 48px !important; margin: 0 auto 12px !important; }
+    html body main .info-card--icon::before { display: flex !important; width: 60px !important; height: 60px !important; font-size: 19px !important; margin: 0 auto 14px !important; }
+    html body main .info-card--icon p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; }
+}
+
+/* 46. Icon cards, all screen sizes: clearly smaller icon tile, clearly bigger number circle, justified copy */
+html body main .info-card--icon .card-icon { width: 40px !important; height: 40px !important; max-width: 40px !important; margin: 0 auto 12px !important; }
+html body main .info-card--icon::before { display: flex !important; width: 68px !important; height: 68px !important; font-size: 21px !important; margin: 0 auto 14px !important; }
+html body main .info-card--icon p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; }
