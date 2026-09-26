@@ -2885,3 +2885,27 @@ html body main .info-card--icon h3 { margin: 0 0 12px !important; font-size: cla
 html body main .info-card--icon p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; font-size: 15px !important; }
 html body main .info-card--icon .card-icon { margin-bottom: 16px !important; }
 html body main .info-card--icon h3 { margin-bottom: 16px !important; }
+
+/* 48. Even card rows + justified copy (services trio, icon cards, home timeline) */
+/* no staggered/lifted cards: every card in a row starts on the same line */
+html body main .luxury-features-section .luxury-card,
+html body main .luxury-features-section .luxury-card:nth-child(n),
+html body main .info-card--icon:nth-child(n) { margin-top: 0 !important; margin-bottom: 0 !important; top: 0 !important; }
+html body main .luxury-features-section .luxury-card:not(:hover),
+html body main .info-card--icon:not(:hover) { transform: none !important; }
+html body main .luxury-features-section .luxury-card-body { padding: 30px 26px 32px !important; }
+html body main .luxury-features-section .luxury-card-body h3 { min-height: 1.3em; }
+html body main .luxury-features-section .luxury-card-body p { max-width: none !important; width: 100%; text-align: justify !important; text-align-last: center !important; text-wrap: pretty; }
+html body main .luxury-features-section .luxury-read-more { margin-top: auto !important; align-self: center; }
+
+/* icon cards: less dead space above the number circle, tighter justified column */
+html body main .info-card--icon { padding-top: 22px !important; padding-left: 18px !important; padding-right: 18px !important; }
+html body main .info-card--icon::before { margin-top: 0 !important; }
+html body main .info-card--icon p { font-size: 14.5px !important; line-height: 1.7 !important; }
+
+/* home timeline: titles share a two-line height so paragraphs start together; wider justified column */
+@media (min-width: 901px) {
+    html body main .timeline__step { padding-left: 14px !important; padding-right: 14px !important; }
+    html body main .timeline__step h3 { min-height: calc(2 * 1.25em); display: flex; align-items: center; justify-content: center; line-height: 1.25; margin-bottom: 14px !important; }
+}
+html body main .timeline__step p { text-align: justify !important; text-align-last: center !important; text-wrap: pretty; font-size: 14.5px !important; }
