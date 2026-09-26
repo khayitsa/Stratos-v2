@@ -2951,3 +2951,6 @@ html body main .clarity-banner .eyebrow-light { padding-left: 2px !important; }
 
 /* anchors on the home page (Services, Who We Work With) must clear the fixed header */
 html body main #services, html body main #who-we-work-with, html body main #proof { scroll-margin-top: 76px; }
+
+/* "Stratos may be a good fit if:" - one straight list instead of two columns */
+.fit-simple__panel .checklist { grid-template-columns: 1fr !important; gap: 0 !important; max-width: 760px; margin-left: auto; margin-right: auto; }
