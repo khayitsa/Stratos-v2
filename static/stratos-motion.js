@@ -71,6 +71,40 @@
     function hide() { cue.classList.add('is-gone'); window.removeEventListener('scroll', onScroll); }
     function onScroll() { if (window.scrollY > 40) hide(); }
     window.addEventListener('scroll', onScroll, { passive: true });
-    cue.addEventListener('click', function () { setTimeout(hide, 50); });
+    cue.addEventListener('click', function (e) {
+        var banner = cue.closest('section'), next = banner && banner.nextElementSibling;
+        if (next) { e.preventDefault(); next.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        setTimeout(hide, 50);
+    });
     if (window.scrollY > 40) hide();
+})();
+
+/* Services showcase (home): click / arrow-key a service to open its panel. Without JS every panel simply stays listed. */
+(function () {
+    var box = document.querySelector('.svc-showcase');
+    if (!box) return;
+    var tabs = [].slice.call(box.querySelectorAll('.svc-tab'));
+    var panels = [].slice.call(box.querySelectorAll('.svc-panel'));
+    if (!tabs.length || tabs.length !== panels.length) return;
+    box.classList.remove('no-js');
+    function show(i, focus) {
+        tabs.forEach(function (t, k) {
+            var on = k === i;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+            t.tabIndex = on ? 0 : -1;
+            panels[k].classList.toggle('is-active', on);
+        });
+        if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { show(i); });
+        t.addEventListener('mouseenter', function () { if (window.matchMedia('(hover:hover)').matches && window.innerWidth > 960) show(i); });
+        t.addEventListener('keydown', function (e) {
+            var k = e.key;
+            if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); show((i + 1) % tabs.length, true); }
+            if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); show((i - 1 + tabs.length) % tabs.length, true); }
+        });
+    });
+    show(0);
 })();

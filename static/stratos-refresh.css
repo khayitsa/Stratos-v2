@@ -2164,3 +2164,556 @@ html body main section.page-banner.page-banner--home {
 .scroll-cue.is-gone { opacity: 0 !important; visibility: hidden; pointer-events: none; animation: none; }
 @media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
 @media (max-width: 768px) { .scroll-cue { bottom: 16px; } }
+
+/* =====================================================================
+   29. STATS STRIP: full-bleed and wider
+   The strip was capped at 1440px (leaving a white gap on wide screens) and its content at 1180px.
+   It now spans the whole screen; the four columns use nearly the full width.
+   ===================================================================== */
+html body main section.proof-strip-section,
+html body main section.reach,
+html body main section.luxury-features-section,
+html body main section.tomorrow-banner,
+html body main section.clarity-banner,
+html body main section.statement-strip {
+    max-width: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+html body main section.proof-strip-section { padding-left: 4% !important; padding-right: 4% !important; }
+html body main section.proof-strip-section .proof-strip-grid { max-width: 1560px !important; }
+html body main section.proof-strip-section .proof-item { padding-left: 24px !important; padding-right: 24px !important; }
+html body main section.proof-strip-section .proof-item p { max-width: 300px; }
+html body main section.proof-strip-section .proof-item strong { font-size: clamp(20px, 1.8vw, 26px) !important; }
+
+/* =====================================================================
+   30. SERVICES SHOWCASE (home) - replaces the 4+3 grid of small cards
+   Left: numbered list of the seven services. Right: the selected service opens in a navy panel with a
+   photo fading in on its right edge. Text is justified; on phones the list sits above the panel.
+   ===================================================================== */
+.svc-showcase {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.6fr);
+    gap: 28px;
+    align-items: stretch;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+.svc-tabs { display: flex; flex-direction: column; gap: 8px; }
+.svc-tab {
+    display: flex; align-items: center; gap: 16px;
+    width: 100%;
+    padding: 16px 18px;
+    text-align: left;
+    font: inherit;
+    color: var(--ink);
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(21,38,90,.14);
+    border-left: 4px solid rgba(21,38,90,.22);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease, color .25s ease;
+}
+.svc-tab__num { font-family: var(--font-heading); font-size: 14px; letter-spacing: .12em; opacity: .5; min-width: 24px; }
+.svc-tab__title { flex: 1; font-family: var(--font-heading); font-size: 17px; line-height: 1.3; font-weight: 500; }
+.svc-tab__arrow { opacity: 0; transform: translateX(-6px); transition: opacity .25s ease, transform .25s ease; }
+.svc-tab:hover { background: #fff; border-left-color: var(--blue-mid); transform: translateX(3px); }
+.svc-tab.is-active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+    border-left-color: var(--blue-2);
+    box-shadow: 0 14px 30px rgba(7,14,40,.22);
+    transform: translateX(6px);
+}
+.svc-tab.is-active .svc-tab__num { opacity: .8; color: var(--blue-2); }
+.svc-tab.is-active .svc-tab__arrow { opacity: 1; transform: none; }
+.svc-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.svc-panels { position: relative; }
+.svc-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    min-height: 100%;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 22px 50px rgba(7,14,40,.28);
+}
+.svc-panel__text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 44px 40px 44px 44px; }
+.svc-panel__num { font-family: var(--font-heading); font-size: 64px; line-height: 1; color: rgba(157,180,220,.35); margin-bottom: 6px; }
+html body main .svc-panel h3 { font-family: var(--font-heading); font-size: clamp(24px, 2.2vw, 32px) !important; font-weight: 500; line-height: 1.2; color: #fff !important; margin: 0 0 16px; text-align: left !important; }
+html body main .svc-panel p { font-size: 15px !important; line-height: 1.8 !important; color: rgba(255,255,255,.86) !important; margin: 0 0 26px !important; text-align: justify !important; text-align-last: left !important; }
+.svc-panel__photo {
+    background-size: cover; background-position: center;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+    min-height: 260px;
+}
+.svc-panel__photo--bw { filter: grayscale(1) contrast(1.05); }
+
+/* JS on: only the active panel shows, with a soft fade */
+.svc-showcase:not(.no-js) .svc-panel { display: none; }
+.svc-showcase:not(.no-js) .svc-panel.is-active { display: grid; animation: svcIn .55s cubic-bezier(.2,.7,.2,1); }
+@keyframes svcIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* JS off: tabs hide, every panel is listed */
+.svc-showcase.no-js { grid-template-columns: 1fr; }
+.svc-showcase.no-js .svc-tabs { display: none; }
+.svc-showcase.no-js .svc-panels { display: grid; gap: 20px; }
+
+@media (max-width: 960px) {
+    .svc-showcase { grid-template-columns: 1fr; }
+    .svc-tabs { flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x proximity; }
+    .svc-tab { flex: 0 0 auto; width: auto; scroll-snap-align: start; padding: 12px 16px; border-left-width: 1px; }
+    .svc-tab__title { font-size: 15px; white-space: nowrap; }
+    .svc-tab__num, .svc-tab__arrow { display: none; }
+    .svc-tab.is-active, .svc-tab:hover { transform: none; }
+    .svc-panel { grid-template-columns: 1fr; }
+    .svc-panel__photo { order: -1; min-height: 190px; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%); mask-image: linear-gradient(180deg, #000 45%, transparent 100%); }
+    .svc-panel__text { padding: 8px 26px 32px; }
+    .svc-panel__num { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .svc-showcase .svc-panel.is-active { animation: none; } }
+
+/* =====================================================================
+   31. EVERY PAGE OPENS LIKE THE HOME PAGE
+   All banners fill the visible screen below the header (photo + words first), with the same scroll cue.
+   ===================================================================== */
+html body main section.page-banner {
+    height: calc(100vh - var(--hdr)) !important;
+    height: calc(100svh - var(--hdr)) !important;
+    min-height: 520px !important;
+}
+
+/* =====================================================================
+   32. SOFT EDGES: navy info strips fade in from the photo above and fade out into the page below
+   No more hard lines. Photo -> navy (banner's bottom edge) ... navy -> white (strip's bottom edge).
+   The text sits in the solid-navy middle, so contrast is unchanged.
+   ===================================================================== */
+/* banner bottom melts into the navy strip that follows it */
+.page-banner:has(+ .statement-strip)::after,
+.page-banner:has(+ .proof-strip-section)::after {
+    height: 34%;
+    background: linear-gradient(180deg, rgba(21,38,90,0) 0%, rgba(21,38,90,.55) 55%, var(--blue-mid) 100%);
+    opacity: 1;
+}
+/* the strips: solid navy at the top (matches the fade), fading to white at the bottom */
+html body main section.statement-strip,
+html body main section.proof-strip-section {
+    background: linear-gradient(180deg, var(--blue-mid) 0%, var(--blue-deep) 46%, rgba(11,22,54,.55) 74%, rgba(255,255,255,0) 100%), #ffffff !important;
+    padding-top: 64px !important;
+    padding-bottom: 130px !important;
+}
+html body main section.statement-strip--intro { padding-top: 56px !important; padding-bottom: 120px !important; }
+/* proof strip: light text needs to stay on the navy part */
+html body main section.proof-strip-section { padding-bottom: 120px !important; }
+
+/* "Complexity into Clarity" band: fades in from and out to the white sections around it */
+html body main section.clarity-banner {
+    background: linear-gradient(180deg, rgba(21,38,90,0) 0%, var(--blue-mid) 30%, var(--blue-deep) 70%, rgba(11,22,54,0) 100%), #ffffff !important;
+    padding-top: 110px !important;
+    padding-bottom: 110px !important;
+}
+/* clarity band fades out into the ice-tint section that follows (no white line between them) */
+html body main section.clarity-banner {
+    background: linear-gradient(180deg, #ffffff 0%, var(--blue-mid) 30%, var(--blue-deep) 70%, var(--tint-a) 100%) !important;
+}
+
+/* =====================================================================
+   33. SPACING SYSTEM + NO DEAD WHITESPACE
+   1) One vertical rhythm: every section uses the same padding token.
+   2) Navy strips end flush against the next section (no white gap, no fade-to-white); the first photo/card block
+      of the next section overlaps the strip's edge so the join looks intentional.
+   3) Intro strips are two-part (big statement + supporting text) so the wide band is filled.
+   ===================================================================== */
+:root { --sp: clamp(56px, 5.6vw, 84px); --sp-lg: clamp(72px, 7vw, 104px); }
+
+html body main section.band { padding-top: var(--sp) !important; padding-bottom: var(--sp) !important; }
+html body main .band__head { margin-bottom: clamp(30px, 3.4vw, 46px); }
+html body main .band__head + * { margin-top: 0; }
+
+/* strips: solid, flush with what follows */
+html body main section.statement-strip,
+html body main section.proof-strip-section {
+    background:
+        radial-gradient(ellipse 60% 100% at 15% 0%, rgba(147,168,207,.18) 0, transparent 60%),
+        linear-gradient(180deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important;
+    padding-top: var(--sp) !important;
+    padding-bottom: var(--sp) !important;
+}
+html body main section.clarity-banner {
+    background: linear-gradient(180deg, var(--blue-mid) 0%, var(--blue-deep) 100%) !important;
+    padding-top: var(--sp) !important;
+    padding-bottom: var(--sp) !important;
+}
+/* banner still melts into the strip below it (photo -> navy) */
+.page-banner:has(+ .statement-strip)::after,
+.page-banner:has(+ .proof-strip-section)::after { height: 30%; }
+
+/* the block after an intro strip climbs up over its bottom edge */
+html body main section.statement-strip--intro { padding-bottom: calc(var(--sp) + 70px) !important; }
+html body main section.statement-strip--intro + .band { padding-top: 0 !important; }
+html body main section.statement-strip--intro + .band .split { transform: translateY(-70px); margin-bottom: -70px; }
+html body main section.statement-strip--intro + .band .split__photo { box-shadow: 0 24px 50px rgba(7,14,40,.30), 18px 18px 0 0 var(--frame, #e3e9f3); }
+html body main section.statement-strip--intro + .premium-articles-section,
+html body main section.statement-strip--intro + section.premium-articles-section { padding-top: 0 !important; }
+html body main section.statement-strip--intro + .premium-articles-section .articles-header { display: none; }
+html body main section.statement-strip--intro + .premium-articles-section .articles-bento-grid { transform: translateY(-70px); margin-bottom: -70px; }
+
+/* intro content */
+.intro-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+html body main .statement-strip .intro-split__lead {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 2.5vw, 36px) !important;
+    line-height: 1.28 !important;
+    font-weight: 500;
+    color: #fff !important;
+    margin: 0 !important;
+    text-align: left !important;
+    text-align-last: left !important;
+    padding-left: 22px;
+    border-left: 3px solid var(--blue-2);
+    max-width: none !important;
+}
+html body main .statement-strip .intro-split__rest {
+    font-size: 15.5px !important;
+    line-height: 1.85 !important;
+    color: rgba(255,255,255,.86) !important;
+    margin: 0 !important;
+    text-align: justify !important;
+    text-align-last: left !important;
+    max-width: none !important;
+}
+html body main .statement-strip .intro-single {
+    font-family: var(--font-heading);
+    font-size: clamp(21px, 2.1vw, 30px) !important;
+    line-height: 1.4 !important;
+    color: #fff !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    text-wrap: balance;
+}
+@media (max-width: 900px) {
+    .intro-split { grid-template-columns: 1fr; gap: 20px; }
+    html body main section.statement-strip--intro + .band .split,
+    html body main section.statement-strip--intro + .premium-articles-section .articles-bento-grid { transform: translateY(-40px); margin-bottom: -40px; }
+    html body main section.statement-strip--intro { padding-bottom: calc(var(--sp) + 40px) !important; }
+}
+
+/* service pages wrap their sections in #engagement-content, so target the first band inside it too */
+html body main section.statement-strip--intro + #engagement-content > .band:first-child { padding-top: 0 !important; }
+html body main section.statement-strip--intro + #engagement-content > .band:first-child .split { transform: translateY(-70px); margin-bottom: -70px; }
+html body main section.statement-strip--intro + #engagement-content > .band:first-child .split__photo { box-shadow: 0 24px 50px rgba(7,14,40,.30), 18px 18px 0 0 var(--frame, #e3e9f3); }
+@media (max-width: 900px) {
+    html body main section.statement-strip--intro + #engagement-content > .band:first-child .split { transform: translateY(-40px); margin-bottom: -40px; }
+}
+
+/* overlap: only the PHOTO climbs onto the strip; headings and text stay put (they were being clipped) */
+html body main section.statement-strip--intro + .band .split,
+html body main section.statement-strip--intro + #engagement-content > .band:first-child .split { transform: none !important; margin-bottom: 0 !important; }
+html body main section.statement-strip--intro + .band .split__photo,
+html body main section.statement-strip--intro + #engagement-content > .band:first-child .split__photo { transform: translateY(-70px); }
+html body main section.statement-strip--intro + .band .split__text,
+html body main section.statement-strip--intro + #engagement-content > .band:first-child .split__text { padding-top: 0; }
+@media (max-width: 900px) {
+    html body main section.statement-strip--intro + .band .split__photo,
+    html body main section.statement-strip--intro + #engagement-content > .band:first-child .split__photo { transform: translateY(-40px); }
+}
+/* pages with nothing to overlap (About): normal bottom padding, no dead navy */
+html body main section.statement-strip--intro:has(+ .mission-split-section),
+html body main section.statement-strip--intro:has(+ .premium-articles-section:not(:has(.split))) { padding-bottom: var(--sp) !important; }
+html body main section.statement-strip--intro + .mission-split-section { padding-top: var(--sp) !important; }
+html body main .statement-strip .intro-split__rest { font-size: 16.5px !important; line-height: 1.9 !important; }
+
+/* =====================================================================
+   34. CLIENT TYPES: one calm feature instead of three heavy dark boxes
+   Left: a single black-and-white photo. Right: three numbered rows separated by hairlines.
+   Even, light, and nothing competes with the text.
+   ===================================================================== */
+.client-feature {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: stretch;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.client-feature__photo {
+    min-height: 420px;
+    background-size: cover; background-position: center 30%;
+    filter: grayscale(1) contrast(1.05);
+    border-radius: 4px;
+    box-shadow: 16px 16px 0 0 rgba(147,168,207,.35);
+}
+.client-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; }
+.client-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    padding: 30px 0;
+    border-top: 1px solid rgba(21,38,90,.18);
+}
+.client-row:last-child { border-bottom: 1px solid rgba(21,38,90,.18); }
+.client-row__num { font-family: var(--font-heading); font-size: 34px; line-height: 1; color: var(--blue); opacity: .75; }
+html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 500; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
+html body main .client-row p { font-size: 15px !important; line-height: 1.75 !important; color: var(--ink-soft) !important; margin: 0 !important; text-align: justify !important; text-align-last: left !important; }
+.client-row { transition: background .3s ease, padding-left .3s ease; }
+.client-row:hover { background: linear-gradient(90deg, rgba(147,168,207,.16), transparent); padding-left: 14px; }
+@media (max-width: 900px) {
+    .client-feature { grid-template-columns: 1fr; }
+    .client-feature__photo { min-height: 240px; box-shadow: 10px 10px 0 0 rgba(147,168,207,.35); }
+    .client-row { grid-template-columns: 44px 1fr; padding: 22px 0; }
+}
+
+/* =====================================================================
+   34. CLIENT TYPES: one calm feature instead of three heavy dark boxes
+   Left: a single black-and-white photo. Right: three numbered rows separated by hairlines.
+   ===================================================================== */
+.client-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: stretch; max-width: 1180px; margin: 0 auto; }
+.client-feature__photo { min-height: 420px; background-size: cover; background-position: center 30%; filter: grayscale(1) contrast(1.05); border-radius: 4px; box-shadow: 16px 16px 0 0 rgba(147,168,207,.35); }
+.client-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; }
+.client-row { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 30px 0; border-top: 1px solid rgba(21,38,90,.18); transition: background .3s ease, padding-left .3s ease; }
+.client-row:last-child { border-bottom: 1px solid rgba(21,38,90,.18); }
+.client-row:hover { background: linear-gradient(90deg, rgba(147,168,207,.16), transparent); padding-left: 14px; }
+.client-row__num { font-family: var(--font-heading); font-size: 34px; line-height: 1; color: var(--blue); opacity: .75; }
+html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 500; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
+html body main .client-row p { font-size: 15px !important; line-height: 1.75 !important; color: var(--ink-soft) !important; margin: 0 !important; text-align: justify !important; text-align-last: left !important; }
+@media (max-width: 900px) {
+    .client-feature { grid-template-columns: 1fr; }
+    .client-feature__photo { min-height: 240px; box-shadow: 10px 10px 0 0 rgba(147,168,207,.35); }
+    .client-row { grid-template-columns: 44px 1fr; padding: 22px 0; }
+}
+html body main .client-row h3 { margin: 4px 0 10px !important; padding: 0 !important; }
+html body main .client-row__body { min-width: 0; }
+
+/* =====================================================================
+   35. FOOTER: light grid only (the fuller redesign was rolled back)
+   ===================================================================== */
+html body .stratos-footer { position: relative; overflow: hidden; }
+html body .stratos-footer::before {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        linear-gradient(rgba(147,168,207,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147,168,207,.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 95% at 50% 30%, #000 25%, transparent 100%);
+            mask-image: radial-gradient(ellipse 85% 95% at 50% 30%, #000 25%, transparent 100%);
+}
+html body .stratos-footer > * { position: relative; z-index: 1; }
+
+/* =====================================================================
+   36. "BEFORE YOU ENQUIRE" - calm, centred, no dark box
+   ===================================================================== */
+.fit-simple { max-width: 1080px; margin: 0 auto; }
+.fit-simple .band__head { margin-bottom: 34px; }
+.fit-simple__intro { max-width: 760px; margin: 0 auto; }
+html body main .fit-simple__intro p { font-size: 15.5px !important; line-height: 1.85 !important; color: var(--ink-soft) !important; text-align: center !important; text-align-last: center !important; margin: 0 0 12px !important; }
+.fit-simple__panel {
+    margin-top: 38px;
+    padding: clamp(26px, 3.4vw, 44px);
+    background: linear-gradient(180deg, #ffffff 0%, #f1f4fa 100%);
+    border: 1px solid rgba(21,38,90,.14);
+    border-top: 3px solid var(--ink);
+    border-radius: 4px;
+    box-shadow: 0 14px 34px rgba(7,14,40,.08);
+}
+html body main .fit-simple__panel h3 { font-family: var(--font-heading); font-size: 22px !important; font-weight: 500; color: var(--ink) !important; text-align: center !important; margin: 0 0 24px; }
+.fit-simple__panel .checklist { max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 44px; --fg-soft: var(--ink-soft); }
+.fit-simple__panel .checklist li { padding: 12px 0 12px 36px; border-bottom: 1px solid rgba(21,38,90,.10); }
+.fit-simple__panel .checklist li::before { top: 14px; }
+html body main .fit-simple__note { max-width: 720px; margin: 30px auto 0 !important; text-align: center !important; text-align-last: center !important; font-family: var(--font-heading); font-style: italic; font-size: 18px !important; line-height: 1.55 !important; color: var(--ink) !important; }
+@media (max-width: 800px) { .fit-simple__panel .checklist { grid-template-columns: 1fr; } }
+html body main .fit-simple__panel { padding-top: clamp(22px, 2.6vw, 34px) !important; }
+html body main .fit-simple__panel h3 { margin: 0 0 16px !important; padding: 0 !important; }
+html body main .fit-simple__intro p { line-height: 1.75 !important; }
+
+/* =====================================================================
+   37. REVIEW ROUND: FAQ layout, bigger FAQ banner, About breaks + compact "Who we support",
+       articles layout, contact page fixes
+   ===================================================================== */
+
+/* ---- Home FAQ: title left (sticky), questions right ---- */
+.faq-split { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.5fr); gap: clamp(32px, 5vw, 80px); align-items: start; max-width: 1180px; margin: 0 auto; }
+.faq-split__intro { position: sticky; top: 110px; }
+.faq-split__intro .eyebrow, .faq-split__intro h2 { text-align: left !important; }
+html body main .faq-split__intro h2::after { margin-left: 0; }
+.faq-split .faq-list { max-width: none; margin: 0; }
+@media (max-width: 900px) { .faq-split { grid-template-columns: 1fr; } .faq-split__intro { position: static; } }
+
+/* ---- FAQs banner: much larger type so it fills the screen ---- */
+html body main .page-banner--xl h1 { font-size: clamp(64px, 9vw, 150px) !important; line-height: 1 !important; margin-bottom: 8px !important; }
+html body main .page-banner--xl p.eyebrow-light { font-size: clamp(12px, 1.1vw, 16px) !important; letter-spacing: .32em !important; margin-bottom: 22px !important; }
+html body main .page-banner--xl .page-banner__inner { max-width: 1100px; }
+
+/* ---- About: photo breaks between sections (B&W, fade in/out, gentle parallax) ---- */
+.photo-break { position: relative; height: clamp(200px, 26vw, 340px); background: #fff; overflow: hidden; }
+.photo-break::before {
+    content: ""; position: absolute; inset: 0;
+    background: var(--img) var(--pos, center) / cover no-repeat fixed;
+    filter: grayscale(1) contrast(1.05);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 74%, transparent 100%);
+}
+.photo-break::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,14,40,.35), rgba(7,14,40,.10) 50%, rgba(7,14,40,.35)); pointer-events: none; }
+@media (max-width: 1024px) { .photo-break::before { background-attachment: scroll; } }
+
+/* ---- About: "Who we support" as a compact 2 x 2 grid instead of tall stretched rows ---- */
+html body .why-directory-section { padding-top: var(--sp) !important; padding-bottom: var(--sp) !important; }
+html body .why-directory-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; margin-top: 32px !important; border-top: 0 !important; max-width: 1180px; margin-left: auto; margin-right: auto; }
+html body .why-directory-list .why-row {
+    display: grid !important; grid-template-columns: 52px minmax(0, 1fr) !important; column-gap: 20px !important; row-gap: 8px !important;
+    align-items: start !important; padding: 26px 28px !important; margin: 0 !important;
+    background: linear-gradient(180deg, #fff 0%, #f1f4fa 100%); border: 1px solid rgba(21,38,90,.14) !important; border-left: 4px solid rgba(21,38,90,.30) !important; border-radius: 4px;
+    box-shadow: 0 8px 22px rgba(7,14,40,.06); transition: transform .3s ease, box-shadow .3s ease, border-left-color .3s ease;
+}
+html body .why-directory-list .why-row:hover { transform: translateY(-3px); padding: 26px 28px !important; margin: 0 !important; background: linear-gradient(180deg, #fff 0%, #e9eef8 100%); border-left-color: var(--blue-mid) !important; box-shadow: 0 16px 34px rgba(7,14,40,.12); }
+html body .why-directory-list .why-icon { grid-row: 1 / span 2; width: 44px; height: 44px; justify-self: start; align-self: start; }
+html body .why-directory-list .why-title { grid-column: 2; font-size: 20px !important; line-height: 1.3; margin: 0 !important; }
+html body .why-directory-list .why-desc { grid-column: 2; font-size: 14.5px !important; line-height: 1.7 !important; text-align: justify !important; text-align-last: left !important; }
+@media (max-width: 900px) { html body .why-directory-list { grid-template-columns: 1fr; } }
+
+/* ---- Articles: one featured article + two side cards; justified text ---- */
+html body main .articles-bento-grid { display: grid !important; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important; grid-template-rows: 1fr 1fr; gap: 26px !important; max-width: 1180px; margin: 0 auto; }
+html body main .articles-bento-grid .editorial-card:first-child { grid-row: 1 / span 2; }
+html body main .articles-bento-grid .editorial-card:first-child .editorial-img-wrap { height: 300px; }
+html body main .articles-bento-grid .editorial-card:not(:first-child) { flex-direction: row; }
+html body main .articles-bento-grid .editorial-card:not(:first-child) .editorial-img-wrap { width: 40%; height: auto; min-height: 100%; flex: 0 0 40%; border-bottom: 0; border-right: 1px solid rgba(7,14,40,.1); }
+html body main .editorial-content { text-align: left !important; padding: 28px 30px; }
+html body main .editorial-content .editorial-category, html body main .editorial-content h2 { text-align: left !important; }
+html body main .articles-bento-grid .editorial-card:first-child h2 { font-size: 28px !important; }
+html body main .editorial-content p { text-align: justify !important; text-align-last: left !important; }
+html body main .editorial-action { justify-content: flex-start; }
+@media (max-width: 900px) {
+    html body main .articles-bento-grid { grid-template-columns: 1fr !important; grid-template-rows: none; }
+    html body main .articles-bento-grid .editorial-card:first-child { grid-row: auto; }
+    html body main .articles-bento-grid .editorial-card:not(:first-child) { flex-direction: column; }
+    html body main .articles-bento-grid .editorial-card:not(:first-child) .editorial-img-wrap { width: 100%; height: 190px; min-height: 0; flex: none; border-right: 0; border-bottom: 1px solid rgba(7,14,40,.1); }
+}
+
+/* ---- Contact: justified intro, steel eyebrow, and a visible submit button ---- */
+html body main .contact-layout p.eyebrow { color: #46608f !important; letter-spacing: .22em !important; line-height: 1.4 !important; }
+html body main .contact-layout p.contact-lead { text-align: justify !important; text-align-last: left !important; }
+html body .contact-form .btn-outline { background: var(--ink) !important; color: #fff !important; border: 1px solid var(--ink) !important; }
+html body .contact-form .btn-outline:hover { background: var(--blue-mid) !important; border-color: var(--blue-mid) !important; color: #fff !important; }
+html body main .editorial-content h2, html body main .editorial-content .editorial-category { text-align: left !important; text-align-last: left !important; }
+html body main .articles-bento-grid .editorial-card:first-child .editorial-img-wrap { height: 380px; }
+html body main .articles-bento-grid .editorial-card:not(:first-child) .editorial-img-wrap { width: 34%; flex: 0 0 34%; }
+html body main .articles-bento-grid .editorial-card:not(:first-child) .editorial-content { padding: 24px 24px; }
+html body main .articles-bento-grid .editorial-card:not(:first-child) .editorial-content p { font-size: 13.5px !important; line-height: 1.65 !important; }
+html body main .band .faq-split__intro h2, html body main .band .faq-split__intro p.eyebrow { text-align: left !important; text-align-last: left !important; }
+html body main .band .faq-split__intro h2 { font-size: clamp(28px, 2.9vw, 40px) !important; }
+
+/* footer: logo mark's top edge sits on the same line as the STRATOS / LEGAL headings (measured: logo glyph was 7px lower) */
+html body .stratos-footer__shell { align-items: start !important; }
+html body .stratos-footer__brand img { margin-top: -8px !important; display: block; }
+html body .stratos-footer__col h4 { margin-top: 0 !important; line-height: 1.3 !important; }
+
+/* =====================================================================
+   38. ONE TYPE SYSTEM + SMALLER BUTTONS
+   Families: Playfair Display (headings, quotes)  /  Raleway (everything else) - already the only two in use.
+   Sizes now come from these tokens; change a size here and it changes everywhere.
+   ===================================================================== */
+:root {
+    --fs-h1: clamp(34px, 4.4vw, 52px);
+    --fs-h2: clamp(26px, 3vw, 38px);
+    --fs-h3: 21px;
+    --fs-feature: 28px;       /* the one large "feature" title (services showcase) */
+    --fs-body: 15px;
+    --fs-lead: 16px;
+    --fs-small: 13px;
+    --fs-eyebrow: 11px;
+}
+
+/* headings */
+html body main h1:not(.x) { font-family: var(--font-heading); }
+html body main .contact-layout h1 { font-size: var(--fs-h1) !important; line-height: 1.15 !important; }
+html body main h2,
+html body main .band h2,
+html body main .cta-band h2,
+html body main .band .faq-split__intro h2,
+html body main .mission-statement h2,
+html body main .values-bento-section .section-header h2,
+html body main .why-directory-section .section-header h2,
+html body main .reach h2,
+html body main .clarity-banner h2,
+html body main .dark-band h2,
+html body main .statement-strip h2,
+html body main .articles-header h2 { font-family: var(--font-heading); font-size: var(--fs-h2) !important; line-height: 1.2 !important; font-weight: 500; }
+html body main h3,
+html body main .why-title,
+html body main .editorial-content h2,
+html body main .value-card h3,
+html body main .luxury-card-body h3,
+html body main .timeline__step h3,
+html body main .info-card h3,
+html body main .svc-card h3,
+html body main .client-row h3,
+html body main .fit-simple__panel h3,
+html body main .vg-block h3 { font-family: var(--font-heading); font-size: var(--fs-h3) !important; line-height: 1.3 !important; }
+html body main .svc-panel h3 { font-size: var(--fs-feature) !important; }
+html body main .articles-bento-grid .editorial-card:first-child h2 { font-size: var(--fs-feature) !important; }
+html body main .luxury-card-body h3 { text-transform: none; letter-spacing: .02em; }
+
+/* body copy: one size for card / panel / list text */
+html body main :is(.info-card, .svc-card, .timeline__step, .value-card, .vg-block, .mission-statement, .editorial-content, .proof-item, .why-desc, .client-row, .fit-simple__intro, .fit-simple__panel, .prose, .luxury-card-body, .svc-panel, .band__head, .faq-answer) p,
+html body main .faq-list details > p,
+html body main .checklist li,
+html body main .why-directory-list .why-desc,
+html body main .contact-layout p:not(.eyebrow) { font-size: var(--fs-body) !important; line-height: 1.75 !important; }
+html body main :is(.proof-item) p { font-size: var(--fs-body) !important; }
+html body main .lead, html body main .lead-light, html body main .banner-lead, html body main .reach__lead, html body main .strip-lead, html body main .cta-band p { font-size: var(--fs-lead) !important; }
+html body main .luxury-read-more, html body main .editorial-action, html body main .editorial-category, html body main .svc-card__num, html body main .svc-tab__num { font-size: var(--fs-small) !important; }
+html body main p.eyebrow, html body main p.eyebrow-light, html body main .eyebrow { font-size: var(--fs-eyebrow) !important; }
+html body main .page-banner--xl h1 { font-size: clamp(64px, 9vw, 150px) !important; }   /* deliberate exception: FAQs banner */
+html body main .page-banner h1 { font-size: var(--fs-h1) !important; }
+html body main .page-banner.page-banner--xl h1 { font-size: clamp(64px, 9vw, 150px) !important; }
+
+/* buttons: smaller everywhere */
+html body .btn-banner, html body .btn-outline {
+    min-height: 40px !important;
+    padding: 0 22px !important;
+    font-size: 12px !important;
+    letter-spacing: .06em !important;
+}
+html body .svc-card .btn-outline { min-height: 34px !important; padding: 0 18px !important; }
+html body header .nav-right-cta a.btn-signin { height: 38px !important; min-height: 38px !important; padding: 0 18px !important; font-size: 11.5px !important; }
+html body .contact-form .btn-outline { min-height: 42px !important; padding: 0 20px !important; font-size: 12px !important; }
+html body .banner-actions, html body .actions { gap: 10px; }
+html body .btn-banner, html body .btn-outline { height: 40px !important; line-height: 1.2 !important; }
+html body .svc-card .btn-outline { height: 34px !important; }
+html body .contact-form .btn-outline { height: 42px !important; }
+html body header .nav-right-cta a.btn-signin, html body header a.btn-signin { font-size: 11.5px !important; letter-spacing: .06em !important; padding: 0 18px !important; }
+html body header #primaryNav .nav-right-cta a.btn-signin { font-size: 11.5px !important; letter-spacing: .06em !important; }
+
+/* =====================================================================
+   39. CLIENT FEATURE: gradient fades instead of hard edges
+   The photo dissolves into the section on its right and bottom edges (no box, no offset frame); the band
+   itself fades in from the white section above.
+   ===================================================================== */
+.client-feature__photo {
+    box-shadow: none !important;
+    border-radius: 0;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%), linear-gradient(180deg, #000 0%, #000 60%, transparent 100%);
+            mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%), linear-gradient(180deg, #000 0%, #000 60%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+}
+.client-row:hover { padding-left: 14px; }
+html body main .band--tint:has(.client-feature) {
+    background:
+        linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0) 22%),
+        radial-gradient(circle at 90% 0%, rgba(147,168,207,.22) 0, transparent 46%),
+        linear-gradient(180deg, var(--tint-a) 0%, var(--tint-b) 100%);
+}

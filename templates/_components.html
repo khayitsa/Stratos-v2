@@ -24,6 +24,8 @@
         </div>
         {% endif %}
     </div>
+    {# same soft scroll hint as the home page; fades away once the visitor scrolls (see stratos-motion.js) #}
+    <a href="#page-body" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
 </section>
 {%- endmacro %}
 
@@ -44,7 +46,17 @@
 {# The old hero paragraph now lives here: a navy strip directly under the banner (as marked up in review).
    Use on every inner page: {{ intro_strip('...') }} right after the page_banner. #}
 {% macro intro_strip(text) -%}
+{# Two-part intro: first sentence large (serif), the rest beside it. A single sentence is set large and centred.
+   Keeps the strip full of content instead of a thin line in the middle of a wide band. #}
+{% set parts = text.split('. ', 1) %}
 <section class="statement-strip statement-strip--intro">
-    <p>{{ text }}</p>
+    {% if parts|length > 1 %}
+    <div class="intro-split">
+        <p class="intro-split__lead">{{ parts[0] }}.</p>
+        <p class="intro-split__rest">{{ parts[1] }}</p>
+    </div>
+    {% else %}
+    <p class="intro-single">{{ text }}</p>
+    {% endif %}
 </section>
 {%- endmacro %}

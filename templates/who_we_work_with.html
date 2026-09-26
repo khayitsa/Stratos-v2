@@ -29,28 +29,22 @@
             <p class="eyebrow">WHO WE SUPPORT</p>
             <h2>Three Kinds of Client, One Accountable Team.</h2>
         </div>
-        <div class="persona-grid">
-            <article class="persona-card">
-                <div class="persona-card__img persona-card__img--bw" style="background-image: url('{{ url_for('image_asset', filename='rahul-sharma-auVibNu6bO8-unsplash.jpg') }}');"></div>
-                <div class="persona-card__body">
-                    <h3>Family Offices &amp; Private Investment Groups</h3>
-                    <p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p>
-                </div>
-            </article>
-            <article class="persona-card">
-                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');"></div>
-                <div class="persona-card__body">
-                    <h3>Cross-Border Founders</h3>
-                    <p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p>
-                </div>
-            </article>
-            <article class="persona-card">
-                <div class="persona-card__img" style="background-image: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');"></div>
-                <div class="persona-card__body">
-                    <h3>Established Businesses Entering the UAE</h3>
-                    <p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p>
-                </div>
-            </article>
+        <div class="client-feature">
+            <div class="client-feature__photo" style="background-image: url('{{ url_for('image_asset', filename='rahul-sharma-auVibNu6bO8-unsplash.jpg') }}');" role="img" aria-label="Dubai skyline in the haze"></div>
+            <ol class="client-list">
+            <li class="client-row">
+                <span class="client-row__num">01</span>
+                <div class="client-row__body"><h3>Family Offices &amp; Private Investment Groups</h3><p>UAE entity establishment, bookkeeping and corporate administration for family offices and private investment groups with cross-border ownership or operations.</p></div>
+            </li>
+            <li class="client-row">
+                <span class="client-row__num">02</span>
+                <div class="client-row__body"><h3>Cross-Border Founders</h3><p>Founders whose shareholders, customers, suppliers, employees or existing companies sit across more than one jurisdiction.</p></div>
+            </li>
+            <li class="client-row">
+                <span class="client-row__num">03</span>
+                <div class="client-row__body"><h3>Established Businesses Entering the UAE</h3><p>Owner-managed and operational businesses that need a UAE entity to fit an existing commercial model and wider group structure.</p></div>
+            </li>
+            </ol>
         </div>
     </div>
 </section>
