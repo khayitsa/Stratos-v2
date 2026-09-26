@@ -2954,3 +2954,54 @@ html body main #services, html body main #who-we-work-with, html body main #proo
 
 /* "Stratos may be a good fit if:" - one straight list instead of two columns */
 .fit-simple__panel .checklist { grid-template-columns: 1fr !important; gap: 0 !important; max-width: 760px; margin-left: auto; margin-right: auto; }
+
+/* =====================================================================
+   51. MOBILE PASS (26 Sep): justified copy that still reads well on a phone, services panel fits the screen,
+       "Who We Support" rows use the full width. Desktop is untouched (everything below is phone / small-tablet only).
+   ===================================================================== */
+@media (max-width: 768px) {
+    /* the home services showcase was wider than the screen because the tab strip refused to shrink */
+    html body main .svc-showcase { grid-template-columns: minmax(0, 1fr) !important; }
+    html body main .svc-tabs, html body main .svc-panels { min-width: 0; max-width: 100%; }
+    html body main .svc-tabs {
+        scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent 100%); mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+        padding-right: 28px;
+    }
+    html body main .svc-tabs::-webkit-scrollbar { display: none; }
+
+    /* justified body copy everywhere; automatic hyphenation stops the wide gaps narrow columns create */
+    html body main :is(.band__head, .prose, .fit-simple__intro, .cta-band__copy, .clarity-banner .lead-light, .reach__lead, .banner-lead,
+                       .info-card, .svc-card, .timeline__step, .client-row__body, .value-card, .why-desc, .luxury-card-body, .svc-panel__text,
+                       .vg-block, .mission-statement, .intro-split__rest, .intro-split__lead, .strip-lead, .statement-strip, .dark-band .banner-text-content,
+                       .faq-answer, .faq-intro, .stratos-footer__brand) p,
+    html body main .faq-list details > p,
+    html body main .lead-light {
+        text-align: justify !important; text-align-last: left !important;
+        hyphens: auto !important; -webkit-hyphens: auto !important;
+        text-justify: inter-word; word-spacing: normal; text-wrap: pretty;
+        overflow-wrap: break-word;
+    }
+    /* blocks that are centred as a whole keep a centred last line */
+    html body main :is(.band__head, .fit-simple__intro, .cta-band__copy, .clarity-banner .lead-light, .reach__lead, .banner-lead,
+                       .info-card, .svc-card, .luxury-card-body, .stratos-footer__brand) p,
+    html body main .clarity-banner .lead-light { text-align-last: center !important; }
+    html body main .faq-list summary { text-align: left; hyphens: manual; }
+
+    /* About: "Who We Support" rows and value cards get the whole card width instead of a narrow text column */
+    html body .why-directory-list .why-row { grid-template-columns: 1fr !important; gap: 10px !important; padding: 22px 20px !important; text-align: left !important; }
+    html body .why-directory-list .why-icon { grid-row: auto !important; justify-self: start !important; }
+    html body .why-directory-list .why-title, html body .why-directory-list .why-desc { grid-column: 1 !important; }
+    html body main .value-card { padding: 26px 22px !important; }
+    html body main .info-card--icon p { text-align-last: center !important; }
+
+    /* comfortable side gutters and tap targets */
+    html body main .band { padding-left: 20px !important; padding-right: 20px !important; }
+    html body .btn-banner, html body .btn-outline { min-height: 44px; }
+}
+@media (max-width: 768px) {
+    /* client rows: slimmer number column so the justified text has more room */
+    html body main .client-row { grid-template-columns: 30px minmax(0, 1fr) !important; gap: 12px !important; }
+    html body main .client-row__num { font-size: 24px !important; }
+    html body main .client-row:hover { padding-left: 0 !important; }
+}
