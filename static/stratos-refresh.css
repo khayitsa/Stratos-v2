@@ -2850,3 +2850,10 @@ html body main .statement-strip .intro-split__rest { font-size: 17px !important;
 .svc-panel__icon { filter: none !important; width: 68px; height: 68px; padding: 10px; background: #fff; border-radius: 10px; box-sizing: border-box; opacity: 1; box-shadow: 0 8px 22px rgba(0,0,0,.35); }
 .band--navy .card-icon, .card-icon { filter: none !important; width: 64px; height: 64px; padding: 9px; background: #fff; border-radius: 10px; box-sizing: border-box; box-shadow: 0 8px 20px rgba(0,0,0,.25); }
 .svc-card__icon { background: #fff; border-radius: 8px; padding: 5px; box-sizing: border-box; width: 46px; height: 46px; }
+
+/* 44. Narrow 4-up icon cards (home "How We Work"): justified text made big word gaps in ~250px columns.
+   Centre the copy with balanced wrapping, and give titles a shared 3-line height so every paragraph starts on the same line. */
+@media (min-width: 901px) {
+    html body main .info-card--icon h3 { min-height: calc(3 * 1.25em); display: flex; align-items: center; justify-content: center; line-height: 1.25; margin-bottom: 14px; }
+}
+html body main .info-card--icon p { text-align: center !important; text-align-last: center !important; text-wrap: balance; word-spacing: normal; hyphens: none; }
