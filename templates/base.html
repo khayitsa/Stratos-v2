@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260926e">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260928a">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -43,7 +43,7 @@
     <nav aria-label="Primary navigation" id="primaryNav">
         <ul>
             <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
-            <li><a href="{{ url_for('about') }}"{% if ep == 'about' %} class="active" aria-current="page"{% endif %}>About</a></li>
+            <li><a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a></li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
         </ul>
@@ -71,7 +71,8 @@
 
         <div class="stratos-footer__col">
             <h4>Stratos</h4>
-            <a href="{{ url_for('about') }}">About Stratos</a>
+            <a href="{{ url_for('home') }}#about">About Stratos</a>
+            <a href="{{ url_for('services') }}">Services</a>
             <a href="{{ url_for('home') }}#who-we-work-with">Who We Work With</a>
             {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
             <a href="{{ url_for('faqs') }}">FAQ</a>

@@ -122,13 +122,16 @@ def admin_dashboard():
 
 @app.get("/about")
 def about():
-    return render_template("about.html")
+    # Merged into the home page (28 Sep review): About repeated material already on the home page,
+    # so its distinct content (mission, relationship model, values) now lives at home#about.
+    return redirect(url_for("home") + "#about")
 
 
 @app.get("/services")
 def services():
-    # Services overview merged into the home page (26 Sep review): the home page already lists every service.
-    return redirect(url_for("home") + "#services")
+    # Restored as its own page (28 Sep review): visitors need a proper directory of every service,
+    # not just the home page's one-tab-at-a-time showcase.
+    return render_template("services.html")
 
 
 SERVICE_PAGES = {

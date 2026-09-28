@@ -277,7 +277,56 @@
             </article>
         </div>
         <div class="actions actions--mt">
-            <a href="{{ url_for('about') }}" class="btn-banner">About Stratos</a>
+            <a href="#about" class="btn-banner">About Stratos</a>
+        </div>
+    </div>
+</section>
+
+<!-- 10.5 ABOUT STRATOS  (moved in from the standalone About page, 28 Sep review: mission, relationship
+     model and values - the content that was genuinely additional, not already covered above) -->
+<section class="mission-split-section" id="about">
+    <div class="mission-statement">
+        <p class="eyebrow">ABOUT STRATOS</p>
+        <h2>We Start with the Operating Model.</h2>
+        <p style="color: var(--navy-light); margin-top: 16px;">A UAE company should be designed around what the business needs to do. That means understanding what it will sell, where it will trade, who will own it, how money will move, which people need to reside in the UAE and how the company fits within any wider group. Only then does it make sense to compare mainland and free-zone routes. Our role is to turn those commercial facts into a practical establishment plan. For structuring engagements, this includes a written comparison of the appropriate routes and a reasoned recommendation before implementation begins.</p>
+    </div>
+    <div class="vision-goals">
+        <div class="vg-block">
+            <h3>The Relationship Model</h3>
+            <p>Every engagement is led by a Relationship Manager who remains responsible for communication, coordination and progress. Senior advisers review the structural recommendation and other material decisions. Bookkeeping, immigration, corporate administration and external specialist work are brought into the engagement when required. You do not have to manage a collection of disconnected providers or repeatedly explain the business to different people.</p>
+        </div>
+        <div class="vg-block">
+            <h3>Professional Boundaries</h3>
+            <p>Stratos directly provides commercial assessment, formation coordination, bookkeeping and management reporting, banking-preparation, residence support and corporate administration. Tax advice, legal advice and other regulated services are delivered by appropriately licensed independent professionals. We coordinate the relationship and documentation as part of the wider engagement.</p>
+        </div>
+    </div>
+</section>
+
+<section class="values-bento-section">
+    <div class="section-header">
+        <p class="eyebrow">HOW WE DELIVER</p>
+        <h2>What Guides Our Advisory &amp; Implementation</h2>
+    </div>
+    <div class="values-bento-grid">
+        <div class="value-card" data-num="01">
+            <img class="value-icon" src="{{ url_for('image_asset', filename='icons/business-formation_icon.svg') }}" alt="">
+            <h3>Structure and Establish</h3>
+            <p>We assess proposed activities, ownership, markets, banking requirements, visa needs and ongoing obligations before coordinating mainland or free-zone formation.</p>
+        </div>
+        <div class="value-card" data-num="02">
+            <img class="value-icon" src="{{ url_for('image_asset', filename='icons/bank-account-opening_icon.svg') }}" alt="">
+            <h3>Prepare the Business for Banking</h3>
+            <p>We assess potential bank fit, identify gaps in the application profile and prepare the business narrative, KYC information and supporting application pack.</p>
+        </div>
+        <div class="value-card" data-num="03">
+            <img class="value-icon" src="{{ url_for('image_asset', filename='icons/accounting-and-bookkeeping_icon.svg') }}" alt="">
+            <h3>Establish the Financial Records</h3>
+            <p>We set up and maintain bookkeeping processes, reconciliations and management reporting suited to the company's operations.</p>
+        </div>
+        <div class="value-card" data-num="04">
+            <img class="value-icon" src="{{ url_for('image_asset', filename='icons/single-point-of-accountability_icon.svg') }}" alt="">
+            <h3>Keep the Company in Good Order</h3>
+            <p>We coordinate renewals, amendments, residence processes, corporate records, governance actions and recurring corporate requirements.</p>
         </div>
     </div>
 </section>

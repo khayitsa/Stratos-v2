@@ -3027,3 +3027,81 @@ html body main p.sj-m.sj-m.sj-m.sj-m.sj-m, html body .stratos-footer__brand p.sj
 @media (max-width: 1024px) {
     html body #primaryNav ul li > a { padding-left: 20px !important; padding-right: 16px !important; }
 }
+
+/* =====================================================================
+   53. SERVICES OVERVIEW PAGE + ABOUT-ON-HOME (28 Sep review)
+   Services restored as its own page (a real directory of every service,
+   not just the home page's one-tab-at-a-time showcase). About's distinct
+   content - mission, relationship model, values - moved onto the home
+   page at #about; the rest of About repeated what the home page already
+   said, so the standalone page was dropped.
+   ===================================================================== */
+
+/* -- About-on-home: mission split + values grid (layout only; the shared
+      typography rules earlier in this file already size the headings/body) -- */
+html body main .mission-split-section {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+    padding: var(--sp) 10%;
+    background: #ffffff;
+    align-items: center;
+    border-top: 1px solid rgba(7, 14, 40, 0.1);
+    border-bottom: 1px solid rgba(7, 14, 40, 0.1);
+}
+html body main .vg-block { border-top: 1px solid rgba(7, 14, 40, 0.15); padding-top: 24px; margin-bottom: 40px; }
+html body main .vg-block:last-child { margin-bottom: 0; }
+
+html body main .values-bento-section { padding: var(--sp) 10%; background: #fdfdfd; }
+html body main .values-bento-section .section-header { margin-bottom: 40px; }
+html body main .values-bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+html body main .value-card {
+    background: #ffffff;
+    border: 1px solid rgba(7, 14, 40, 0.12);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+html body main .value-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(7, 14, 40, 0.06); border-color: var(--navy-dark); }
+html body main .value-card::after {
+    content: attr(data-num);
+    position: absolute; top: -15px; right: -5px;
+    font-family: var(--font-heading); font-size: 140px; line-height: 1;
+    color: var(--navy-dark); opacity: 0.03; transition: opacity 0.3s ease; pointer-events: none;
+}
+html body main .value-card:hover::after { opacity: 0.07; }
+
+@media (max-width: 1024px) { html body main .mission-split-section { grid-template-columns: 1fr; gap: 48px; } }
+@media (max-width: 768px)  {
+    html body main .values-bento-grid { grid-template-columns: 1fr; }
+    html body main .mission-split-section { padding: var(--sp) 24px; }
+    html body main .values-bento-section { padding: var(--sp) 24px; }
+}
+
+/* anchor clears the fixed header */
+html body main #about { scroll-margin-top: 76px; }
+
+/* -- Services overview page: a short "Includes" list inside each service card, so the
+      directory says more than one sentence per service before the visitor clicks through -- */
+html body main .svc-card__includes {
+    list-style: none;
+    margin: 12px 0 16px;
+    padding: 0;
+    text-align: left;
+}
+html body main .svc-card__includes li {
+    position: relative;
+    padding: 3px 0 3px 22px;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    color: var(--ink-soft);
+    text-align: left !important;
+}
+html body main .svc-card__includes li::before {
+    content: "";
+    position: absolute; left: 0; top: 9px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/8px no-repeat;
+}
