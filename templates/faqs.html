@@ -59,6 +59,9 @@
         </div>
     </section>
 
+    <!-- Photo break: same black-and-white fade treatment used on About/Services, so the FAQ page
+         doesn't read as one long stack of accordions. -->
+    <div class="photo-break" role="img" aria-label="Dubai skyline" style="--img: url('{{ url_for('image_asset', filename='claudio-poggio-0xC7iBAgtr8-unsplash.jpg') }}'); --pos: center 45%;"></div>
 
     <section class="band band--tint">
     <div class="band__inner">
@@ -100,107 +103,75 @@
         </div>
     </section>
 
-    <!-- SECTION 3: GOVERNMENT FEES & APPROVALS -->
+    <!-- SECTION 3: GOVERNMENT FEES & APPROVALS  (navy photo band + numbered cards, same treatment
+         as the home page's "How We Work" section, instead of another wall of accordions) -->
+    <section class="band band--navy band--photo" style="--bg: url('{{ url_for('image_asset', filename='dubai-7237750_1920.jpg') }}');">
+        <div class="band__inner">
+            <div class="band__head">
+                <p class="eyebrow">TERMS &amp; COMPLIANCE</p>
+                <h2>Government Fees, Approvals &amp; Limitations.</h2>
+                <p>A few practical points worth knowing before fees are paid and documentation is filed.</p>
+            </div>
+            <div class="card-grid card-grid--4">
+                <article class="info-card">
+                    <h3>Government Fees Protocol</h3>
+                    <p>All official government charges are supported by official payment vouchers. Government fees are payable upfront prior to filing and must be settled in full before submission of documentation to relevant authorities.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Activity Approvals &amp; Free Zone Authority Review</h3>
+                    <p>All selected business activities are subject to final approval by the relevant licensing authority or Free Zone. Where an activity requires external regulatory approval or amendment, our team coordinates that approval with the relevant authority.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Shareholder Limitations &amp; Establishment Cards</h3>
+                    <p>Standard setup structures accommodate up to three (3) shareholders. Supplementary administrative fees apply for additional corporate or individual shareholders. Establishment cards are issued specifically for entity structures with visa allocations.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Proposal Validity</h3>
+                    <p>Engagement proposals are valid for a period of 30 days from issuance, after which government fees, regulatory terms, or activity availability may be subject to authority adjustments.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROCESS & PROJECT TIMELINE  (an actual timeline component, matching the one on
+         the home page's "Complete UAE Establishment" section, instead of accordions with a badge) -->
     <section class="band band--white">
     <div class="band__inner">
         <div class="band__head">
-            <p class="eyebrow">TERMS &amp; COMPLIANCE</p>
-            <h2>Government Fees, Approvals &amp; Limitations</h2>
+            <p class="eyebrow">ESTIMATED MILESTONES</p>
+            <h2>Process &amp; Project Timeline.</h2>
         </div>
 
-        <div class="faq-list">
-            <details>
-                <summary>Government Fees Protocol</summary>
-                <div class="faq-answer">
-                    <p>All official government charges are supported by official payment vouchers. Government fees are payable upfront prior to filing and must be settled in full before submission of documentation to relevant authorities.</p>
-                </div>
-            </details>
-
-            <details>
-                <summary>Activity Approvals &amp; Free Zone Authority Review</summary>
-                <div class="faq-answer">
-                    <p>All selected business activities are subject to final approval by the relevant licensing authority or Free Zone. In the event an activity requires external regulatory approval or amendment. Our team will coordinate approval with the relevant authority.</p>
-                </div>
-            </details>
-
-            <details>
-                <summary>Shareholder Limitations &amp; Establishment Cards</summary>
-                <div class="faq-answer">
-                    <p>Standard setup structures accommodate up to three (3) shareholders. Supplementary administrative fees apply for additional corporate or individual shareholders. Establishment cards are issued specifically for entity structures with visa allocations.</p>
-                </div>
-            </details>
-
-            <details>
-                <summary>Proposal Validity</summary>
-                <div class="faq-answer">
-                    <p>Engagement proposals are valid for a period of 30 days from issuance, after which government fees, regulatory terms, or activity availability may be subject to authority adjustments.</p>
-                </div>
-            </details>
-        </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: PROCESS & PROJECT TIMELINE -->
-<section class="band band--tint">
-    <div class="band__inner">
-    <div class="band__head">
-        <p class="eyebrow">ESTIMATED MILESTONES</p>
-        <h2>Process &amp; Project Timeline</h2>
-    </div>
-
-    <div class="faq-list">
-        <details>
-            <summary>
-                <div>
-                    Step 1: Initial Setup &amp; Onboarding
-                    <span class="milestone-badge">Approx. 48 Hours</span>
-                </div>
-            </summary>
-            <div class="faq-answer">
+        <ol class="timeline" style="--steps: 4;">
+            <li class="timeline__step">
+                <span class="timeline__dot">01</span>
+                <h3>Initial Setup &amp; Onboarding</h3>
+                <span class="milestone-badge">Approx. 48 Hours</span>
                 <p>Invoice settlement, engagement agreement execution, document verification, and immediate filing initiation with licensing authorities.</p>
-            </div>
-        </details>
-
-        <details>
-            <summary>
-                <div>
-                    Step 2: Company Incorporation
-                    <span class="milestone-badge">Approx. 5–7 Working Days</span>
-                </div>
-            </summary>
-            <div class="faq-answer">
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">02</span>
+                <h3>Company Incorporation</h3>
+                <span class="milestone-badge">Approx. 5–7 Working Days</span>
                 <p>Official submission to authorities, signing of statutory legal incorporation instruments, and official Trade License and Certificate of Formation issuance.</p>
-            </div>
-        </details>
-
-        <details>
-            <summary>
-                <div>
-                    Step 3: Visa Application &amp; Entry Permit
-                    <span class="milestone-badge">Approx. 2–3 Working Days</span>
-                </div>
-            </summary>
-            <div class="faq-answer">
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">03</span>
+                <h3>Visa Application &amp; Entry Permit</h3>
+                <span class="milestone-badge">Approx. 2–3 Working Days</span>
                 <p>Filing for official Entry Permit issuance, pre-arrival immigration clearance, and scheduling of in-country residency procedures.</p>
-            </div>
-        </details>
-
-        <details>
-            <summary>
-                <div>
-                    Step 4: UAE Arrival &amp; Residency Processing
-                    <span class="milestone-badge">Approx. 5–7 Working Days</span>
-                </div>
-            </summary>
-            <div class="faq-answer">
+            </li>
+            <li class="timeline__step">
+                <span class="timeline__dot">04</span>
+                <h3>UAE Arrival &amp; Residency Processing</h3>
+                <span class="milestone-badge">Approx. 5–7 Working Days</span>
                 <p>In-person arrival in Dubai, VIP escorted Medical Fitness examination, biometrics capture, and official Emirates ID &amp; Residency Visa stamping.</p>
-            </div>
-        </details>
-    </div>
+            </li>
+        </ol>
     </div>
     </section>
 
-    {{ cta_band('dubai-7237750_1920.jpg', 'NOT SURE WHERE TO START?', "Let's discuss your UAE plans.", 'Submit a short enquiry and our advisors will respond with next steps and a suitable engagement path.') }}
+    {{ cta_band('p2.jfif', 'NOT SURE WHERE TO START?', "Let's discuss your UAE plans.", 'Submit a short enquiry and our advisors will respond with next steps and a suitable engagement path.') }}
 
 </div>
 
