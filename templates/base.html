@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20260929b">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261006a">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -73,7 +73,7 @@
             <h4>Stratos</h4>
             <a href="{{ url_for('home') }}#about">About Stratos</a>
             <a href="{{ url_for('services') }}">Services</a>
-            <a href="{{ url_for('home') }}#who-we-work-with">Who We Work With</a>
+            <a href="{{ url_for('home') }}#who-we-work-with">Our Clients</a>
             {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
             <a href="{{ url_for('faqs') }}">FAQ</a>
             <a href="{{ url_for('contact') }}">Contact</a>

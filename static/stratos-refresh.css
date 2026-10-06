@@ -1155,7 +1155,11 @@ body .editorial-content h2 { text-align: center; }
     }
     .band--navy .timeline::before { background: rgba(255,255,255,.35); }
     .timeline__step { display: grid; grid-template-columns: 56px 1fr; column-gap: 20px; text-align: left; padding: 0; }
-    .timeline__dot { margin: 0; grid-row: 1 / span 2; }
+    .timeline__dot { margin: 0; grid-row: 1 / span 2; grid-column: 1; }
+    /* everything except the dot belongs in the text column - without this, CSS grid auto-placement
+       drops the paragraph back into the narrow 56px dot column once the dot's 2-row span is exceeded,
+       causing the description text to wrap one word per line */
+    .timeline__step > *:not(.timeline__dot) { grid-column: 2; }
     body main .timeline__step h3,
     body main .timeline__step p { text-align: left !important; }
     /* CTA band stacks: photo on top, fades DOWN into the navy panel */
@@ -1173,6 +1177,9 @@ body .editorial-content h2 { text-align: center; }
     body main .cta-band p { text-align: center !important; text-align-last: center; }
     .cta-band .btn-banner { align-self: center; }
     .pin__label { font-size: 9px; padding: 3px 8px; bottom: 14px; }
+    /* tester feedback (27 Sep): "Explore UAE Establishment" and similar left-aligned action buttons
+       looked off-centre on mobile - centre all .actions--left rows on small screens, desktop unaffected */
+    .actions--left { justify-content: center; }
 }
 @media (max-width: 768px) {
     .band { padding: 60px 6%; }
