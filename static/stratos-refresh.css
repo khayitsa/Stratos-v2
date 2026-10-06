@@ -1037,64 +1037,26 @@ body main .cta-band p {
     0%   { transform: scale(1);   opacity: .9; }
     100% { transform: scale(3.4); opacity: 0;  }
 }
-/* "client" markers (6 Oct v2 - scattered across every continent instead of 4 fixed spots, so the
-   set of dots reads as a faint global texture rather than naming specific countries): unfilled, no
-   pulse, no label, small and low-opacity so 16 of them sit quietly behind the 3 solid office pins. */
-.pin--client .pin__dot {
-    left: -4px; top: -4px;
-    width: 8px; height: 8px;
-    background: rgba(255,255,255,.08);
-    border: 1.5px solid rgba(255,255,255,.45);
-    box-shadow: none;
-}
-.reach__legend {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-    margin: 0 0 22px;
-}
-.reach__legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.75);
-}
-.legend-dot {
-    display: inline-block;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-}
-.legend-dot--office {
-    background: #3ddc84;
-    box-shadow: 0 0 8px rgba(61,220,132,.75);
-}
-.legend-dot--client {
-    background: rgba(255,255,255,.2);
-    border: 2px solid rgba(255,255,255,.95);
-    box-shadow: 0 0 6px rgba(255,255,255,.4);
-}
 .reach__offices {
     max-width: 720px;
-    margin: 0 auto 34px;
+    margin: 0 auto 18px;
     font-family: var(--font-heading);
     font-size: clamp(18px, 2vw, 22px);
     line-height: 1.5;
     color: #fff;
 }
 .reach__offices span { display: block; margin-top: 6px; font-family: var(--font-body); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.reach__note {
+/* separate line (6 Oct v3, Khayanda): used to be tacked onto the end of .reach__offices in one
+   sentence - split out so "offices are here" and "clients are everywhere" read as two distinct
+   facts rather than one easily-skimmed run-on line. v4 (6 Oct, Khayanda): now also carries the
+   sanctions/language caveat that used to be a separate, redundant .reach__note line below it. */
+.reach__clients {
     max-width: 560px;
     margin: 0 auto;
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.6;
-    color: rgba(255,255,255,.55);
+    color: rgba(255,255,255,.8);
 }
 .reach h2 {
     font-family: var(--font-heading);
@@ -1326,8 +1288,6 @@ body .editorial-content h2 { text-align: center; }
     /* tester feedback (27 Sep): "Explore UAE Establishment" and similar left-aligned action buttons
        looked off-centre on mobile - centre all .actions--left rows on small screens, desktop unaffected */
     .actions--left { justify-content: center; }
-    /* legend (6 Oct): stack the two legend rows on narrow screens instead of forcing them onto one line */
-    .reach__legend { flex-direction: column; align-items: center; gap: 8px; margin-bottom: 18px; }
 }
 @media (max-width: 768px) {
     .band { padding: 60px 6%; }

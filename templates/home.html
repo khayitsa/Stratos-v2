@@ -447,53 +447,29 @@
     </div>
 </section>
 
-<!-- 14. GLOBAL REACH  (map with green office pins for UAE, Panama and South Africa, plus muted
-     "client" markers so the graphic itself reads as "offices here, clients everywhere" rather than
-     "we only serve these three countries" - Greg/Dylan feedback, 6 Oct. v2 (6 Oct, Khayanda): the
-     first pass used just 4 client markers, which risked the same read - "clients only in these 4
-     places" - so they're now scattered across every continent, faint enough to read as texture. -->
+<!-- 14. GLOBAL REACH  (map with green office pins for UAE, Panama and South Africa - Greg/Dylan
+     feedback, 6 Oct. v2 (6 Oct, Khayanda): added faint "client" markers scattered across every
+     continent, but even that risked reading as "clients only in these spots". v3 (6 Oct, Khayanda):
+     removed the client markers entirely - the map now shows offices only. v4 (6 Oct, Khayanda):
+     the separate "we work with clients internationally" line duplicated the sanctions/language note
+     right under it, so the two were merged into one line carrying both facts. -->
 <section class="reach">
     <p class="eyebrow-light" style="text-align:center; letter-spacing:.22em; font-size:11px; font-weight:700; opacity:.8; margin:0 0 12px;">INTERNATIONAL BUSINESS ADVISORY</p>
     <h2>Establish Your Global Presence in the UAE</h2>
     <p class="reach__lead">Structured, advisory-led market entry for international founders, private investment groups and expanding enterprises.</p>
 
-    <div class="reach__legend" aria-hidden="true">
-        <span class="reach__legend-item"><i class="legend-dot legend-dot--office"></i>Our Offices</span>
-        <span class="reach__legend-item"><i class="legend-dot legend-dot--client"></i>Clients We Serve Internationally</span>
-    </div>
-
     <div class="reach__map">
-        <img src="{{ url_for('image_asset', filename='wrld4.png') }}" alt="Map showing Stratos offices in the UAE, Panama and South Africa, serving clients internationally">
+        <img src="{{ url_for('image_asset', filename='wrld4.png') }}" alt="Map showing Stratos offices in the UAE, Panama and South Africa">
         <!-- Pin positions are % of the map image. Tweak left/top here if the map image is ever replaced. -->
         <span class="pin" style="left: 61.5%; top: 47%;"  aria-label="United Arab Emirates"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">UAE</b></span>
         <span class="pin" style="left: 27.5%; top: 53%;"  aria-label="Panama"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">Panama</b></span>
         <span class="pin" style="left: 52.5%; top: 80%;"  aria-label="South Africa"><i class="pin__pulse"></i><i class="pin__dot"></i><b class="pin__label">South Africa</b></span>
-        <!-- Muted, unlabelled client markers (6 Oct v2 - Khayanda flagged that even 4 markers could read
-             as "clients only in these 4 places"): scattered across every continent instead, faint enough
-             to read as a texture/pattern rather than discrete pinned locations, so the graphic signals
-             "clients everywhere" rather than implying any specific set of countries. -->
-        <span class="pin pin--client" style="left: 14%; top: 32%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 24%; top: 28%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 23%; top: 46%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 35%; top: 62%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 40%; top: 85%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 46%; top: 20%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 52%; top: 10%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 58%; top: 18%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 46%; top: 42%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 40%; top: 58%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 67%; top: 40%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 73%; top: 26%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 78%; top: 48%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 88%; top: 33%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 85%; top: 58%;" aria-hidden="true"><i class="pin__dot"></i></span>
-        <span class="pin pin--client" style="left: 91%; top: 82%;" aria-hidden="true"><i class="pin__dot"></i></span>
     </div>
 
-    <p class="reach__offices">Our offices are based in the UAE, Panama and South Africa — we work with clients internationally, wherever they are based.<span>Dubai &bull; Panama &bull; South Africa</span></p>
-    <!-- language-fit note, added 6 Oct per Leah/Dylan: makes clear reach is global (minus sanctioned
-         countries) while setting the practical expectation that advisory communication is in English/Spanish -->
-    <p class="reach__note">We work with clients in every country outside of those subject to international sanctions. Our advisory team communicates in English and Spanish.</p>
+    <p class="reach__offices">Our offices are based in the UAE, Panama and South Africa.<span>Dubai &bull; Panama &bull; South Africa</span></p>
+    <!-- carries both the global-reach claim and the sanctions/language caveat (Leah/Dylan, 6 Oct) in
+         one line now, instead of two lines saying "we work with clients..." back to back -->
+    <p class="reach__clients">We work with clients in every country outside of those subject to international sanctions, communicating in English and Spanish.</p>
 </section>
 
 <!-- 15. CLOSING CTA -->
