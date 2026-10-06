@@ -5,6 +5,16 @@
 {% block content %}
 <div class="home-page-content">
 
+<!-- 0.5 JUMP LINKS (6 Oct, client-experience review; moved 6 Oct to sit right under
+     the header instead of under the hero): quick in-page navigation for visitors
+     who scan the homepage rather than read the whole thing top to bottom -->
+<nav class="jump-nav" aria-label="Page sections">
+    <a href="#who-we-work-with">Who We Help</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#services">Services</a>
+    <a href="#what-you-receive">What You Receive</a>
+</nav>
+
 <!-- 1. HERO -------------------------------------------------------------
      Same component as every other page (.page-banner). The old rotating
      text slider is gone: both paragraphs now sit still, stacked. -->
@@ -27,15 +37,6 @@
     <!-- Soft scroll hint: fades in after a moment, gently bobs, and disappears for good once the visitor scrolls -->
     <a href="#proof" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
 </section>
-
-<!-- 1.5 JUMP LINKS (6 Oct, client-experience review): quick in-page navigation for visitors
-     who scan the homepage rather than read the whole thing top to bottom -->
-<nav class="jump-nav" aria-label="Page sections">
-    <a href="#who-we-work-with">Who We Help</a>
-    <a href="#how-it-works">How It Works</a>
-    <a href="#services">Services</a>
-    <a href="#what-you-receive">What You Receive</a>
-</nav>
 
 <!-- 2. PROOF STRIP (equal columns, every item centred) -->
 <section class="proof-strip-section" id="proof">

@@ -926,16 +926,13 @@ body main .cta-band p {
 .cta-band + .stratos-footer { border-top: 0; }
 
 /* ---------------------------------------------------------------------
-   8.5 HOMEPAGE JUMP LINKS (6 Oct, client-experience review): quick in-page
-   nav just under the hero so scanning visitors can reach the section they
-   care about without reading the whole page. Sits inside the hero's existing
-   dark-photo -> navy fade (see .page-banner:has(+ .jump-nav)::after below),
-   so it reads as part of that transition instead of a white seam cutting
-   across it.
+   8.5 HOMEPAGE JUMP LINKS (6 Oct, client-experience review; moved 6 Oct to sit
+   right under the fixed header instead of under the hero, per feedback - reads
+   as a secondary nav row, so its background matches the header exactly).
    ------------------------------------------------------------------- */
 .jump-nav {
     display: flex;
-    background: var(--blue-mid);
+    background: var(--ink);
     padding: 0 6%;
 }
 .jump-nav a {
@@ -2450,11 +2447,9 @@ html body main section.page-banner {
    No more hard lines. Photo -> navy (banner's bottom edge) ... navy -> white (strip's bottom edge).
    The text sits in the solid-navy middle, so contrast is unchanged.
    ===================================================================== */
-/* banner bottom melts into the navy strip that follows it (or into the jump-nav bar,
-   which is itself the same navy colour, when that sits in between - 6 Oct) */
+/* banner bottom melts into the navy strip that follows it */
 .page-banner:has(+ .statement-strip)::after,
-.page-banner:has(+ .proof-strip-section)::after,
-.page-banner:has(+ .jump-nav)::after {
+.page-banner:has(+ .proof-strip-section)::after {
     height: 34%;
     background: linear-gradient(180deg, rgba(21,38,90,0) 0%, rgba(21,38,90,.55) 55%, var(--blue-mid) 100%);
     opacity: 1;
@@ -2510,8 +2505,7 @@ html body main section.clarity-banner {
 }
 /* banner still melts into the strip below it (photo -> navy) */
 .page-banner:has(+ .statement-strip)::after,
-.page-banner:has(+ .proof-strip-section)::after,
-.page-banner:has(+ .jump-nav)::after { height: 30%; }
+.page-banner:has(+ .proof-strip-section)::after { height: 30%; }
 
 /* the block after an intro strip climbs up over its bottom edge */
 html body main section.statement-strip--intro { padding-bottom: calc(var(--sp) + 70px) !important; }
