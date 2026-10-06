@@ -928,38 +928,40 @@ body main .cta-band p {
 /* ---------------------------------------------------------------------
    8.5 HOMEPAGE JUMP LINKS (6 Oct, client-experience review): quick in-page
    nav just under the hero so scanning visitors can reach the section they
-   care about without reading the whole page.
+   care about without reading the whole page. Sits inside the hero's existing
+   dark-photo -> navy fade (see .page-banner:has(+ .jump-nav)::after below),
+   so it reads as part of that transition instead of a white seam cutting
+   across it.
    ------------------------------------------------------------------- */
 .jump-nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px 6px;
-    padding: 18px 6% 20px;
-    background: #ffffff;
-    border-bottom: 1px solid rgba(7,14,40,.08);
+    gap: 10px 8px;
+    padding: 22px 6% 26px;
+    background: var(--blue-mid);
 }
 .jump-nav a {
     padding: 8px 18px;
     border-radius: 999px;
-    border: 1px solid rgba(7,14,40,.16);
+    border: 1px solid rgba(255,255,255,.32);
     font-family: var(--font-body);
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: .04em;
-    color: var(--ink);
+    color: rgba(255,255,255,.9);
     text-decoration: none;
     white-space: nowrap;
     transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
 .jump-nav a:hover,
 .jump-nav a:focus-visible {
-    background: var(--ink);
-    border-color: var(--ink);
+    background: rgba(255,255,255,.14);
+    border-color: rgba(255,255,255,.65);
     color: #fff;
 }
 @media (max-width: 600px) {
-    .jump-nav { gap: 8px; padding: 16px 6% 18px; }
+    .jump-nav { gap: 8px; padding: 18px 6% 22px; }
     .jump-nav a { font-size: 11.5px; padding: 7px 14px; }
 }
 
@@ -1138,6 +1140,27 @@ body main .cta-band p {
     text-transform: uppercase;
     color: rgba(255,255,255,.62);
 }
+.stratos-footer__social {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.22);
+    color: rgba(255,255,255,.78);
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.social-icon:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,.55);
+    background: rgba(255,255,255,.08);
+}
 .stratos-footer__col h4 {
     margin: 0 0 18px;
     font-family: var(--font-body);
@@ -1279,6 +1302,7 @@ body .editorial-content h2 { text-align: center; }
     .stratos-footer__shell { grid-template-columns: 1fr; text-align: center; }
     .stratos-footer__brand p { margin-left: auto; margin-right: auto; text-align: center; }
     .stratos-footer__brand img { margin-left: auto; margin-right: auto; }
+    .stratos-footer__social { justify-content: center; }
     .faq-list summary { padding: 18px 20px; font-size: 16px !important; }
     .faq-list details > p,
     .faq-list .faq-answer { padding: 0 20px 20px; }
@@ -2390,9 +2414,11 @@ html body main section.page-banner {
    No more hard lines. Photo -> navy (banner's bottom edge) ... navy -> white (strip's bottom edge).
    The text sits in the solid-navy middle, so contrast is unchanged.
    ===================================================================== */
-/* banner bottom melts into the navy strip that follows it */
+/* banner bottom melts into the navy strip that follows it (or into the jump-nav bar,
+   which is itself the same navy colour, when that sits in between - 6 Oct) */
 .page-banner:has(+ .statement-strip)::after,
-.page-banner:has(+ .proof-strip-section)::after {
+.page-banner:has(+ .proof-strip-section)::after,
+.page-banner:has(+ .jump-nav)::after {
     height: 34%;
     background: linear-gradient(180deg, rgba(21,38,90,0) 0%, rgba(21,38,90,.55) 55%, var(--blue-mid) 100%);
     opacity: 1;
@@ -2448,7 +2474,8 @@ html body main section.clarity-banner {
 }
 /* banner still melts into the strip below it (photo -> navy) */
 .page-banner:has(+ .statement-strip)::after,
-.page-banner:has(+ .proof-strip-section)::after { height: 30%; }
+.page-banner:has(+ .proof-strip-section)::after,
+.page-banner:has(+ .jump-nav)::after { height: 30%; }
 
 /* the block after an intro strip climbs up over its bottom edge */
 html body main section.statement-strip--intro { padding-bottom: calc(var(--sp) + 70px) !important; }
