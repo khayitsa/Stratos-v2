@@ -927,29 +927,31 @@ body main .cta-band p {
 
 /* ---------------------------------------------------------------------
    8.5 HOMEPAGE JUMP LINKS (6 Oct, client-experience review; moved 6 Oct to sit
-   right under the fixed header instead of under the hero, per feedback - reads
-   as a secondary nav row, so its background matches the header exactly).
+   right under the fixed header instead of under the hero; toned down 6 Oct to
+   read as a quiet secondary row - same font treatment as the main nav links
+   (regular weight, sentence case), not a row of loud CTA-style buttons).
    ------------------------------------------------------------------- */
 .jump-nav {
     display: flex;
     background: var(--ink);
     padding: 0 6%;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .jump-nav a {
     flex: 1 1 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 22px 14px;
+    padding: 11px 14px;
     border: none;
-    border-top: 3px solid rgba(255,255,255,.26);
-    border-left: 1px solid rgba(255,255,255,.14);
+    border-top: 2px solid rgba(255,255,255,.18);
+    border-left: 1px solid rgba(255,255,255,.08);
     font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.82);
+    font-size: 13.5px;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: rgba(255,255,255,.75);
     text-decoration: none;
     text-align: center;
     background: transparent;
@@ -958,14 +960,14 @@ body main .cta-band p {
 .jump-nav a:first-child { border-left: none; }
 .jump-nav a:hover,
 .jump-nav a:focus-visible {
-    background: rgba(255,255,255,.08);
-    border-top-color: #ffffff;
+    background: rgba(255,255,255,.05);
+    border-top-color: rgba(255,255,255,.6);
     color: #ffffff;
 }
 @media (max-width: 680px) {
     .jump-nav { flex-wrap: wrap; padding: 0; }
-    .jump-nav a { flex: 1 1 50%; padding: 18px 10px; font-size: 11px; border-left: none; }
-    .jump-nav a:nth-child(even) { border-left: 1px solid rgba(255,255,255,.14); }
+    .jump-nav a { flex: 1 1 50%; padding: 10px 10px; font-size: 12px; border-left: none; }
+    .jump-nav a:nth-child(even) { border-left: 1px solid rgba(255,255,255,.08); }
 }
 
 /* ---------------------------------------------------------------------
