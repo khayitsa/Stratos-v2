@@ -20,13 +20,22 @@
         <p class="banner-lead">Stratos Consulting helps private founders, international investment groups and established businesses structure and operate companies in the UAE.</p>
         <p class="banner-lead">From mainland and free-zone company formation to banking, residency, accounting and ongoing corporate support, we bring every part of your UAE establishment together.</p>
         <div class="banner-actions">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+            <a href="{{ url_for('contact') }}" class="btn-banner">Submit an Enquiry</a>
             <a href="#services" class="btn-banner btn-banner-transparent">Explore Our Services</a>
         </div>
     </div>
     <!-- Soft scroll hint: fades in after a moment, gently bobs, and disappears for good once the visitor scrolls -->
     <a href="#proof" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
 </section>
+
+<!-- 1.5 JUMP LINKS (6 Oct, client-experience review): quick in-page navigation for visitors
+     who scan the homepage rather than read the whole thing top to bottom -->
+<nav class="jump-nav" aria-label="Page sections">
+    <a href="#who-we-work-with">Who We Help</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#services">Services</a>
+    <a href="#what-you-receive">What You Receive</a>
+</nav>
 
 <!-- 2. PROOF STRIP (equal columns, every item centred) -->
 <section class="proof-strip-section" id="proof">
@@ -251,7 +260,7 @@
 </section>
 
 <!-- 10. HOW WE WORK  (navy band with dark cards - replaces the grey band with four white boxes) -->
-<section class="band band--navy band--photo" style="--bg: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');">
+<section class="band band--navy band--photo" id="how-it-works" style="--bg: url('{{ url_for('image_asset', filename='dubai-1351569_1920.jpg') }}');">
     <div class="band__inner">
         <div class="band__head">
             <p class="eyebrow">HOW WE WORK</p>
@@ -302,7 +311,7 @@
     </div>
 </section>
 
-<section class="values-bento-section">
+<section class="values-bento-section" id="what-you-receive">
     <div class="section-header">
         <p class="eyebrow">HOW WE DELIVER</p>
         <h2>What Guides Our Advisory &amp; Implementation</h2>

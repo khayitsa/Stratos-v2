@@ -19,7 +19,7 @@
         {% if lead %}<p class="banner-lead">{{ lead }}</p>{% endif %}
         {% if show_actions %}
         <div class="banner-actions">
-            <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+            <a href="{{ url_for('contact') }}" class="btn-banner">Submit an Enquiry</a>
             <a href="{{ secondary_href or (url_for('home') ~ '#services') }}" class="btn-banner btn-banner-transparent">{{ secondary_label }}</a>
         </div>
         {% endif %}
@@ -39,7 +39,7 @@
             <h2>{{ heading }}</h2>
             <p class="cta-band__copy">{{ copy }}</p>
         </div>
-        <a href="{{ url_for('contact') }}" class="btn-banner">Book a Consultation</a>
+        <a href="{{ url_for('contact') }}" class="btn-banner">Submit an Enquiry</a>
     </div>
     <div class="cta-band__photo" style="background-image: url('{{ url_for('image_asset', filename=image) }}');" role="img" aria-label="Dubai skyline"></div>
 </section>

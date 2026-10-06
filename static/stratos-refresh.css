@@ -926,6 +926,44 @@ body main .cta-band p {
 .cta-band + .stratos-footer { border-top: 0; }
 
 /* ---------------------------------------------------------------------
+   8.5 HOMEPAGE JUMP LINKS (6 Oct, client-experience review): quick in-page
+   nav just under the hero so scanning visitors can reach the section they
+   care about without reading the whole page.
+   ------------------------------------------------------------------- */
+.jump-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 6px;
+    padding: 18px 6% 20px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(7,14,40,.08);
+}
+.jump-nav a {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(7,14,40,.16);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.jump-nav a:hover,
+.jump-nav a:focus-visible {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+}
+@media (max-width: 600px) {
+    .jump-nav { gap: 8px; padding: 16px 6% 18px; }
+    .jump-nav a { font-size: 11.5px; padding: 7px 14px; }
+}
+
+/* ---------------------------------------------------------------------
    9. WORLD MAP + OFFICE PINS
    ------------------------------------------------------------------- */
 .reach {
@@ -992,14 +1030,14 @@ body main .cta-band p {
     0%   { transform: scale(1);   opacity: .9; }
     100% { transform: scale(3.4); opacity: 0;  }
 }
-/* muted "client" markers (6 Oct): smaller, unfilled, no pulse, no label - deliberately understated
-   so the 3 solid green office pins still read as the primary markers */
+/* "client" markers (6 Oct, brightened per Dylan's feedback 6 Oct): unfilled, no pulse, no label -
+   secondary to the 3 solid green office pins, but visible enough to actually read on the map */
 .pin--client .pin__dot {
-    left: -5px; top: -5px;
-    width: 10px; height: 10px;
-    background: transparent;
-    border: 2px solid rgba(255,255,255,.6);
-    box-shadow: none;
+    left: -6px; top: -6px;
+    width: 12px; height: 12px;
+    background: rgba(255,255,255,.2);
+    border: 2px solid rgba(255,255,255,.95);
+    box-shadow: 0 0 10px rgba(255,255,255,.5);
 }
 .reach__legend {
     display: flex;
@@ -1029,8 +1067,9 @@ body main .cta-band p {
     box-shadow: 0 0 8px rgba(61,220,132,.75);
 }
 .legend-dot--client {
-    background: transparent;
-    border: 2px solid rgba(255,255,255,.6);
+    background: rgba(255,255,255,.2);
+    border: 2px solid rgba(255,255,255,.95);
+    box-shadow: 0 0 6px rgba(255,255,255,.4);
 }
 .reach__offices {
     max-width: 720px;
