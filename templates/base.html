@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261006h">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261006i">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -100,6 +100,12 @@
         {% if company.disclaimer %}<p>{{ company.disclaimer }}</p>{% endif %}
     </div>
 </footer>
+
+    <!-- Floating WhatsApp button (placeholder, 6 Oct): links to whatsapp.com for now.
+         Swap the href below for Matt's direct chat link (wa.me/...) once that's ready. -->
+    <a href="https://www.whatsapp.com/" class="whatsapp-float" aria-label="Chat with us on WhatsApp" target="_blank" rel="noopener noreferrer">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.36.104 11.942c0 2.105.549 4.161 1.593 5.977L0 24l6.235-1.635a11.9 11.9 0 0 0 5.805 1.479h.005c6.585 0 11.944-5.36 11.944-11.943 0-3.191-1.246-6.188-3.47-8.452zm-8.47 18.384h-.004a9.92 9.92 0 0 1-5.05-1.38l-.362-.215-3.75.984 1.001-3.653-.236-.375a9.9 9.9 0 0 1-1.52-5.274c0-5.466 4.449-9.914 9.926-9.914 2.65 0 5.14 1.033 7.012 2.907a9.85 9.85 0 0 1 2.903 7.014c0 5.466-4.449 9.906-9.92 9.906z"/></svg>
+    </a>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script src="{{ url_for('static', filename='stratos-motion.js') }}?v=20260925" defer></script>
