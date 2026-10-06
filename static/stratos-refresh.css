@@ -1037,14 +1037,15 @@ body main .cta-band p {
     0%   { transform: scale(1);   opacity: .9; }
     100% { transform: scale(3.4); opacity: 0;  }
 }
-/* "client" markers (6 Oct, brightened per Dylan's feedback 6 Oct): unfilled, no pulse, no label -
-   secondary to the 3 solid green office pins, but visible enough to actually read on the map */
+/* "client" markers (6 Oct v2 - scattered across every continent instead of 4 fixed spots, so the
+   set of dots reads as a faint global texture rather than naming specific countries): unfilled, no
+   pulse, no label, small and low-opacity so 16 of them sit quietly behind the 3 solid office pins. */
 .pin--client .pin__dot {
-    left: -6px; top: -6px;
-    width: 12px; height: 12px;
-    background: rgba(255,255,255,.2);
-    border: 2px solid rgba(255,255,255,.95);
-    box-shadow: 0 0 10px rgba(255,255,255,.5);
+    left: -4px; top: -4px;
+    width: 8px; height: 8px;
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(255,255,255,.45);
+    box-shadow: none;
 }
 .reach__legend {
     display: flex;
@@ -1353,6 +1354,19 @@ body .editorial-content h2 { text-align: center; }
 .card-grid--4 .info-card { flex-basis: calc((100% - 72px) / 4); }
 @media (max-width: 1100px) { .card-grid--4 .info-card { flex-basis: calc((100% - 24px) / 2); } }
 @media (max-width: 640px)  { .card-grid--4 .info-card { flex-basis: 100%; } }
+
+/* 6 Oct - "can we make this like 2x2?": exactly-4-card grids (e.g. "What You Receive Before
+   Formation") were wrapping 3+1 on desktop because .info-card hardcodes a 3-column basis.
+   Scoped with :has() to grids with a 4th card and no 5th, so the 5/6-card .card-grid sections
+   on other service pages are untouched. */
+.card-grid:has(.info-card:nth-child(4)):not(:has(.info-card:nth-child(5))) .info-card {
+    flex-basis: calc((100% - 24px) / 2);
+}
+@media (max-width: 768px) {
+    .card-grid:has(.info-card:nth-child(4)):not(:has(.info-card:nth-child(5))) .info-card {
+        flex-basis: 100%;
+    }
+}
 
 /* "Structured Guidance" banner: no seam / black line against the banner above it,
    navy fallback colour, centred text, same darkening on every screen. */
