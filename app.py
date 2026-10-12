@@ -28,8 +28,8 @@ ARTICLES_PREVIEW_KEY = os.environ.get("STRATOS_ARTICLES_PREVIEW_KEY", "")
 
 COMPANY = {
     "email": "info@stratosuae.com",
-    # Office address: replace with the exact wording on the Canva letterhead (one string per line).
-    "address_lines": ["Nad Al Sheba 1", "Dubai, United Arab Emirates"],
+    # Office address: confirmed 12 Oct (Meydan Grandstand).
+    "address_lines": ["Meydan Grandstand, 6th floor", "Meydan Road, Nad Al Sheba", "Dubai, U.A.E."],
     "legal_name": os.environ.get("STRATOS_LEGAL_NAME", ""),
     "licence_no": os.environ.get("STRATOS_LICENCE_NO", ""),
     "licence_authority": "Meydan Free Zone",
