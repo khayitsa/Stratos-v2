@@ -75,7 +75,15 @@ def home():
 
 @app.get("/logo")
 def logo():
-    return send_from_directory(BASE_DIR, "STRATOS Primary Logo.svg.svg")
+    # 21 Oct - swapped for a true vector trace (static/stratos-logo-mark.svg) to fix the blurry
+    # logo: "STRATOS Primary Logo.svg.svg" LOOKS like an SVG but is actually a 1920x1920 PNG
+    # wrapped in an SVG mask (Canva's export for gradient/metallic effects it can't vectorise) -
+    # that raster-via-mask trick, plus the site's own CSS filter on top (brightness/invert to
+    # force it white), compounds into visible blur. The traced file is flat navy (#070e28) fill,
+    # genuinely vector, and the existing brightness(0) invert(1) CSS still turns it solid white
+    # wherever that's applied - so no CSS changes were needed. Original Canva export left in
+    # place untouched at BASE_DIR / "STRATOS Primary Logo.svg.svg" for the design record.
+    return send_from_directory(BASE_DIR / "static", "stratos-logo-mark.svg")
 
 
 @app.get("/images/<path:filename>")

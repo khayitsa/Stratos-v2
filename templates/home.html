@@ -273,15 +273,20 @@
                 <h3>Dedicated Relationship Manager</h3>
                 <p>One point of contact coordinates your engagement, keeps you updated and manages the agreed next steps throughout the process.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/expert-knowledge_icon_blue.svg') }}" alt="">
+            <!-- TEMP (21 Oct): no white/transparent "_blue" export exists for this icon yet - using the
+                 plain navy+white badge version with its CSS filter disabled (card-icon--native) until
+                 Leah uploads a flat white version matching the other six. -->
+            <article class="info-card info-card--icon"><img class="card-icon card-icon--native" src="{{ url_for('image_asset', filename='icons/expert-knowledge_icon.svg') }}" alt="">
                 <h3>Advice Based on Your Business</h3>
                 <p>Our recommendations are based on your business activities, ownership, operational requirements and objectives in the UAE.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/transparent-pricing_icon_blue.svg') }}" alt="">
+            <!-- TEMP (21 Oct): see note above - no "_blue" export for this icon either. -->
+            <article class="info-card info-card--icon"><img class="card-icon card-icon--native" src="{{ url_for('image_asset', filename='icons/transparent-pricing_icon.svg') }}" alt="">
                 <h3>Clear Process &amp; Communication</h3>
                 <p>We explain the recommended approach, the steps involved and the information required from you as the engagement progresses.</p>
             </article>
-            <article class="info-card info-card--icon"><img class="card-icon" src="{{ url_for('image_asset', filename='icons/our-vision_icon_blue.svg') }}" alt="">
+            <!-- TEMP (21 Oct): see note above - no "_blue" export for this icon either. -->
+            <article class="info-card info-card--icon"><img class="card-icon card-icon--native" src="{{ url_for('image_asset', filename='icons/our-vision_icon.svg') }}" alt="">
                 <h3>Independent Decisions Remain Independent</h3>
                 <p>Company formation, banking, residency and other applications remain subject to the requirements and approval of the relevant authorities and institutions.</p>
             </article>
@@ -376,7 +381,7 @@
                 <img src="{{ url_for('image_asset', filename='gabriel-santos-DgLksCjEfB0-unsplash.jpg') }}" alt="UAE Company Formation">
             </div>
             <div class="luxury-card-body">
-                <h3>COMPANY FORMATION</h3>
+                <h3>Company Formation</h3>
                 <p>Structure and establish mainland or <span class="nb">free&#8209;zone</span> entities aligned with your long-term operating, residency, and banking requirements.</p>
                 <a href="{{ url_for('uae_company_formation') }}" class="luxury-read-more">Explore route &rarr;</a>
             </div>
@@ -390,7 +395,7 @@
                 <img src="{{ url_for('image_asset', filename='amir-hanna-KjWMGF0PYuE-unsplash (1).jpg') }}" alt="Business Banking Support">
             </div>
             <div class="luxury-card-body">
-                <h3>BANKING PREPARATION</h3>
+                <h3>Banking Preparation</h3>
                 <p>Comprehensive profile preparation, KYC documentation, and application coordination for UAE corporate bank accounts.</p>
                 <a href="{{ url_for('business_bank_account_support') }}" class="luxury-read-more">Explore route &rarr;</a>
             </div>
@@ -404,7 +409,7 @@
                 <img src="{{ url_for('image_asset', filename='kate-trysh-70vza4NysS8-unsplash.jpg') }}" alt="Accounting & Bookkeeping">
             </div>
             <div class="luxury-card-body">
-                <h3>ACCOUNTING &amp; TAX</h3>
+                <h3>Accounting &amp; Tax</h3>
                 <p>Ongoing bookkeeping, financial reporting, and Corporate Tax &amp; VAT coordination to keep your business fully compliant.</p>
                 <a href="{{ url_for('accounting_management_reporting') }}" class="luxury-read-more">Explore route &rarr;</a>
             </div>

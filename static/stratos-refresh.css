@@ -51,6 +51,14 @@ html { scroll-behavior: smooth; }
 
 main { display: block; overflow-x: clip; }
 
+/* nav headings in caps (Leah, 21 Oct) - applies at every width since the mobile
+   drawer reuses the same #primaryNav markup; beats style.css's "#primaryNav a"
+   on specificity so it doesn't need !important. */
+body header #primaryNav > ul > li > a {
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
 /* ---------------------------------------------------------------------
    1. DESKTOP HEADER  (>=1025px only - the mobile drawer is untouched)
    ------------------------------------------------------------------- */
@@ -2631,18 +2639,7 @@ html body main .client-row__body { min-width: 0; }
 /* =====================================================================
    35. FOOTER: light grid only (the fuller redesign was rolled back)
    ===================================================================== */
-html body .stratos-footer { position: relative; overflow: hidden; }
-html body .stratos-footer::before {
-    content: "";
-    position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    background-image:
-        linear-gradient(rgba(147,168,207,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(147,168,207,.07) 1px, transparent 1px);
-    background-size: 56px 56px;
-    -webkit-mask-image: radial-gradient(ellipse 85% 95% at 50% 30%, #000 25%, transparent 100%);
-            mask-image: radial-gradient(ellipse 85% 95% at 50% 30%, #000 25%, transparent 100%);
-}
-html body .stratos-footer > * { position: relative; z-index: 1; }
+html body .stratos-footer { position: relative; }
 
 /* =====================================================================
    36. "BEFORE YOU ENQUIRE" - calm, centred, no dark box
@@ -2978,9 +2975,11 @@ html body main .page-banner p.eyebrow-light { color: #fff !important; opacity: 1
 html body main .statement-strip .intro-split__lead { font-size: clamp(22px, 2.1vw, 30px) !important; line-height: 1.35 !important; }
 html body main .statement-strip .intro-split__rest { font-size: 17px !important; line-height: 1.8 !important; }
 @media (max-width: 900px) { .intro-split { grid-template-columns: 1fr !important; } }
-/* icons are pre-coloured light-blue SVGs with a transparent background - no tile, no inversion */
-.svc-panel__icon { filter: none !important; width: 68px; height: 68px; padding: 0 !important; background: none !important; border-radius: 0 !important; box-sizing: border-box; opacity: 1; box-shadow: none !important; }
-.band--navy .card-icon, .card-icon { filter: none !important; width: 64px; height: 64px; padding: 9px; background: #fff; border-radius: 10px; box-sizing: border-box; box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+/* icons on navy panels/cards forced solid white (Leah, 21 Oct - was showing the icons' own
+   bright-blue fill plus a baked-in white tile from the old "light-blue SVG" exports); no tile needed
+   since the icon itself is now the only mark on the panel. */
+.svc-panel__icon { filter: brightness(0) invert(1) !important; width: 68px; height: 68px; padding: 0 !important; background: none !important; border-radius: 0 !important; box-sizing: border-box; opacity: 1; box-shadow: none !important; }
+.band--navy .card-icon, .card-icon { filter: brightness(0) invert(1) !important; width: 64px; height: 64px; padding: 0; background: none; border-radius: 0; box-sizing: border-box; box-shadow: none; }
 .svc-card__icon { background: #fff; border-radius: 8px; padding: 5px; box-sizing: border-box; width: 46px; height: 46px; }
 
 /* 44. Narrow 4-up icon cards (home "How We Work"): justified text made big word gaps in ~250px columns.
@@ -3066,7 +3065,8 @@ html body main .page-banner--home .banner-lead { margin: 0 auto 16px !important;
 html body main .page-banner--home .banner-lead:last-of-type { margin-bottom: 0 !important; }
 html body main .page-banner--home .banner-actions { margin-top: 42px; }
 
-/* "How We Work" cards: no number circles, and the icons sit directly on the card in brand blue (no white tile) */
+/* "How We Work" cards: no number circles, and the icons sit directly on the card, forced solid white
+   (21 Oct - was showing bright blue + a baked-in white tile; no tile needed, filter does the work) */
 html body main .info-card--icon::before { display: none !important; content: none !important; }
 html body main .info-card--icon,
 html body main .band--navy .info-card--icon { padding-top: 34px !important; }
@@ -3074,7 +3074,15 @@ html body main .info-card--icon .card-icon,
 html body main .band--navy .info-card--icon .card-icon {
     width: 60px !important; height: 60px !important; max-width: 60px !important;
     padding: 0 !important; margin: 0 auto 20px !important;
-    background: none !important; border-radius: 0 !important; box-shadow: none !important; filter: none !important;
+    background: none !important; border-radius: 0 !important; box-shadow: none !important; filter: brightness(0) invert(1) !important;
+}
+/* TEMP (21 Oct) - 3 of these 4 "How We Work" icons have no flat/transparent "_blue" export yet,
+   only the navy+white badge-style icon used elsewhere on white backgrounds; forcing the white filter
+   on that asset collapses it into a solid white blob, so skip the filter for those three until Leah
+   uploads matching white versions (see home.html TEMP notes). */
+html body main .info-card--icon .card-icon.card-icon--native,
+html body main .band--navy .info-card--icon .card-icon.card-icon--native {
+    filter: none !important;
 }
 
 /* "A Clearer Way Forward" eyebrow: balance the trailing letter-space so it sits dead centre over the heading */
