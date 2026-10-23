@@ -238,11 +238,14 @@ body .page-banner .eyebrow-light {
     text-transform: uppercase;
     opacity: .85;
 }
-/* The page NAME is the big heading, so visitors always know where they are */
+/* The page NAME is the big heading, so visitors always know where they are
+   21 Oct - weight dropped 500 -> 400 to match the Canva brand kit's Heading style (un-bolded
+   Playfair Display). This is the rule that actually governs every page's big hero h1, including
+   the home page - the bare h1{} rule changed elsewhere never reaches this element. */
 body main .page-banner h1 {
     font-family: var(--font-heading);
     font-size: clamp(34px, 4.4vw, 52px) !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     line-height: 1.12 !important;
     color: #ffffff !important;
     margin: 0 0 12px !important;
@@ -352,7 +355,9 @@ body main .callout {
     padding: 18px 26px;
     text-align: center !important;
     text-align-last: center;
-    font-family: var(--font-heading);
+    /* 21 Oct - switched from font-heading (Playfair) to font-body (Raleway): the brand kit's
+       Quote style is Raleway italic, not the serif heading face. */
+    font-family: var(--font-body);
     font-size: 18px !important;
     font-style: italic;
     line-height: 1.5 !important;
@@ -746,7 +751,9 @@ body main .fit-layout__text p {
     margin: 0 0 14px !important;
 }
 body main .fit-layout__text p.fit-note {
-    font-family: var(--font-heading);
+    /* 21 Oct - switched from font-heading (Playfair) to font-body (Raleway), same reason as
+       body main .callout above. */
+    font-family: var(--font-body);
     font-style: italic;
     font-size: 17px !important;
     color: var(--ink) !important;

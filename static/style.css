@@ -1391,26 +1391,28 @@ details p {
     border-bottom: none; 
 }
 
-/* Shared typography roles across every page. */
+/* Shared typography roles across every page.
+   21 Oct - weight dropped from 500 to 400 (Regular) to match the Canva brand kit's
+   Title/Subtitle/Heading styles, which use Playfair Display un-bolded. */
 h1 {
     font-family: var(--font-heading);
     font-size: 42px;
     line-height: 1.15;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h2 {
     font-family: var(--font-heading);
     font-size: 36px;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h3 {
     font-family: var(--font-heading);
     font-size: 32px;
     line-height: 1.25;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h4,
@@ -5682,13 +5684,15 @@ body {
         font-weight: 600 !important;
     }
 
-    /* 4. All Minor Titles & Feature Subheads (H4 / Summaries) */
+    /* 4. All Minor Titles & Feature Subheads (H4 / Summaries)
+       21 Oct - size restored to 24px (was 18px) to match the Canva brand kit's Subheading
+       style, which this desktop-only media query was silently shrinking. */
     h4,
     .feature-text h4,
     .working-hours-card h4,
     summary {
         font-family: var(--font-body) !important;
-        font-size: 18px !important;
+        font-size: 24px !important;
         line-height: 1.35 !important;
         font-weight: 700 !important;
     }
