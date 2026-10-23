@@ -319,7 +319,7 @@ body main .band .eyebrow-light {
 body main .band h2 {
     font-family: var(--font-heading);
     font-size: clamp(26px, 3vw, 38px) !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     line-height: 1.2 !important;
     color: var(--fg) !important;
     margin: 0 0 16px !important;
@@ -459,7 +459,7 @@ body main .callout {
 body main .svc-card h3 {
     font-family: var(--font-heading);
     font-size: 21px !important;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
     color: var(--ink) !important;
     margin: 0 0 12px;
@@ -524,7 +524,7 @@ body main .svc-card p {
 body main .timeline__step h3 {
     font-family: var(--font-heading);
     font-size: 19px !important;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
     margin: 0 0 10px;
     color: var(--fg) !important;
@@ -578,7 +578,7 @@ body main .timeline__step p {
 body main .info-card h3 {
     font-family: var(--font-heading);
     font-size: 20px !important;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
     margin: 0 0 10px;
     color: var(--fg) !important;
@@ -659,7 +659,7 @@ body main .info-card p {
 body main .persona-card h3 {
     font-family: var(--font-heading);
     font-size: 20px !important;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
     color: #ffffff !important;
     margin: 0 0 12px;
@@ -786,7 +786,7 @@ body main .fit-layout__text p.fit-note {
 body main .fit-panel h3 {
     font-family: var(--font-heading);
     font-size: 21px !important;
-    font-weight: 500;
+    font-weight: 400;
     color: #ffffff !important;
     margin: 0 0 18px;
     text-align: left;
@@ -821,9 +821,10 @@ body main .fit-panel h3 {
     padding: 22px 28px;
     cursor: pointer;
     list-style: none;
-    font-family: var(--font-heading);
-    font-size: 17px !important;       /* one size for every question */
-    font-weight: 600;
+    font-family: var(--font-body);    /* 23 Oct - was var(--font-heading)/Playfair; the Subheading style elsewhere on
+                                          the site (see the h4 rules in style.css) uses Raleway, not the serif heading face */
+    font-size: 24px !important;       /* 23 Oct - was 17px; matches the brand kit's Subheading size (phones keep their own 16px override below) */
+    font-weight: 400;                 /* 23 Oct - was 600; brand kit's Subheading isn't bold */
     line-height: 1.4;
     color: var(--ink);
     text-align: left;
@@ -921,7 +922,7 @@ body main .cta-band .eyebrow-light {
 body main .cta-band h2 {
     font-family: var(--font-heading);
     font-size: clamp(26px, 3vw, 38px) !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     line-height: 1.2 !important;
     color: #ffffff !important;
     margin: 0 0 16px !important;
@@ -1076,7 +1077,7 @@ body main .cta-band p {
 .reach h2 {
     font-family: var(--font-heading);
     font-size: clamp(24px, 3vw, 34px) !important;
-    font-weight: 500;
+    font-weight: 400;
     color: #fff !important;
     margin: 0 0 14px !important;
 }
@@ -1218,7 +1219,7 @@ body main .cta-band p {
 .article-body h2 {
     font-family: var(--font-heading);
     font-size: 28px !important;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--ink) !important;
     margin: 44px 0 14px !important;
     text-align: left !important;
@@ -2388,7 +2389,7 @@ html body main section.proof-strip-section .proof-item strong { font-size: clamp
 }
 .svc-panel__text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 44px 40px 44px 44px; }
 .svc-panel__num { font-family: var(--font-heading); font-size: 64px; line-height: 1; color: rgba(157,180,220,.35); margin-bottom: 6px; }
-html body main .svc-panel h3 { font-family: var(--font-heading); font-size: clamp(24px, 2.2vw, 32px) !important; font-weight: 500; line-height: 1.2; color: #fff !important; margin: 0 0 16px; text-align: left !important; }
+html body main .svc-panel h3 { font-family: var(--font-heading); font-size: clamp(24px, 2.2vw, 32px) !important; font-weight: 400; line-height: 1.2; color: #fff !important; margin: 0 0 16px; text-align: left !important; }
 html body main .svc-panel p { font-size: 15px !important; line-height: 1.8 !important; color: rgba(255,255,255,.86) !important; margin: 0 0 26px !important; text-align: justify !important; text-align-last: left !important; }
 .svc-panel__photo {
     background-size: cover; background-position: center;
@@ -2612,7 +2613,7 @@ html body main .statement-strip .intro-split__rest { font-size: 16.5px !importan
 }
 .client-row:last-child { border-bottom: 1px solid rgba(21,38,90,.18); }
 .client-row__num { font-family: var(--font-heading); font-size: 34px; line-height: 1; color: var(--blue); opacity: .75; }
-html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 500; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
+html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 400; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
 html body main .client-row p { font-size: 15px !important; line-height: 1.75 !important; color: var(--ink-soft) !important; margin: 0 !important; text-align: justify !important; text-align-last: left !important; }
 .client-row { transition: background .3s ease, padding-left .3s ease; }
 .client-row:hover { background: linear-gradient(90deg, rgba(147,168,207,.16), transparent); padding-left: 14px; }
@@ -2633,7 +2634,7 @@ html body main .client-row p { font-size: 15px !important; line-height: 1.75 !im
 .client-row:last-child { border-bottom: 1px solid rgba(21,38,90,.18); }
 .client-row:hover { background: linear-gradient(90deg, rgba(147,168,207,.16), transparent); padding-left: 14px; }
 .client-row__num { font-family: var(--font-heading); font-size: 34px; line-height: 1; color: var(--blue); opacity: .75; }
-html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 500; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
+html body main .client-row h3 { font-family: var(--font-heading); font-size: 21px !important; font-weight: 400; line-height: 1.3; color: var(--ink) !important; margin: 0 0 10px; text-align: left !important; }
 html body main .client-row p { font-size: 15px !important; line-height: 1.75 !important; color: var(--ink-soft) !important; margin: 0 !important; text-align: justify !important; text-align-last: left !important; }
 @media (max-width: 900px) {
     .client-feature { grid-template-columns: 1fr; }
@@ -2665,7 +2666,7 @@ html body main .fit-simple__intro p { font-size: 15.5px !important; line-height:
     border-radius: 4px;
     box-shadow: 0 14px 34px rgba(7,14,40,.08);
 }
-html body main .fit-simple__panel h3 { font-family: var(--font-heading); font-size: 22px !important; font-weight: 500; color: var(--ink) !important; text-align: center !important; margin: 0 0 24px; }
+html body main .fit-simple__panel h3 { font-family: var(--font-heading); font-size: 22px !important; font-weight: 400; color: var(--ink) !important; text-align: center !important; margin: 0 0 24px; }
 .fit-simple__panel .checklist { max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 44px; --fg-soft: var(--ink-soft); }
 .fit-simple__panel .checklist li { padding: 12px 0 12px 36px; border-bottom: 1px solid rgba(21,38,90,.10); }
 .fit-simple__panel .checklist li::before { top: 14px; }
@@ -2786,7 +2787,7 @@ html body main .reach h2,
 html body main .clarity-banner h2,
 html body main .dark-band h2,
 html body main .statement-strip h2,
-html body main .articles-header h2 { font-family: var(--font-heading); font-size: var(--fs-h2) !important; line-height: 1.2 !important; font-weight: 500; }
+html body main .articles-header h2 { font-family: var(--font-heading); font-size: var(--fs-h2) !important; line-height: 1.2 !important; font-weight: 400; }
 html body main h3,
 html body main .why-title,
 html body main .editorial-content h2,
@@ -2950,11 +2951,10 @@ html body .contact-form-grid .checkbox-group label:hover:not(:has(input:checked)
        balanced About intro
    ===================================================================== */
 /* brand-kit icons */
-.svc-panel__icon { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; filter: brightness(0) invert(1); opacity: .95; }
+.svc-panel__icon { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; opacity: .95; }
 .svc-card__icon { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; object-fit: contain; opacity: .9; }
 .info-card--icon::before { display: none !important; }
 .card-icon { display: block; width: 52px; height: 52px; object-fit: contain; margin: 0 auto 14px; }
-.band--navy .card-icon { filter: brightness(0) invert(1); }
 .value-icon { position: relative; z-index: 1; display: block; width: 46px; height: 46px; object-fit: contain; margin: 0 0 14px; }
 
 /* number bubbles bigger */
@@ -2982,11 +2982,12 @@ html body main .page-banner p.eyebrow-light { color: #fff !important; opacity: 1
 html body main .statement-strip .intro-split__lead { font-size: clamp(22px, 2.1vw, 30px) !important; line-height: 1.35 !important; }
 html body main .statement-strip .intro-split__rest { font-size: 17px !important; line-height: 1.8 !important; }
 @media (max-width: 900px) { .intro-split { grid-template-columns: 1fr !important; } }
-/* icons on navy panels/cards forced solid white (Leah, 21 Oct - was showing the icons' own
-   bright-blue fill plus a baked-in white tile from the old "light-blue SVG" exports); no tile needed
-   since the icon itself is now the only mark on the panel. */
-.svc-panel__icon { filter: brightness(0) invert(1) !important; width: 68px; height: 68px; padding: 0 !important; background: none !important; border-radius: 0 !important; box-sizing: border-box; opacity: 1; box-shadow: none !important; }
-.band--navy .card-icon, .card-icon { filter: brightness(0) invert(1) !important; width: 64px; height: 64px; padding: 0; background: none; border-radius: 0; box-sizing: border-box; box-shadow: none; }
+/* icons on navy panels/cards (Khayanda, 23 Oct - the white-forcing filter below was removed: Leah's
+   newer icon exports are two-tone (light blue + white) and already look right natively on the navy
+   panels, so forcing brightness(0)/invert(1) was collapsing all their internal detail into a solid
+   white blob - that's the "weird logos" bug. No tile needed either way. */
+.svc-panel__icon { width: 68px; height: 68px; padding: 0 !important; background: none !important; border-radius: 0 !important; box-sizing: border-box; opacity: 1; box-shadow: none !important; }
+.band--navy .card-icon, .card-icon { width: 64px; height: 64px; padding: 0; background: none; border-radius: 0; box-sizing: border-box; box-shadow: none; }
 .svc-card__icon { background: #fff; border-radius: 8px; padding: 5px; box-sizing: border-box; width: 46px; height: 46px; }
 
 /* 44. Narrow 4-up icon cards (home "How We Work"): justified text made big word gaps in ~250px columns.
@@ -3072,8 +3073,9 @@ html body main .page-banner--home .banner-lead { margin: 0 auto 16px !important;
 html body main .page-banner--home .banner-lead:last-of-type { margin-bottom: 0 !important; }
 html body main .page-banner--home .banner-actions { margin-top: 42px; }
 
-/* "How We Work" cards: no number circles, and the icons sit directly on the card, forced solid white
-   (21 Oct - was showing bright blue + a baked-in white tile; no tile needed, filter does the work) */
+/* "How We Work" cards: no number circles, icons sit directly on the card in their native two-tone
+   colour (23 Oct - the brightness(0)/invert(1) white-forcing filter was removed here too, same reason
+   as section 43 above; Leah's newer exports already read correctly on the navy band unfiltered). */
 html body main .info-card--icon::before { display: none !important; content: none !important; }
 html body main .info-card--icon,
 html body main .band--navy .info-card--icon { padding-top: 34px !important; }
@@ -3081,15 +3083,7 @@ html body main .info-card--icon .card-icon,
 html body main .band--navy .info-card--icon .card-icon {
     width: 60px !important; height: 60px !important; max-width: 60px !important;
     padding: 0 !important; margin: 0 auto 20px !important;
-    background: none !important; border-radius: 0 !important; box-shadow: none !important; filter: brightness(0) invert(1) !important;
-}
-/* TEMP (21 Oct) - 3 of these 4 "How We Work" icons have no flat/transparent "_blue" export yet,
-   only the navy+white badge-style icon used elsewhere on white backgrounds; forcing the white filter
-   on that asset collapses it into a solid white blob, so skip the filter for those three until Leah
-   uploads matching white versions (see home.html TEMP notes). */
-html body main .info-card--icon .card-icon.card-icon--native,
-html body main .band--navy .info-card--icon .card-icon.card-icon--native {
-    filter: none !important;
+    background: none !important; border-radius: 0 !important; box-shadow: none !important;
 }
 
 /* "A Clearer Way Forward" eyebrow: balance the trailing letter-space so it sits dead centre over the heading */
