@@ -3337,3 +3337,9 @@ html body main :is(ul.checklist, p.callout, .fit-layout, .fit-layout__text, .fit
 html body main section .statement-strip__inner p.intro-single, html body main .statement-strip p.intro-single, html body main p.faq-intro, html body main .band__inner > .prose {
     max-width: none !important; margin-left: 0 !important; margin-right: 0 !important;
 }
+
+/* The fixed header is now 60px tall (64px on tablet and phone) because of the horizontal
+   logo, but the body still reserved 76px / 80px for it. The extra 16px showed up as a white
+   strip between the header and the jump links. Reserve exactly the header's height. */
+@media (min-width: 1025px) { html body { padding-top: 60px !important; } }
+@media (max-width: 1024px) { html body { padding-top: 64px !important; } }
