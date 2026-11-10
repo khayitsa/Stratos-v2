@@ -3375,3 +3375,11 @@ html body main .svc-panel h3 { text-wrap: balance; }
     html body main .svc-panel p, html body main .luxury-card-body p, html body main .luxury-card.luxury-card .luxury-card-body.luxury-card-body p, html body main .info-card.info-card p, html body main .card p, html body main .luxury-card p, html body main .legal-content-container p, html body main li, html body main .faq-list p { text-align: left !important; text-align-last: left !important; }
     html body main .legal-section-wrapper :is(li, p, strong, span, ul, ol) { text-align: left !important; text-align-last: left !important; }
 }
+
+/* Service panel button (Leah, 10 Nov: "move this button to the centre"). When the panel stacks
+   (tablet and phone) the button is centred under the text instead of sitting on the left. On a
+   phone the longest label fills the width, which is why only the shorter ones looked off-centre. */
+@media (max-width: 960px) {
+    html body main .svc-panel__text { align-items: stretch; }
+    html body main .svc-panel__text .btn-banner { align-self: center; text-align: center; margin-left: auto; margin-right: auto; }
+}
