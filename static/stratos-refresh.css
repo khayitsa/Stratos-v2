@@ -3264,3 +3264,76 @@ html body main .timeline__step .milestone-badge {
     display: inline-block;
     margin: 10px 0 14px;
 }
+
+/* =====================================================================
+   52. SHARED LEFT / RIGHT EDGES (10 Nov, Leah's alignment review)
+   Every section's content now starts where the header logo starts and ends
+   where the "Submit an Enquiry" button ends. One variable drives both:
+   change --edge here to move the header and every section together.
+   Full-bleed backgrounds and photos still run edge to edge; only the
+   content inside them is held to the shared edges.
+   ===================================================================== */
+:root { --edge: max(4vw, calc((100vw - 1440px) / 2)); --content: calc(100vw - 2 * var(--edge)); }
+@media (max-width: 1024px) { :root { --edge: 5vw; } }
+@media (max-width: 768px)  { :root { --edge: 20px; } }
+
+/* Header: horizontal logo, shared edges, nav text sized like the other buttons */
+html body header { padding-left: var(--edge) !important; padding-right: var(--edge) !important; }
+html body header .logo-container { align-items: flex-start !important; justify-content: flex-start !important; padding-left: 0 !important; margin-left: 0 !important; }
+html body header img.brand-logo { width: auto !important; max-width: none !important; height: 40px !important; object-fit: contain; display: block; }
+@media (max-width: 1024px) { html body header img.brand-logo { height: 32px !important; } }
+@media (min-width: 1025px) { html body header nav#primaryNav > ul > li > a { font-size: 12px !important; letter-spacing: .1em; } }
+
+/* Section gutters */
+html body main :is(section.band, .statement-strip, .clarity-banner, .values-bento-section, .mission-split-section, .luxury-features-section, .reach, .dark-band, .proof-strip-section, .contact-hero, .contact-primary-split, .page-banner) {
+    padding-left: var(--edge) !important; padding-right: var(--edge) !important;
+}
+html body .stratos-footer { padding-left: var(--edge) !important; padding-right: var(--edge) !important; }
+
+/* Inner wrappers: no more centred 1180px shells */
+html body main :is(.band__inner, .split, .svc-showcase, .client-feature, .faq-split, .luxury-services-grid, .proof-strip-grid, .timeline, .card-grid, .svc-grid),
+html body .stratos-footer__shell, html body .stratos-footer__legal {
+    max-width: none !important; width: 100%; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box;
+}
+html body main :is(.band__head, .clarity-banner-content, .statement-strip > *, .reach__map, .reach__lead, .reach__clients, .reach__offices, .fit-simple, .fit-simple__intro, .fit-simple__panel, .faq-list, .intro-single, .strip-lead) { max-width: none !important; }
+html body main :is(.band__head, .clarity-banner-content, .statement-strip, .reach, .fit-simple__intro) p,
+html body main .lead-light { max-width: none !important; }
+
+/* Leftovers found while measuring */
+html body main .luxury-features-section .luxury-services-grid,
+html body main .luxury-features-section .luxury-card-grid { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; width: 100%; }
+html body main .dark-band.image-band { padding-left: calc(50% + 24px) !important; padding-right: var(--edge) !important; }
+html body main .dark-band.image-band .banner-text-content { max-width: none !important; width: 100%; margin-left: auto !important; transform: none !important; }
+html body main .cta-band .cta-band__content { padding-left: var(--edge) !important; }
+@media (min-width: 1025px) {
+    html body .stratos-footer__shell { grid-template-columns: 1fr auto auto !important; column-gap: clamp(48px, 8vw, 140px) !important; justify-content: space-between; }
+    html body .stratos-footer__col { padding-left: 0 !important; }
+    html body .stratos-footer__shell > .stratos-footer__col:last-child { justify-self: end; }
+}
+
+/* Jump links under the header */
+@media (min-width: 681px) {
+    html body nav.jump-nav { padding-left: var(--edge) !important; padding-right: var(--edge) !important; }
+}
+html body nav.jump-nav a { font-size: 13px !important; }
+
+/* Sections with their own max-width + auto margins were inset twice on very wide screens */
+html body main :is(section.mission-split-section, section.values-bento-section, section.legal-section-wrapper, section.auth-layout, section.page-intro, section.page-hero, section.contact-primary-split, section.contact-hero) {
+    max-width: none !important; margin-left: 0 !important; margin-right: 0 !important;
+    padding-left: var(--edge) !important; padding-right: var(--edge) !important; box-sizing: border-box;
+}
+html body main .legal-content-container { max-width: none !important; }
+
+/* Dark photo band: back to one full-width column on tablet and phone */
+@media (max-width: 768px) {
+    html body main .dark-band.image-band { padding-left: var(--edge) !important; padding-right: var(--edge) !important; }
+    html body main .dark-band.image-band .banner-text-content { margin-left: 0 !important; }
+}
+
+/* Checklist and italic callout on the service pages were capped at 980px / 800px and centred */
+html body main :is(ul.checklist, p.callout, .fit-layout, .fit-layout__text, .fit-note) { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; }
+
+/* Intro paragraphs and prose blocks that were capped to a narrow centred column */
+html body main section .statement-strip__inner p.intro-single, html body main .statement-strip p.intro-single, html body main p.faq-intro, html body main .band__inner > .prose {
+    max-width: none !important; margin-left: 0 !important; margin-right: 0 !important;
+}
