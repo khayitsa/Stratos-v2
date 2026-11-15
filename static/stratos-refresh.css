@@ -3383,3 +3383,27 @@ html body main .svc-panel h3 { text-wrap: balance; }
     html body main .svc-panel__text { align-items: stretch; }
     html body main .svc-panel__text .btn-banner { align-self: center; text-align: center; margin-left: auto; margin-right: auto; }
 }
+
+
+/* =====================================================================
+   POLISH PASS (16 Nov review) - consistency fixes from a full desktop +
+   mobile walk-through. Does not touch the justify/stratos-justify.js system.
+   ===================================================================== */
+
+/* Section eyebrows: a few were un-spaced and grey; all light-background
+   eyebrows now share the same tracking and the brand blue. */
+html body main p.eyebrow,
+html body main .values-bento-section p.eyebrow,
+html body main .section-header p.eyebrow { letter-spacing: .22em !important; }
+html body main .mission-statement p.eyebrow,
+html body main .values-bento-section p.eyebrow,
+html body main .contact-hero p.eyebrow { color: #46608f !important; }
+
+/* Services overview: the "includes" tick list shrink-wrapped and centred, so its
+   left edge drifted card to card. Make it fill the card and start at the same x. */
+html body main .svc-card .svc-card__includes {
+    align-self: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 8px;
+}

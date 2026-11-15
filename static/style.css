@@ -6893,7 +6893,7 @@ h3,
 /* 5. Paragraphs & List Items - 15px Desktop / 14px Mobile */
 .legal-content-container p,
 .legal-content-container li {
-    font-size: 1px !important;
+    font-size: 15px !important;
     line-height: 1.65 !important;
     color: var(--navy-light) !important;
     margin-bottom: 20px !important;

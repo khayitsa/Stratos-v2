@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20260904c">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261110e">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20261116a">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261116a">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -45,7 +45,7 @@
             <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
             <li><a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a></li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
-            <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQ</a></li>
+            <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQs</a></li>
         </ul>
         
         <!-- CTA Button Aligned to the Nav Row -->
@@ -84,7 +84,7 @@
             <a href="{{ url_for('services') }}">Services</a>
             <a href="{{ url_for('home') }}#who-we-work-with">Our Clients</a>
             {% if articles_public %}<a href="{{ url_for('articles') }}">Articles</a>{% endif %}
-            <a href="{{ url_for('faqs') }}">FAQ</a>
+            <a href="{{ url_for('faqs') }}">FAQs</a>
             <a href="{{ url_for('contact') }}">Contact</a>
         </div>
 
