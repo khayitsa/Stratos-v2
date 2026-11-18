@@ -3364,16 +3364,19 @@ html body main .svc-panel h3 { text-wrap: balance; }
     html body main .svc-panel__text { justify-content: flex-start; }
 }
 
-/* Phones and small tablets: body text is justified here too (18 Nov, Khayanda: justify for mobile and desktop).
-   This replaces the 10 Nov "left-align everything on phones" block (Leah: uneven word gaps on narrow lines).
-   Last lines stay left, centred blocks stay centred, and words are never hyphenated (section 51). */
+/* Phones and small tablets (18 Nov, Khayanda): full-width section copy is justified, but text inside narrow cards stays
+   left-aligned. Card columns are only ~30 characters wide on a phone and, with no hyphenation, justifying them stretches the
+   word gaps (Leah, 10 Nov). Last lines stay left; centred blocks stay centred. */
 @media (max-width: 768px) {
     html body main p.sj-j.sj-j.sj-j.sj-j.sj-j.sj-j,
     html body .stratos-footer__brand p.sj-j.sj-j.sj-j.sj-j.sj-j.sj-j { text-align: justify !important; text-align-last: left !important; }
     html body main p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc,
     html body .stratos-footer__brand p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc { text-align: justify !important; text-align-last: center !important; }
-    html body main .svc-panel p, html body main .luxury-card-body p, html body main .luxury-card.luxury-card .luxury-card-body.luxury-card-body p, html body main .info-card.info-card p, html body main .card p, html body main .luxury-card p, html body main .legal-content-container p, html body main li, html body main .faq-list p { text-align: justify !important; text-align-last: left !important; }
-    html body main .legal-section-wrapper :is(li, p) { text-align: justify !important; text-align-last: left !important; }
+    html body main .legal-content-container p, html body main .legal-section-wrapper :is(li, p) { text-align: justify !important; text-align-last: left !important; }
+    /* narrow card text: left-aligned (more specific than the sj-* classes the script adds) */
+    html body main :is(.svc-panel, .luxury-card, .info-card, .svc-card, .value-card, .card, .timeline__step, .client-row, .why-row, .fit-simple__panel, .faq-list, .band--navy .info-card) :is(p, li), html body main :is(.svc-panel, .luxury-card, .info-card, .svc-card, .value-card, .card, .timeline__step, .client-row, .why-row, .fit-simple__panel, .faq-list, .band--navy .info-card) p.sj-j.sj-j.sj-j.sj-j.sj-j.sj-j.sj-j, html body main :is(.svc-panel, .luxury-card, .info-card, .svc-card, .value-card, .card, .timeline__step, .client-row, .why-row, .fit-simple__panel, .faq-list, .band--navy .info-card) p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc { text-align: left !important; text-align-last: left !important; }
+    html body main :is(.card, .luxury-card, .info-card, .svc-card, .value-card) p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc { text-align-last: left !important; }
+    html body main :is(ul.checklist, .faq-answer ul, .faq-answer ol) > li { text-align: left !important; text-align-last: left !important; }
 }
 
 /* Service panel button (Leah, 10 Nov: "move this button to the centre"). When the panel stacks
@@ -3411,12 +3414,16 @@ html body main .svc-card .svc-card__includes {
 
 /* =====================================================================
    JUSTIFIED BODY TEXT, DESKTOP + MOBILE (18 Nov, Khayanda)
-   Card and section copy is text-align: justify at every width. static/stratos-justify.js no longer
+   Card and section copy is text-align: justify on desktop; on phones only full-width section copy is justified and
+   narrow card text stays left-aligned (see the "Phones and small tablets" block above). static/stratos-justify.js no longer
    falls back to left-aligned for body paragraphs; this adds the list items it does not touch (checklists,
    FAQ answer lists, legal lists) and nicer line breaking. Centred lead-ins, hero text and the italic
    .callout pull-quotes stay centred on purpose.
    ===================================================================== */
-html body main :is(ul.checklist, .faq-answer ul, .faq-answer ol, .legal-content-container ul, .legal-content-container ol, .legal-section-wrapper ul, .legal-section-wrapper ol) > li {
+@media (min-width: 769px) {
+    html body main :is(ul.checklist, .faq-answer ul, .faq-answer ol) > li { text-align: justify !important; text-align-last: left !important; text-justify: inter-word; }
+}
+html body main :is(.legal-content-container ul, .legal-content-container ol, .legal-section-wrapper ul, .legal-section-wrapper ol) > li {
     text-align: justify !important; text-align-last: left !important; text-justify: inter-word;
 }
 html body main p.sj-j.sj-j.sj-j.sj-j.sj-j, html body main p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc { text-justify: inter-word; text-wrap: pretty; overflow-wrap: break-word; }
