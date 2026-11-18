@@ -1,7 +1,7 @@
-/* Stratos: keep word spacing natural.
-   For every paragraph we first lay it out left-aligned and measure how much each line would have to stretch if it were justified.
-   Small stretch  -> justify it (last line left, or centred for centred blocks).
-   Big stretch    -> leave it left-aligned (or centred if the block is centred), so there are never "word     word" gaps.
+/* Stratos: justified body text on every screen size.
+   Card / section body copy is always justified (last line left, or centred for centred blocks), on desktop and on phones.
+   The old "measure the gaps and fall back to left-aligned" check now only applies to hero text, short centred lead-ins and
+   pull-quote callouts, which keep their previous behaviour so they never show "word     word" gaps.
    Re-runs on resize, after fonts load, and when tabs / FAQ items open. Without JavaScript the normal styles apply. */
 (function () {
     'use strict';
@@ -45,8 +45,11 @@
         }
         var avg = count ? total / count : 0;
         clear(el);
-        if (order.length < 2) { el.classList.add(centred ? 'sj-c' : 'sj-l'); return; }
-        var ok = worst <= MAX_EXTRA_EM && avg <= MAX_AVG_EM;
+        var forceJustify = !centred && !el.classList.contains('callout');   /* body copy: always justified */
+        /* centred section intros that run to 3+ lines are justified too (last line stays centred); hero text, footer and callouts stay centred */
+        if (centred && order.length >= 3 && !el.closest('.page-banner, .stratos-footer, .clarity-banner') && !el.classList.contains('callout')) forceJustify = true;
+        if (order.length < 2) { el.classList.add(centred ? 'sj-c' : (forceJustify ? 'sj-j' : 'sj-l')); return; }
+        var ok = forceJustify || (worst <= MAX_EXTRA_EM && avg <= MAX_AVG_EM);
         el.classList.add(ok ? (centred ? 'sj-jc' : 'sj-j') : (centred ? 'sj-c' : 'sj-l'));
     }
 
