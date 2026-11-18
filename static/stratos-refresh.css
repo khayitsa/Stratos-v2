@@ -823,7 +823,7 @@ body main .fit-panel h3 {
     list-style: none;
     font-family: var(--font-body);    /* 23 Oct - was var(--font-heading)/Playfair; the Subheading style elsewhere on
                                           the site (see the h4 rules in style.css) uses Raleway, not the serif heading face */
-    font-size: 24px !important;       /* 23 Oct - was 17px; matches the brand kit's Subheading size (phones keep their own 16px override below) */
+    font-size: 20px !important;       /* 18 Nov - eased down from 24px (was 17px before 23 Oct); phones keep their own 16px override below */
     font-weight: 400;                 /* 23 Oct - was 600; brand kit's Subheading isn't bold */
     line-height: 1.4;
     color: var(--ink);
