@@ -3427,3 +3427,68 @@ html body main :is(.legal-content-container ul, .legal-content-container ol, .le
     text-align: justify !important; text-align-last: left !important; text-justify: inter-word;
 }
 html body main p.sj-j.sj-j.sj-j.sj-j.sj-j, html body main p.sj-jc.sj-jc.sj-jc.sj-jc.sj-jc { text-justify: inter-word; text-wrap: pretty; overflow-wrap: break-word; }
+
+
+/* =====================================================================
+   CALI'S WEBSITE FEEDBACK, 18 Nov (applied 24 Nov, Khayanda)
+   1. Banner buttons: style.css gave .btn-banner a 1px white text-shadow. On hover the label turns
+      white, so the shadow showed as a second, slightly offset copy of every word (fuzzy text).
+   2. Home "Complete UAE Establishment" steps: paragraphs centred to match the number and heading.
+      (The :not(#_) trick out-ranks the stratos-justify.js .sj-* class chains.)
+   3. Footer: all-caps links, wider brand text, columns pulled left and aligned with the top of the
+      brand paragraph (logo height = width x 560/418, + 20px gap - 8px pull-up).
+   ===================================================================== */
+html body .btn-banner,
+html body .btn-banner:hover,
+html body .btn-banner:focus-visible,
+html body .btn-banner.btn-banner-transparent:hover {
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 901px) {
+    html body main ol.timeline > li.timeline__step > p:not(#_) {
+        text-align: center !important;
+        text-align-last: center !important;
+        text-wrap: balance;
+    }
+}
+
+html body .stratos-footer__col a {
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    letter-spacing: .1em !important;
+}
+@media (min-width: 1025px) {
+    html body .stratos-footer__shell {
+        grid-template-columns: minmax(0, 640px) auto auto !important;
+        justify-content: start !important;
+        column-gap: clamp(56px, 8vw, 128px) !important;
+    }
+    html body .stratos-footer__brand p,
+    html body .stratos-footer__brand .footer-offices { max-width: 600px !important; }
+    html body .stratos-footer__shell > .stratos-footer__col { margin-top: calc(var(--footer-logo-w) * 560 / 418 + 12px) !important; }
+    html body .stratos-footer__shell > .stratos-footer__col:last-child { justify-self: start !important; }
+}
+
+
+/* =====================================================================
+   BRAND-KIT LOGOS AND ICONS (24 Nov, Cali's 18 Nov feedback)
+   The site was using a flat traced vector that CSS forced to solid white, so it lost the silver
+   gradient of the real logo. static/stratos-logo-*.png are the brand-kit Primary and Secondary
+   logos pre-composited to transparent PNGs (the Canva SVGs are a PNG behind a mask, which is what
+   made them blurry in the browser). They must NOT get the old brightness(0)/invert(1) filter.
+   Icons: images/icons/*_icon_white.png on dark panels, *_icon.png (navy) on light backgrounds.
+   ===================================================================== */
+html body header img.brand-logo,
+html body .loading-logo,
+html body .stratos-footer__brand img { filter: none !important; }
+
+html body header img.brand-logo { height: 36px !important; width: auto !important; }
+@media (max-width: 1024px) { html body header img.brand-logo { height: 28px !important; } }
+
+:root { --footer-logo-w: 100px; }
+html body .stratos-footer__brand img { width: var(--footer-logo-w) !important; height: auto !important; }
+@media (min-width: 769px) { html body .stratos-footer__brand img { margin-left: 0 !important; } }
+html body .loading-logo { width: 110px !important; height: auto !important; }

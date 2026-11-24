@@ -52,13 +52,13 @@ def articles_visible():
 
 # Brand-kit icons (already in /images/icons) used for each service
 SERVICE_ICONS = {
-    "complete_uae_establishment": "remote-coordination_icon.svg",
-    "uae_company_formation": "business-formation_icon.svg",
-    "accounting_management_reporting": "accounting-and-bookkeeping_icon.svg",
-    "business_bank_account_support": "bank-account-opening_icon.svg",
-    "residence_visa_support": "residency-and-visas_icon.svg",
-    "corporate_administration_governance": "single-point-of-accountability_icon.svg",
-    "corporate_tax_vat_coordination": "auditing_icon.svg",
+    "complete_uae_establishment": "remote-coordination_icon.png",
+    "uae_company_formation": "business-formation_icon.png",
+    "accounting_management_reporting": "accounting-and-bookkeeping_icon.png",
+    "business_bank_account_support": "bank-account-opening_icon.png",
+    "residence_visa_support": "residency-and-visas_icon.png",
+    "corporate_administration_governance": "single-point-of-accountability_icon.png",
+    "corporate_tax_vat_coordination": "auditing_icon.png",
 }
 
 
