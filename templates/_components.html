@@ -90,6 +90,10 @@
 </div>
 <script>
 (function () {
+    /* the bar is sticky: tell the CSS how tall the fixed header is so it docks flush underneath */
+    var root = document.documentElement;
+    function sync() { var h = document.querySelector('header'); if (h) root.style.setProperty('--hdr-h', h.getBoundingClientRect().bottom + 'px'); }
+    sync(); window.addEventListener('load', sync); window.addEventListener('resize', sync);
     var m = document.querySelector('.backmenu'); if (!m) return;
     document.addEventListener('click', function (e) { if (m.open && !m.contains(e.target)) m.open = false; });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.open) { m.open = false; m.querySelector('summary').focus(); } });

@@ -3519,7 +3519,9 @@ html body :is(#who-we-work-with, #services, #how-it-works, #what-you-receive) { 
    Sits between the fixed header and the page banner on pages nested inside another page (service pages, articles).
    A native <details> dropdown ("Back") plus a breadcrumb trail for orientation.
    ===================================================================== */
-html body .backbar { background: #0a1332; border-bottom: 1px solid rgba(255,255,255,.08); position: relative; z-index: 60; }
+html body .backbar { background: #0a1332; border-bottom: 1px solid rgba(255,255,255,.08); position: sticky; top: var(--hdr-h, 60px); z-index: 900; }
+/* in-page jumps on these pages must land below header + bar (47px) */
+html:has(.backbar) body [id] { scroll-margin-top: calc(var(--hdr-h, 60px) + 47px + 12px) !important; }
 html body .backbar__inner { box-sizing: border-box; width: calc(100% - 2 * clamp(20px, 4vw, 58px)); max-width: 1324px; margin: 0 auto !important; padding: 0 !important; min-height: 46px; display: flex; align-items: center; gap: 22px; }
 html body .backmenu { position: relative; margin: 0 !important; padding: 0 !important; border: 0 !important; background: none !important; }
 html body .backmenu > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(255,255,255,.22); border-radius: 3px; color: #fff; font-family: var(--font-body, inherit) !important; font-size: 12px !important; font-weight: 600 !important; line-height: 1 !important; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, border-color .2s; -webkit-user-select: none; user-select: none; }
