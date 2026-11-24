@@ -14,6 +14,18 @@
     <a href="#services">Our Services</a>
     <a href="#what-you-receive">How We Deliver</a>
 </nav>
+<script>
+/* keep the sticky sub-nav flush under the fixed header at every screen size */
+(function () {
+    var root = document.documentElement;
+    function sync() {
+        var h = document.querySelector('header'), j = document.querySelector('nav.jump-nav');
+        if (h) root.style.setProperty('--hdr-h', h.getBoundingClientRect().bottom + 'px');
+        if (j) root.style.setProperty('--jump-h', j.offsetHeight + 'px');
+    }
+    sync(); window.addEventListener('load', sync); window.addEventListener('resize', sync);
+})();
+</script>
 
 <!-- 1. HERO -------------------------------------------------------------
      Same component as every other page (.page-banner). The old rotating

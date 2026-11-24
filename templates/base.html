@@ -11,13 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20261118a">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261124a">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261124b">
 </head>
 <body>
 <!-- LOADING SCREEN -->
 <div id="loadingScreen" class="loading-screen">
     <div class="loading-container">
-        <img src="{{ url_for('static', filename='stratos-logo-primary.png') }}" alt="Stratos Loading" class="loading-logo">
+        <img src="{{ url_for('static', filename='stratos-logo-primary-100.png') }}" srcset="{{ url_for('static', filename='stratos-logo-primary-200.png') }} 2x, {{ url_for('static', filename='stratos-logo-primary.png') }} 3x" width="100" height="134" alt="Stratos Loading" class="loading-logo">
         <div class="loading-spinner"></div>
     </div>
 </div>
@@ -25,7 +25,7 @@
 <header>
     <div class="header-top">
         <a class="logo-container" href="{{ url_for('home') }}" aria-label="Stratos home">
-            <img class="brand-logo" src="{{ url_for('static', filename='stratos-logo-horizontal.png') }}" alt="STRATOS">
+            <img class="brand-logo" src="{{ url_for('static', filename='stratos-logo-secondary.svg') }}" alt="STRATOS">
         </a>
 
         <!-- Mobile Hamburger Button Stays Top Right -->
@@ -63,7 +63,7 @@
         <!-- Brand sits on the LEFT -->
         <div class="stratos-footer__brand">
             <a href="{{ url_for('home') }}" aria-label="Stratos home">
-                <img src="{{ url_for('static', filename='stratos-logo-primary.png') }}" alt="STRATOS">
+                <img src="{{ url_for('static', filename='stratos-logo-primary-100.png') }}" srcset="{{ url_for('static', filename='stratos-logo-primary-200.png') }} 2x, {{ url_for('static', filename='stratos-logo-primary.png') }} 3x" width="100" height="134" alt="STRATOS">
             </a>
             <p>Advisory-led UAE company formation, bookkeeping, banking preparation and ongoing corporate support for international founders, private investment groups and established businesses.</p>
             <p class="footer-offices">Offices in the UAE, Panama and South Africa</p>

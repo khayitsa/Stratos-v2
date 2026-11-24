@@ -3491,4 +3491,24 @@ html body header img.brand-logo { height: 36px !important; width: auto !importan
 :root { --footer-logo-w: 100px; }
 html body .stratos-footer__brand img { width: var(--footer-logo-w) !important; height: auto !important; }
 @media (min-width: 769px) { html body .stratos-footer__brand img { margin-left: 0 !important; } }
-html body .loading-logo { width: 110px !important; height: auto !important; }
+html body .loading-logo { width: 100px !important; height: auto !important; }
+
+
+/* =====================================================================
+   STICKY HOME SUB-NAV (24 Nov, Khayanda)
+   The header is position:fixed, so the sub-nav sticks just under it. A small script in home.html writes the
+   real header height into --hdr-h (it changes between desktop and mobile) and the sub-nav height into --jump-h.
+   On phones the four links become one swipeable row so the stuck bar stays slim.
+   ===================================================================== */
+:root { --hdr-h: 76px; --jump-h: 46px; }
+/* style.css hides sideways overflow with overflow-x:hidden on html+body, which turns <body> into its own scroll
+   box and stops anything inside from sticking. "clip" blocks sideways scroll the same way without that side effect. */
+html, body { overflow-x: clip !important; }
+html body nav.jump-nav { position: sticky; top: var(--hdr-h); z-index: 900; }
+html body :is(#who-we-work-with, #services, #how-it-works, #what-you-receive) { scroll-margin-top: calc(var(--hdr-h) + var(--jump-h) + 12px) !important; }
+@media (max-width: 680px) {
+    html body nav.jump-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    html body nav.jump-nav::-webkit-scrollbar { display: none; }
+    html body nav.jump-nav a { flex: 0 0 auto; white-space: nowrap; padding: 11px 18px; font-size: 12px !important; border-left: 1px solid rgba(255,255,255,.08); }
+    html body nav.jump-nav a:first-child { border-left: none; }
+}
