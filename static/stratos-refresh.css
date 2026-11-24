@@ -3512,3 +3512,35 @@ html body :is(#who-we-work-with, #services, #how-it-works, #what-you-receive) { 
     html body nav.jump-nav a { flex: 0 0 auto; white-space: nowrap; padding: 11px 18px; font-size: 12px !important; border-left: 1px solid rgba(255,255,255,.08); }
     html body nav.jump-nav a:first-child { border-left: none; }
 }
+
+
+/* =====================================================================
+   BACK-NAVIGATION BAR (24 Nov, Khayanda)
+   Sits between the fixed header and the page banner on pages nested inside another page (service pages, articles).
+   A native <details> dropdown ("Back") plus a breadcrumb trail for orientation.
+   ===================================================================== */
+html body .backbar { background: #0a1332; border-bottom: 1px solid rgba(255,255,255,.08); position: relative; z-index: 60; }
+html body .backbar__inner { box-sizing: border-box; width: calc(100% - 2 * clamp(20px, 4vw, 58px)); max-width: 1324px; margin: 0 auto !important; padding: 0 !important; min-height: 46px; display: flex; align-items: center; gap: 22px; }
+html body .backmenu { position: relative; margin: 0 !important; padding: 0 !important; border: 0 !important; background: none !important; }
+html body .backmenu > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid rgba(255,255,255,.22); border-radius: 3px; color: #fff; font-family: var(--font-body, inherit) !important; font-size: 12px !important; font-weight: 600 !important; line-height: 1 !important; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, border-color .2s; -webkit-user-select: none; user-select: none; }
+html body .backmenu > summary::-webkit-details-marker { display: none; }
+html body .backmenu > summary:hover, html body .backmenu[open] > summary { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); }
+html body .backmenu > summary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+html body .backmenu__caret { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .2s; }
+html body .backmenu[open] .backmenu__caret { transform: translateY(1px) rotate(-135deg); }
+html body .backmenu__list { position: absolute; top: calc(100% + 8px); left: 0; z-index: 950; min-width: 290px; max-width: min(380px, 86vw); margin: 0; padding: 6px 0; list-style: none; background: #0a1332; border: 1px solid rgba(255,255,255,.18); border-radius: 4px; box-shadow: 0 14px 34px rgba(0,0,0,.4); }
+html body .backmenu__list a { display: block; padding: 10px 18px; color: rgba(255,255,255,.82); font-size: 14px; line-height: 1.35; text-decoration: none; transition: background .15s, color .15s; }
+html body .backmenu__list a:hover, html body .backmenu__list a:focus-visible { background: rgba(255,255,255,.1); color: #fff; outline: none; }
+html body .backmenu__list a.backmenu__primary { color: #fff; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.12); margin-bottom: 4px; }
+html body .backmenu__heading { padding: 10px 18px 4px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+html body .crumbs { display: flex; flex-wrap: nowrap; align-items: center; min-width: 0; margin: 0; padding: 0; list-style: none; font-size: 13px; color: rgba(255,255,255,.55); }
+html body .crumbs li { white-space: nowrap; }
+html body .crumbs li + li::before { content: "/"; margin: 0 10px; color: rgba(255,255,255,.3); }
+html body .crumbs a { color: rgba(255,255,255,.75); text-decoration: none; }
+html body .crumbs a:hover { color: #fff; text-decoration: underline; }
+html body .crumbs li[aria-current] { color: #fff; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+@media (max-width: 680px) {
+    html body .crumbs li:not([aria-current]) { display: none; }
+    html body .crumbs li[aria-current]::before { content: none; }
+    html body .crumbs { flex: 1 1 auto; }
+}

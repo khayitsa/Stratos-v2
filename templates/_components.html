@@ -62,3 +62,37 @@
     {% endif %}
 </section>
 {%- endmacro %}
+
+{# BACK-NAVIGATION BAR for pages that sit inside another page (a service inside Services, an article inside Articles).
+   parent_label/parent_url = the page one level up; current = this page's name.
+   siblings = optional list of (label, url) shown under "Other ..." so visitors can hop sideways without going up first.
+   It is a native <details> dropdown, so it works without JavaScript; the small script only closes it on outside click / Esc. #}
+{% macro back_nav(parent_label, parent_url, current, siblings=None, siblings_heading='Other pages') -%}
+<div class="backbar">
+    <div class="backbar__inner">
+        <details class="backmenu">
+            <summary aria-label="Go back: {{ parent_label }}"><span class="backmenu__arrow" aria-hidden="true">&larr;</span> Back <span class="backmenu__caret" aria-hidden="true"></span></summary>
+            <ul class="backmenu__list">
+                <li><a class="backmenu__primary" href="{{ parent_url }}">&larr; Back to {{ parent_label }}</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                {% if siblings %}
+                <li class="backmenu__heading" role="presentation">{{ siblings_heading }}</li>
+                {% for label, url in siblings %}<li><a href="{{ url }}">{{ label }}</a></li>{% endfor %}
+                {% endif %}
+            </ul>
+        </details>
+        <ol class="crumbs" aria-label="Breadcrumb">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ parent_url }}">{{ parent_label }}</a></li>
+            <li aria-current="page">{{ current }}</li>
+        </ol>
+    </div>
+</div>
+<script>
+(function () {
+    var m = document.querySelector('.backmenu'); if (!m) return;
+    document.addEventListener('click', function (e) { if (m.open && !m.contains(e.target)) m.open = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && m.open) { m.open = false; m.querySelector('summary').focus(); } });
+})();
+</script>
+{%- endmacro %}

@@ -40,7 +40,8 @@ COMPANY = {
 @app.context_processor
 def inject_globals():
     return {"company": COMPANY, "current_year": datetime.now().year,
-            "articles_public": articles_visible(), "service_icons": SERVICE_ICONS}
+            "articles_public": articles_visible(), "service_icons": SERVICE_ICONS,
+            "service_names": SERVICE_NAMES}
 
 
 def articles_visible():

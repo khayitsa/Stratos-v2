@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% from '_components.html' import page_banner, cta_band with context %}
+{% from '_components.html' import page_banner, cta_band, back_nav with context %}
 {% block title %}{{ article.title }} | Stratos Consulting{% endblock %}
 {% block meta_description %}{{ article.summary }}{% endblock %}
 {% block content %}
+
+{{ back_nav('Articles', url_for('articles'), article.title) }}
 
 {{ page_banner(article.banner, 'Articles', subtitle=article.title, eyebrow=article.category, show_actions=False, pos='center 20%', bw=True) }}
 
