@@ -3632,3 +3632,17 @@ html body main::before { content: ""; display: block; height: 3px; background: #
     }
     html body main .faq-list .faq-answer p { max-width: 900px !important; }
 }
+
+
+/* Service-page checklists ("What Happens When the Licence Is Issued?" etc.): sit as a centred block under the heading
+   instead of stretching edge to edge. Ticks + text stay left-aligned inside each column so the list still scans. */
+html body main .band__inner > ul.checklist {
+    max-width: 860px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    column-gap: 56px !important;
+}
+@media (max-width: 680px) {
+    html body main .band__inner > ul.checklist { max-width: 420px !important; }
+}
+html body main .band__inner > p.callout:not(#_) { text-align: center !important; text-align-last: center !important; text-wrap: balance; }
