@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% from '_components.html' import page_banner, cta_band, intro_strip, back_nav with context %}
-{% block title %}{{ page.title }}{% endblock %}
+{% block title %}Stratos | {{ page.title | replace(' | Stratos Consulting', '') }}{% endblock %}
 {% block meta_description %}{{ page.meta_description }}{% endblock %}
 {% block content %}
 
 {# Back bar: up to Services, plus the other six services so visitors can hop sideways #}
 {% set other_services = [] %}
 {% for k, n in service_names.items() if k != request.endpoint %}{% set _ = other_services.append((n, url_for(k))) %}{% endfor %}
-{{ back_nav('Services', url_for('services'), page.name, siblings=other_services, siblings_heading='Other services') }}
+{% set svc_keys = service_names.keys() | list %}
+{% set svc_i = svc_keys.index(request.endpoint) %}
+{% set prev_key = svc_keys[(svc_i - 1) % svc_keys | length] %}
+{% set next_key = svc_keys[(svc_i + 1) % svc_keys | length] %}
+{{ back_nav('Services', url_for('services'), page.name, siblings=other_services, siblings_heading='Other services',
+            prev=(service_names[prev_key], url_for(prev_key)), next=(service_names[next_key], url_for(next_key))) }}
 
 {# HERO: the SERVICE NAME is the big heading, the long line becomes the subtitle.
    All the per-page <style> that used to live here has moved to static/stratos-refresh.css. #}
@@ -87,15 +92,11 @@
 
 <section class="band band--{{ 'white' if (ns.prev == 'tint' or ns.prev == 'navy') else 'tint' }}">
     <div class="band__inner">
-        <div class="band__head">
-            <p class="eyebrow">FAQ</p>
-            <h2>Frequently Asked Questions</h2>
+        <div class="svc-pager">
+            <a class="svc-pager__link svc-pager__link--prev" href="{{ url_for(prev_key) }}" rel="prev"><span class="svc-pager__label">&larr; Previous service</span><span class="svc-pager__name">{{ service_names[prev_key] }}</span></a>
+            <a class="svc-pager__link svc-pager__link--next" href="{{ url_for(next_key) }}" rel="next"><span class="svc-pager__label">Next service &rarr;</span><span class="svc-pager__name">{{ service_names[next_key] }}</span></a>
         </div>
-        <div class="faq-list">
-            {% for question, answer in page.faq %}
-            <details><summary>{{ question }}</summary><p>{{ answer }}</p></details>
-            {% endfor %}
-        </div>
+        <p class="svc-pager__faq">Questions about this service? <a href="{{ url_for('faqs') }}#faq-{{ request.endpoint }}">See the answers in our FAQs</a>.</p>
     </div>
 </section>
 

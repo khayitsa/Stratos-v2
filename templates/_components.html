@@ -67,7 +67,7 @@
    parent_label/parent_url = the page one level up; current = this page's name.
    siblings = optional list of (label, url) shown under "Other ..." so visitors can hop sideways without going up first.
    It is a native <details> dropdown, so it works without JavaScript; the small script only closes it on outside click / Esc. #}
-{% macro back_nav(parent_label, parent_url, current, siblings=None, siblings_heading='Other pages') -%}
+{% macro back_nav(parent_label, parent_url, current, siblings=None, siblings_heading='Other pages', prev=None, next=None) -%}
 <div class="backbar">
     <div class="backbar__inner">
         <details class="backmenu">
@@ -86,6 +86,12 @@
             <li><a href="{{ parent_url }}">{{ parent_label }}</a></li>
             <li aria-current="page">{{ current }}</li>
         </ol>
+        {% if prev and next %}
+        <div class="backbar__cycle" role="group" aria-label="Cycle through services">
+            <a href="{{ prev[1] }}" rel="prev" title="Previous service: {{ prev[0] }}"><span aria-hidden="true">&lsaquo;</span> <span class="backbar__cycle-text">Previous</span></a>
+            <a href="{{ next[1] }}" rel="next" title="Next service: {{ next[0] }}"><span class="backbar__cycle-text">Next</span> <span aria-hidden="true">&rsaquo;</span></a>
+        </div>
+        {% endif %}
     </div>
 </div>
 <script>

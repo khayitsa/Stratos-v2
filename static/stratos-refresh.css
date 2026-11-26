@@ -3546,3 +3546,89 @@ html body .crumbs li[aria-current] { color: #fff; overflow: hidden; text-overflo
     html body .crumbs li[aria-current]::before { content: none; }
     html body .crumbs { flex: 1 1 auto; }
 }
+
+
+/* =====================================================================
+   26 NOV MEETING ACTIONS (Khayanda)
+   1. Services hover dropdown in the header   2. Previous / Next service buttons (sticky bar + bottom pager)
+   3. Consolidated FAQ page groups            4. 3px breathing room above the page content
+   ===================================================================== */
+
+/* ---- 1. SERVICES DROPDOWN ---- */
+html body header #primaryNav li.has-svc-menu { position: relative; }
+html body header #primaryNav .svc-toggle { display: none; }
+html body header #primaryNav .svc-menu ul { display: block !important; margin: 0 !important; padding: 6px 0 !important; gap: 0 !important; list-style: none; background: #0a1332; border: 1px solid rgba(255,255,255,.18); border-radius: 4px; box-shadow: 0 14px 34px rgba(0,0,0,.4); }
+html body header #primaryNav .svc-menu li { display: block; margin: 0; padding: 0; }
+html body header #primaryNav .svc-menu a { display: block !important; padding: 10px 18px !important; font-size: 14px !important; line-height: 1.35 !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none !important; white-space: normal; color: rgba(255,255,255,.82) !important; text-decoration: none; background: none; box-shadow: none !important; transition: background .15s, color .15s; }
+html body header #primaryNav .svc-menu a::after { display: none !important; }
+html body header #primaryNav .svc-menu a:hover, html body header #primaryNav .svc-menu a:focus-visible { background: rgba(255,255,255,.1); color: #fff !important; outline: none; }
+html body header #primaryNav .svc-menu a[aria-current="page"] { color: #fff !important; font-weight: 600 !important; background: rgba(255,255,255,.08); }
+
+@media (min-width: 1025px) {
+    html body header #primaryNav .svc-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: max-content; min-width: 300px; max-width: 380px; padding-top: 16px; z-index: 1100; }
+    html body header #primaryNav li.has-svc-menu:hover > .svc-menu,
+    html body header #primaryNav li.has-svc-menu:focus-within > .svc-menu { display: block; }
+}
+@media (max-width: 1024px) {
+    html body header nav#primaryNav > ul > li.has-svc-menu { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; align-items: center !important; width: 100% !important; }
+    html body header #primaryNav li.has-svc-menu > a { flex: 1 1 0 !important; width: auto !important; min-width: 0; }
+    html body header #primaryNav button.svc-toggle { display: inline-flex !important; align-items: center; justify-content: center; flex: 0 0 auto; width: 48px; height: 40px; margin: 0 4px 0 6px; padding: 0; background: none; border: 0; color: #fff; cursor: pointer; }
+    html body header #primaryNav .svc-toggle::before { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .2s; }
+    html body header #primaryNav li.svc-open .svc-toggle::before { transform: translateY(2px) rotate(-135deg); }
+    html body header #primaryNav .svc-menu { display: none; flex: 0 0 100%; width: 100%; padding: 4px 0 4px 14px; }
+    html body header #primaryNav li.svc-open > .svc-menu { display: block; }
+    html body header #primaryNav .svc-menu ul { background: none; border: 0; box-shadow: none; padding: 0 !important; border-left: 1px solid rgba(255,255,255,.2); }
+}
+
+/* ---- 2. PREVIOUS / NEXT SERVICE ---- */
+html body .backbar__cycle { display: flex; gap: 8px; margin-left: auto; flex: 0 0 auto; }
+html body .backbar__cycle a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 3px; color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; line-height: 1; white-space: nowrap; transition: background .2s, border-color .2s; }
+html body .backbar__cycle a:hover, html body .backbar__cycle a:focus-visible { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); outline: none; }
+html body .backbar__cycle a span[aria-hidden] { font-size: 16px; line-height: .8; }
+@media (max-width: 680px) {
+    html body .backbar__cycle-text { display: none; }
+    html body .backbar__cycle a { padding: 8px 14px; }
+    html body .backbar__cycle a span[aria-hidden] { font-size: 20px; }
+}
+html body .svc-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+html body .svc-pager__link { display: flex; flex-direction: column; gap: 6px; padding: 22px 26px; border: 1px solid rgba(7,14,40,.18); border-radius: 4px; background: #fff; color: var(--ink, #070e28); text-decoration: none; transition: border-color .2s, box-shadow .2s, transform .2s; }
+html body .svc-pager__link:hover, html body .svc-pager__link:focus-visible { border-color: var(--ink, #070e28); box-shadow: 0 8px 24px rgba(7,14,40,.12); transform: translateY(-2px); outline: none; }
+html body .svc-pager__link--next { text-align: right; align-items: flex-end; }
+html body .svc-pager__label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(7,14,40,.6); }
+html body .svc-pager__name { font-family: "Playfair Display", Georgia, serif; font-size: 20px; line-height: 1.3; }
+html body .svc-pager__faq { margin: 26px 0 0; text-align: center; font-size: 15px; }
+html body .svc-pager__faq a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 680px) { html body .svc-pager { grid-template-columns: 1fr; } }
+
+/* ---- 3. CONSOLIDATED SERVICE FAQS ---- */
+html body .faq-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 auto 44px; max-width: 980px; }
+html body .faq-jump a { padding: 9px 16px; border: 1px solid rgba(7,14,40,.25); border-radius: 999px; font-size: 13px; color: var(--ink, #070e28); text-decoration: none; transition: background .2s, color .2s; }
+html body .faq-jump a:hover, html body .faq-jump a:focus-visible { background: var(--ink, #070e28); color: #fff; outline: none; }
+html body .faq-group { margin-top: 52px; scroll-margin-top: 110px; }
+html body .faq-group:first-of-type { margin-top: 0; }
+html body .faq-group__title { margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(7,14,40,.2); font-size: clamp(20px, 2.4vw, 26px); text-transform: none !important; text-align: left; }
+html body .faq-group__more { margin: 18px 0 0; font-size: 14px; }
+html body .faq-group__more a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- 4. 3px of space above the top page elements (between the fixed header and the first banner/bar) ---- */
+html body main::before { content: ""; display: block; height: 3px; background: #070e28; }
+
+
+/* =====================================================================
+   COMFORTABLE LINE LENGTH (26 Nov layout pass)
+   Intro paragraphs, prose blocks, callouts and FAQ answers ran the full 1324px content width (170+ characters a line),
+   which is hard to read once the text is justified. Cap them at a readable width and centre the block under its heading.
+   Only affects desktop/tablet: on phones the column is already narrow.
+   ===================================================================== */
+@media (min-width: 900px) {
+    html body main :is(.band__head, .fit-simple__intro) > p:not(.eyebrow):not(.eyebrow-light),
+    html body main .band__inner > .prose,
+    html body main .band__inner > p.callout,
+    html body main .band__inner > p.faq-intro,
+    html body main .statement-strip > p {
+        max-width: 940px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    html body main .faq-list .faq-answer p { max-width: 900px !important; }
+}

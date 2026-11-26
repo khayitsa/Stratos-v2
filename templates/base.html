@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}STRATOS - UAE Business Advisory{% endblock %}</title>
+    <title>{% block title %}Stratos | UAE Company Formation &amp; Corporate Services{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{% endblock %}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('logo') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=20261118a">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261124d">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stratos-refresh.css') }}?v=20261126b">
 </head>
 <body>
 <!-- LOADING SCREEN -->
@@ -43,7 +43,16 @@
     <nav aria-label="Primary navigation" id="primaryNav">
         <ul>
             <li><a href="{{ url_for('home') }}"{% if ep == 'home' %} class="active" aria-current="page"{% endif %}>Home</a></li>
-            <li><a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a></li>
+            <li class="has-svc-menu">
+                <a href="{{ url_for('services') }}"{% if ep in service_eps %} class="active" aria-current="{{ 'page' if ep == 'services' else 'true' }}"{% endif %}>Services</a>
+                <button type="button" class="svc-toggle" aria-label="Show individual services" aria-expanded="false"></button>
+                {# Hover / keyboard-focus dropdown on desktop, tap-to-expand on the mobile drawer #}
+                <div class="svc-menu">
+                    <ul>
+                        {% for key, name in service_names.items() %}<li><a href="{{ url_for(key) }}"{% if ep == key %} aria-current="page"{% endif %}>{{ name }}</a></li>{% endfor %}
+                    </ul>
+                </div>
+            </li>
             {% if articles_public %}<li><a href="{{ url_for('articles') }}"{% if ep in ['articles','article_detail'] %} class="active" aria-current="{{ 'page' if ep == 'articles' else 'true' }}"{% endif %}>Articles</a></li>{% endif %}
             <li><a href="{{ url_for('faqs') }}"{% if ep == 'faqs' %} class="active" aria-current="page"{% endif %}>FAQs</a></li>
         </ul>
@@ -110,6 +119,18 @@
     </a>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+    /* Services submenu toggle for the mobile drawer (on desktop the menu opens on hover / focus via CSS) */
+    (function () {
+        var btn = document.querySelector('.svc-toggle'); if (!btn) return;
+        var li = btn.closest('li');
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = li.classList.toggle('svc-open');
+            btn.setAttribute('aria-expanded', String(open));
+        });
+    })();
+    </script>
     <script src="{{ url_for('static', filename='stratos-motion.js') }}?v=20260925" defer></script>
     <script src="{{ url_for('static', filename='stratos-justify.js') }}?v=20261118a" defer></script>
 </body>

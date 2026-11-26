@@ -277,7 +277,9 @@ def corporate_administration_governance():
 
 @app.get("/faqs")
 def faqs():
-    return render_template("faqs.html")
+    # Service-specific FAQs live here (consolidated 26 Nov); the service pages link to their group by id.
+    service_faqs = [(key, SERVICE_NAMES[key], SERVICE_PAGES[key]["faq"]) for key in SERVICE_NAMES]
+    return render_template("faqs.html", service_faqs=service_faqs)
 
 
 # ---------------------------------------------------------------------------
